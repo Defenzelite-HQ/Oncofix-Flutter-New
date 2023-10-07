@@ -1,0 +1,46 @@
+  {
+  "project_info": {
+    "project_number": "463220700899",
+    "project_id": "zflarter",
+    "storage_bucket": "zflarter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463220700899:android:4272bae66b23494c1d77d6",
+        "android_client_info": {
+          "package_name": "com.zstarter.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463220700899-8242b93ig0rro79ho00fnngvm404q7jo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcSUbOYZTVdUh4tDzLUW1AEy6t4w5Yv_4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "463220700899-8242b93ig0rro79ho00fnngvm404q7jo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "463220700899-dsmioc52md3q07nklkqt61iljgs1jle3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.devsbuddy.flutterMvc"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
