@@ -298,8 +298,7 @@ class FilterBottomWidget extends StatelessWidget {
                       ),
                       onTap: () {
                         Get.back();
-                        // TODO: Get Doctor List
-                        // controller.getDoctors();
+                        controller.index();
                       },
                     ),
                   ),

@@ -145,71 +145,71 @@ class DoctorController extends AppController {
     await index();
   }
 
-  // Future<void> getMoreDoctors() async {
-  //   _page(_page.value + 1);
-  //   _loadingMore(true);
-  //
-  //   var params = "?page=${_page.value}&limit=${_limit.value}";
-  //
-  //   params = "${params + "&gender=" + _selectedGender.value}";
-  //
-  //   if (_selectedSpecialist.value != '0') {
-  //     params = "${params + "&profile_type=" + _selectedSpecialist.value}";
-  //   }
-  //   if (nameInput.text != "") {
-  //     params = "${params + "&name=" + nameInput.text}";
-  //   }
-  //   ApiResponse response =
-  //   await Request.get('/doctors$params', authenticate: true);
-  //
-  //   if (response.hasError()) {
-  //     ShowSnack.toast(message: "${response.message}");
-  //     _loadingMore(false);
-  //     return;
-  //   }
-  //
-  //   log.w(response.data);
-  //
-  //   if (response.hasData()) {
-  //     log.e(response.data);
-  //     _doctors.addAll(List<DoctorModel>.from(
-  //         response.data.map((e) => DoctorModel.fromJson(e))));
-  //   } else {
-  //     _doctorsListEnded(true);
-  //   }
-  //
-  //   _loadingMore(false);
-  // }
+  Future<void> getMoreDoctors() async {
+    _page(_page.value + 1);
+    _loadingMore(true);
 
-  // Future<void> getFilter() async {
-  //   _isLoading(true);
-  //
-  //   ApiResponse response =
-  //   await Request.get('/doctors/categories', authenticate: true);
-  //
-  //   log.w(response.data);
-  //   if (response.hasError()) {
-  //    Toastr.show(message: message);
-  //     return;
-  //   }
-  //
-  //   if (response.hasData()) {
-  //     _categories.assignAll(List<CategoryElementModel>.from(
-  //         response.data.map((x) => CategoryElementModel.fromJson(x))));
-  //     if (Get.parameters['category_id'] != null) {
-  //       CategoryElementModel cat = _categories
-  //           .where((element) =>
-  //       element.id.toString() ==
-  //           Get.parameters['category_id'].toString())
-  //           .first;
-  //       _selectedSpecialist(Get.parameters['category_id']);
-  //       _categoryName(cat.name);
-  //       getDoctors(refresh: true);
-  //     }
-  //   }
-  //
-  //   _isLoading(false);
-  // }
+    var params = "?page=${_page.value}&limit=${_limit.value}";
+
+    params = "${params + "&gender=" + _selectedGender.value}";
+
+    if (_selectedSpecialist.value != '0') {
+      params = "${params + "&profile_type=" + _selectedSpecialist.value}";
+    }
+    if (nameInput.text != "") {
+      params = "${params + "&name=" + nameInput.text}";
+    }
+    ApiResponse response =
+    await Request.get('/doctors$params', authenticate: true);
+
+    if (response.hasError()) {
+      Toastr.show(message: "${response.message}");
+      _loadingMore(false);
+      return;
+    }
+
+    log.w(response.data);
+
+    if (response.hasData()) {
+      log.e(response.data);
+      _indexData.addAll(List<DoctorModel>.from(
+          response.data.map((e) => DoctorModel.fromJson(e))));
+    } else {
+      _doctorsListEnded(true);
+    }
+
+    _loadingMore(false);
+  }
+
+  Future<void> getFilter() async {
+    _isLoading(true);
+
+    ApiResponse response =
+    await Request.get('/doctors/categories', authenticate: true);
+
+    log.w(response.data);
+    if (response.hasError()) {
+     Toastr.show(message: "success");
+      return;
+    }
+
+    if (response.hasData()) {
+      _categories.assignAll(List<CategoryElementModel>.from(
+          response.data.map((x) => CategoryElementModel.fromJson(x))));
+      if (Get.parameters['category_id'] != null) {
+        CategoryElementModel cat = _categories
+            .where((element) =>
+        element.id.toString() ==
+            Get.parameters['category_id'].toString())
+            .first;
+        _selectedSpecialist(Get.parameters['category_id']);
+        _categoryName(cat.name);
+        index(refresh: true);
+      }
+    }
+
+    _isLoading(false);
+  }
 
   void onGenderSelect(String gender) {
     _selectedGender(gender);
