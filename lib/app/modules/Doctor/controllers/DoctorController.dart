@@ -163,7 +163,7 @@ class DoctorController extends AppController {
     await Request.get('/doctors$params', authenticate: true);
 
     if (response.hasError()) {
-      ShowSnack.toast(message: "${response.message}");
+      Toastr.show(message: "${response.message}");
       _loadingMore(false);
       return;
     }
@@ -172,7 +172,7 @@ class DoctorController extends AppController {
 
     if (response.hasData()) {
       log.e(response.data);
-      _doctors.addAll(List<DoctorModel>.from(
+      _indexData.addAll(List<DoctorModel>.from(
           response.data.map((e) => DoctorModel.fromJson(e))));
     } else {
       _doctorsListEnded(true);
@@ -189,7 +189,7 @@ class DoctorController extends AppController {
 
     log.w(response.data);
     if (response.hasError()) {
-     Toastr.show(message: message);
+     Toastr.show(message: "success");
       return;
     }
 
@@ -204,7 +204,7 @@ class DoctorController extends AppController {
             .first;
         _selectedSpecialist(Get.parameters['category_id']);
         _categoryName(cat.name);
-        getDoctors(refresh: true);
+        index(refresh: true);
       }
     }
 
