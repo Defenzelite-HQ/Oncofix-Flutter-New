@@ -50,20 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBcSUbOYZTVdUh4tDzLUW1AEy6t4w5Yv_4',
-    appId: '1:463220700899:android:4272bae66b23494c1d77d6',
-    messagingSenderId: '463220700899',
-    projectId: 'zflarter',
-    storageBucket: 'zflarter.appspot.com',
+    apiKey: 'AIzaSyBSdobboNzsYcogfaA54LhFfeJfKyXeuPU',
+    appId: '1:218352792644:android:6085d24ccb5335a15e3811',
+    messagingSenderId: '218352792644',
+    projectId: 'oncofix-c4f77',
+    storageBucket: 'oncofix-c4f77.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBYvbBD2U95o9ZogjVe5ORgykwxnS766nA',
-    appId: '1:463220700899:ios:428b6075034eddf71d77d6',
-    messagingSenderId: '463220700899',
-    projectId: 'zflarter',
-    storageBucket: 'zflarter.appspot.com',
-    iosClientId: '463220700899-dsmioc52md3q07nklkqt61iljgs1jle3.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCkmyvMKZ_zdmxrn3COoO2Gj4ADcFvsvJY',
+    appId: '1:218352792644:ios:5c5f96c46781218d5e3811',
+    messagingSenderId: '218352792644',
+    projectId: 'oncofix-c4f77',
+    storageBucket: 'oncofix-c4f77.appspot.com',
     iosBundleId: 'com.devsbuddy.flutterMvc',
   );
 }

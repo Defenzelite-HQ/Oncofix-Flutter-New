@@ -53,7 +53,6 @@ class AuthState extends AppController {
 
   /// Logout the user
   Future<void> logout() async {
-    log.w("logout");
     await storage.remove('access_token');
     await storage.remove('user');
     Get.offAllNamed(AuthRoutes.login);
