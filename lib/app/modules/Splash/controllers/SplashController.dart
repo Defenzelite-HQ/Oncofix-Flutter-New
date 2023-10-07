@@ -8,9 +8,7 @@
 */
 
 import 'package:get/get.dart';
-import 'package:oncofix/app/modules/Dashboard/DashboardModule.dart';
 import 'package:oncofix/app/modules/Modules.dart';
-import 'package:oncofix/app/modules/OnBoarding/OnBoardingModule.dart';
 
 import '../../../../config/Config.dart';
 import '../../../helpers/Global.dart';

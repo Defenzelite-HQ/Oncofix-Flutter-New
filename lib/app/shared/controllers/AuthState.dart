@@ -37,31 +37,24 @@ class AuthState extends AppController {
   /// Refreshes User data on every launch of the application
   Future<void> getUser() async {
     _authService.init();
-    if (storage.read("token") != null) {
+    if (storage.read("access_token") != null) {
       ApiResponse response = await _authService.getUser();
 
       if (response.hasError()) {
         Toastr.show(message: "${response.message}");
         return;
       }
-
       if (response.hasData()) {
         setUserData(response.data);
-      } 
+      }
       _authService.close();
     }
   }
 
   /// Logout the user
   Future<void> logout() async {
-
-    ApiResponse response = await _authService.logout();
-    if (response.hasError()) {
-      Toastr.show(message: "${response.message}");
-      return;
-    }
-    Toastr.show(message: "${response.message}");
-    await storage.remove('token');
+    log.w("logout");
+    await storage.remove('access_token');
     await storage.remove('user');
     Get.offAllNamed(AuthRoutes.login);
   }
@@ -74,12 +67,12 @@ class AuthState extends AppController {
 
   /// Setter for user auth token [setUserToken(String)]
   Future<void> setUserToken(String token) async {
-    await storage.write("token", token);
+    await storage.write("access_token", token);
   }
 
   /// Checks if user is logged in by validating the token
   Future<bool> check() async {
-    if (storage.read('token') != null) {
+    if (storage.read('access_token') != null) {
       /// TODO: Add api call here to validate token
       return true;
     }

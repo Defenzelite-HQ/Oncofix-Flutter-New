@@ -153,7 +153,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            // Image.asset("assets/images/book-alt.png",
+                            // Image.asset("assets/icons/book-alt.png",
                             //   color: route == 'my-appointments'
                             //   ? kcBottomBar
                             //       : kcSecondary,
@@ -436,7 +436,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
                       elevation: 20.0,
                       child: CircleAvatar(
                         backgroundColor: kcPrimary,
-                        backgroundImage: AssetImage("assets/images/onco.png"),
+                        backgroundImage: AssetImage("assets/icons/onco.png"),
                         radius: 45,
                       ),
                       onPressed: () => webViewOnTap("doctor_chat"),

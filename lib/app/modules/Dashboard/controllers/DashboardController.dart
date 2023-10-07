@@ -7,20 +7,20 @@
 @link    <https://www.defenzelite.com>
 */
 
+// Third Party Packages
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
-import '../../../models/CategoryElementModel.dart';
-import '../../../shared/controllers/AppController.dart';
+import 'package:ui_x/helpers/Toastr.dart';
+
 import '../../../helpers/Global.dart';
 import '../../../models/ApiResponse.dart';
+import '../../../models/CategoryElementModel.dart';
+import '../../../shared/controllers/AppController.dart';
+import '../models/DashboardModel.dart';
 import '../models/FeaturedDoctorModel.dart';
 import '../services/DashboardService.dart';
-import '../models/DashboardModel.dart';
-
-// Third Party Packages
-import 'package:flutter/cupertino.dart';
-import 'package:ui_x/helpers/Toastr.dart';
 
 class DashboardController extends AppController {
   /// Creating Global Instance
@@ -78,7 +78,6 @@ class DashboardController extends AppController {
     super.onInit();
     _qrcode.value = '${auth.user.id}';
     auth.getUser();
-
     this.getData();
     _scrollController = ScrollController();
   }
@@ -142,27 +141,30 @@ class DashboardController extends AppController {
   }
 
   Future<void> getData() async {
-    _isLoading(true);
-    ApiResponse response = await _dashboardService.index();
+    try {
+      setBusy(true);
+      ApiResponse response = await _dashboardService.index();
 
-    if (response.hasError()) {
-      Toastr.show(message: "${response.message}");
-      _isLoading(false);
-      return;
+      log.w(response.data);
+      if (response.hasError()) {
+        Toastr.show(message: "${response.message}");
+        setBusy(false);
+        return;
+      }
+
+      if (response.hasData()) {
+        _categories.assignAll(List<CategoryElementModel>.from(response
+            .data['categories']
+            .map((e) => CategoryElementModel.fromJson(e))));
+        _featuredDoctors.assignAll(List<FeaturedDoctorModel>.from(response
+            .data['featured_doctors']
+            .map((e) => FeaturedDoctorModel.fromJson(e))));
+      }
+
+      setBusy(false);
+    } on Exception catch (e) {
+      print(e);
     }
-
-    log.w(response.data['categories']);
-
-    if (response.hasData()) {
-      _categories.assignAll(List<CategoryElementModel>.from(response
-          .data['categories']
-          .map((e) => CategoryElementModel.fromJson(e))));
-      _featuredDoctors.assignAll(List<FeaturedDoctorModel>.from(response
-          .data['featured_doctors']
-          .map((e) => FeaturedDoctorModel.fromJson(e))));
-    }
-
-    _isLoading(false);
   }
 
   //Delete
@@ -231,15 +233,15 @@ class DashboardController extends AppController {
 
   /// Mock Data
   final imageListPatient = [
-    'assets/images/home-banner-07.jpg',
-    'assets/images/home-banner-08.jpg',
-    'assets/images/home-banner-3.png',
-    'assets/images/home-banner-4.png',
-    'assets/images/home-banner-5.png',
-    'assets/images/home-banner-6.png',
+    'assets/icons/home-banner-07.jpg',
+    'assets/icons/home-banner-08.jpg',
+    'assets/icons/home-banner-3.png',
+    'assets/icons/home-banner-4.png',
+    'assets/icons/home-banner-5.png',
+    'assets/icons/home-banner-6.png',
   ];
   final imageListDoctor = [
-    "assets/images/doctor_slider_banner.jpg",
-    "assets/images/doctor_slider_banner1.jpg"
+    "assets/icons/doctor_slider_banner.jpg",
+    "assets/icons/doctor_slider_banner1.jpg"
   ];
 }

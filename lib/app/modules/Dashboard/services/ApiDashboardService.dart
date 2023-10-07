@@ -1,5 +1,5 @@
-import '../../../models/ApiResponse.dart';
 import '../../../helpers/Request.dart';
+import '../../../models/ApiResponse.dart';
 import 'DashboardService.dart';
 
 class ApiDashboardService implements DashboardService {
@@ -10,10 +10,10 @@ class ApiDashboardService implements DashboardService {
   /// Stop the server request
   @override
   void close() => Request.close();
-  
- @override
+
+  @override
   Future<ApiResponse> index() async {
-  return await Request.get('/dashboard', authenticate: true);
+    return await Request.get('/dashboard', authenticate: true);
   }
 
   @override
@@ -27,18 +27,21 @@ class ApiDashboardService implements DashboardService {
   }
 
   @override
-  Future<ApiResponse> storePatientAttendance({required Map<String, dynamic> body}) async {
+  Future<ApiResponse> storePatientAttendance(
+      {required Map<String, dynamic> body}) async {
     return await Request.post('/patient-attendance/store',
         body: body, authenticate: true);
   }
 
   @override
-  Future<ApiResponse> edit({required Map<String, dynamic> body, required int id}) async {
+  Future<ApiResponse> edit(
+      {required Map<String, dynamic> body, required int id}) async {
     return await Request.post('/url', body: body, authenticate: true);
   }
 
   @override
-  Future<ApiResponse> patch({required Map<String, dynamic> body, required int id}) async {
+  Future<ApiResponse> patch(
+      {required Map<String, dynamic> body, required int id}) async {
     return await Request.post('/url', body: body, authenticate: true);
   }
 
@@ -47,4 +50,3 @@ class ApiDashboardService implements DashboardService {
     return await Request.get('/url', authenticate: true);
   }
 }
-

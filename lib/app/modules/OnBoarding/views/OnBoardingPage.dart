@@ -66,7 +66,7 @@ class OnBoardingPage extends StatelessWidget {
                                   ),
                                   // GestureDetector(
                                   //   child: Image.asset(
-                                  //     "assets/images/works2.jpg",
+                                  //     "assets/icons/works2.jpg",
                                   //   ),
                                   //   onTap: () {
                                   //     playVideo;

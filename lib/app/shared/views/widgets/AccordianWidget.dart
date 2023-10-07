@@ -83,7 +83,7 @@ class _AccordionState extends State<AccordionWidget> {
                   child: Row(
                     children: [
                       Image.network(
-                        // "assets/images/category-icon.png",
+                        // "assets/icons/category-icon.png",
                         "${widget.image}",
                         width: 35,
                       ),
@@ -176,7 +176,7 @@ class OptionsWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(
-                    "assets/images/bullet.png",
+                    "assets/icons/bullet.png",
                     width: 15,
                     color: kcDarkAlt,
                   ),

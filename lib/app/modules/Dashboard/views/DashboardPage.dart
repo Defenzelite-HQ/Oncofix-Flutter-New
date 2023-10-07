@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:oncofix/app/modules/Dashboard/views/widget/HomeExploreCardWidget.dart';
+import 'package:oncofix/app/modules/Doctor/DoctorModule.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:ui_x/ui_x.dart';
-import 'package:oncofix/app/modules/Dashboard/views/widget/HomeExploreCardWidget.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../../config/Config.dart';
 import '../../../helpers/Global.dart';
 import '../../../helpers/Webview.dart';
 import '../../../models/CategoryElementModel.dart';
@@ -14,9 +17,7 @@ import '../../../shared/views/errors/NotConnectedErrorPage.dart';
 import '../../../shared/views/layouts/MasterLayout.dart';
 import '../../../shared/views/widgets/BottomNavigationBarWidget.dart';
 import '../../../shared/views/widgets/LoadingIconWidget.dart';
-import '../../Doctor/controllers/DoctorController.dart';
 import '../controllers/DashboardController.dart';
-import '../../../../config/Config.dart';
 import '../models/FeaturedDoctorModel.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -34,7 +35,7 @@ class DashboardPage extends StatelessWidget {
                         ? LoadingIconWidget()
                         : MasterLayout(
                             title: Image.asset(
-                              "assets/images/oncofixlogo.png",
+                              "assets/icons/oncofixlogo.png",
                               height: 28,
                             ),
                             leading: Builder(
@@ -103,7 +104,7 @@ class DashboardPage extends StatelessWidget {
                                     Stack(
                                       children: [
                                         Image.asset(
-                                          'assets/images/oncofixbnr.jpg',
+                                          'assets/icons/oncofixbnr.jpg',
                                           width: double.infinity,
                                           height: 120,
                                           fit: BoxFit.cover,
@@ -123,7 +124,7 @@ class DashboardPage extends StatelessWidget {
                                                   child:
                                                       auth.user.avatar == null
                                                           ? Image.asset(
-                                                              'assets/images/dr6.jpg',
+                                                              'assets/icons/dr6.jpg',
                                                               width: 50,
                                                               height: 50,
                                                               fit: BoxFit.cover,
@@ -198,7 +199,7 @@ class DashboardPage extends StatelessWidget {
                                                 child: Container(
                                                   width: double.maxFinite,
                                                   padding: const EdgeInsets
-                                                      .symmetric(
+                                                          .symmetric(
                                                       vertical: 14,
                                                       horizontal: 24),
                                                   color: kcWhite,
@@ -232,7 +233,7 @@ class DashboardPage extends StatelessWidget {
                                                 child: Container(
                                                   width: double.maxFinite,
                                                   padding: const EdgeInsets
-                                                      .symmetric(
+                                                          .symmetric(
                                                       vertical: 14,
                                                       horizontal: 24),
                                                   color: kcWhite,
@@ -266,7 +267,7 @@ class DashboardPage extends StatelessWidget {
                                                 child: Container(
                                                   width: double.maxFinite,
                                                   padding: const EdgeInsets
-                                                      .symmetric(
+                                                          .symmetric(
                                                       vertical: 14,
                                                       horizontal: 24),
                                                   color: kcWhite,
@@ -300,7 +301,7 @@ class DashboardPage extends StatelessWidget {
                                                 child: Container(
                                                   width: double.maxFinite,
                                                   padding: const EdgeInsets
-                                                      .symmetric(
+                                                          .symmetric(
                                                       vertical: 14,
                                                       horizontal: 24),
                                                   color: kcWhite,
@@ -334,7 +335,7 @@ class DashboardPage extends StatelessWidget {
                                                 child: Container(
                                                   width: double.maxFinite,
                                                   padding: const EdgeInsets
-                                                      .symmetric(
+                                                          .symmetric(
                                                       vertical: 14,
                                                       horizontal: 24),
                                                   color: kcWhite,
@@ -390,7 +391,7 @@ class DashboardPage extends StatelessWidget {
                                                 child: Container(
                                                   width: double.maxFinite,
                                                   padding: const EdgeInsets
-                                                      .symmetric(
+                                                          .symmetric(
                                                       vertical: 14,
                                                       horizontal: 24),
                                                   color: kcWhite,
@@ -424,7 +425,7 @@ class DashboardPage extends StatelessWidget {
                                                 child: Container(
                                                   width: double.maxFinite,
                                                   padding: const EdgeInsets
-                                                      .symmetric(
+                                                          .symmetric(
                                                       vertical: 14,
                                                       horizontal: 24),
                                                   color: kcWhite,
@@ -455,7 +456,7 @@ class DashboardPage extends StatelessWidget {
                                                 child: Container(
                                                   width: double.maxFinite,
                                                   padding: const EdgeInsets
-                                                      .symmetric(
+                                                          .symmetric(
                                                       vertical: 14,
                                                       horizontal: 24),
                                                   color: kcWhite,
@@ -572,7 +573,8 @@ class DashboardPage extends StatelessWidget {
                                             onTap: () {
                                               switch (index) {
                                                 case 1:
-                                                  Get.toNamed('/doctors');
+                                                  Get.toNamed(
+                                                      DoctorRoutes.doctor);
                                                   break;
                                                 case 2:
                                                   webViewOnTap("shop");
@@ -666,7 +668,7 @@ class DashboardPage extends StatelessWidget {
                                                           BorderRadius.circular(
                                                               8),
                                                       child: Image.asset(
-                                                        "assets/images/getstarted.jpg",
+                                                        "assets/icons/getstarted.jpg",
                                                         height: screen.height *
                                                             0.14,
                                                         fit: BoxFit.fill,
@@ -699,7 +701,7 @@ class DashboardPage extends StatelessWidget {
                                                     child:
                                                         HomeExploreCardWidget(
                                                       image:
-                                                          "assets/images/case-report.png",
+                                                          "assets/icons/case-report.png",
                                                       label: "My Cases",
                                                       onTap: () {
                                                         Get.toNamed('/cases');
@@ -712,7 +714,7 @@ class DashboardPage extends StatelessWidget {
                                                     child:
                                                         HomeExploreCardWidget(
                                                       image:
-                                                          "assets/images/patient_attendance.png",
+                                                          "assets/icons/patient_attendance.png",
                                                       label: "Attendance",
                                                       onTap: () {
                                                         webViewOnTap(
@@ -726,7 +728,7 @@ class DashboardPage extends StatelessWidget {
                                                     child:
                                                         HomeExploreCardWidget(
                                                       image:
-                                                          "assets/images/health-report.png",
+                                                          "assets/icons/health-report.png",
                                                       label: "Report",
                                                       onTap: () {
                                                         webViewOnTap("report");
@@ -737,7 +739,7 @@ class DashboardPage extends StatelessWidget {
                                                     child:
                                                         HomeExploreCardWidget(
                                                       image:
-                                                          "assets/images/money-matters.png",
+                                                          "assets/icons/money-matters.png",
                                                       label: "Money Matter",
                                                       onTap: () {
                                                         webViewOnTap(
@@ -748,7 +750,7 @@ class DashboardPage extends StatelessWidget {
                                             Expanded(
                                               child: HomeExploreCardWidget(
                                                 image:
-                                                    "assets/images/events.png",
+                                                    "assets/icons/events.png",
                                                 label: "Events",
                                                 onTap: () {
                                                   Config.isDoctor()
@@ -773,7 +775,7 @@ class DashboardPage extends StatelessWidget {
                                                     child:
                                                         HomeExploreCardWidget(
                                                       image:
-                                                          "assets/images/report_pro.png",
+                                                          "assets/icons/report_pro.png",
                                                       label: "PRO",
                                                       onTap: () {
                                                         webViewOnTap(
@@ -785,7 +787,7 @@ class DashboardPage extends StatelessWidget {
                                                     child:
                                                         HomeExploreCardWidget(
                                                       image:
-                                                          "assets/images/clipboard.png",
+                                                          "assets/icons/clipboard.png",
                                                       label: "Tumour Board",
                                                       maxLines: 1,
                                                       onTap: () {
@@ -798,7 +800,7 @@ class DashboardPage extends StatelessWidget {
                                                     child:
                                                         HomeExploreCardWidget(
                                                       image:
-                                                          "assets/images/schedule.png",
+                                                          "assets/icons/schedule.png",
                                                       label: "Schedules",
                                                       onTap: () {
                                                         webViewOnTap(
@@ -817,7 +819,7 @@ class DashboardPage extends StatelessWidget {
                                             Expanded(
                                               child: HomeExploreCardWidget(
                                                 image:
-                                                    "assets/images/clinical-trails.png",
+                                                    "assets/icons/clinical-trails.png",
                                                 label: "Clinical Trials",
                                                 onTap: () {
                                                   webViewOnTap(
@@ -827,8 +829,7 @@ class DashboardPage extends StatelessWidget {
                                             ),
                                             Expanded(
                                               child: HomeExploreCardWidget(
-                                                image:
-                                                    "assets/images/forum.png",
+                                                image: "assets/icons/forum.png",
                                                 label: "Support Group",
                                                 onTap: () {
                                                   webViewOnTap("support_group");
@@ -837,7 +838,7 @@ class DashboardPage extends StatelessWidget {
                                             ),
                                             Expanded(
                                               child: HomeExploreCardWidget(
-                                                image: "assets/images/risk.png",
+                                                image: "assets/icons/risk.png",
                                                 label: "Risk Assessment",
                                                 onTap: () {
                                                   webViewOnTap(
@@ -857,7 +858,7 @@ class DashboardPage extends StatelessWidget {
                                                     child:
                                                         HomeExploreCardWidget(
                                                       image:
-                                                          "assets/images/schedule.png",
+                                                          "assets/icons/schedule.png",
                                                       label: "Appointments",
                                                       onTap: () {
                                                         webViewOnTap(
@@ -886,7 +887,7 @@ class DashboardPage extends StatelessWidget {
                                                           BorderRadius.circular(
                                                               8),
                                                       child: Image.asset(
-                                                          "assets/images/getstarted.jpg"),
+                                                          "assets/icons/getstarted.jpg"),
                                                     ),
                                                   ),
                                                   SizedBox(
@@ -963,7 +964,7 @@ class DashboardPage extends StatelessWidget {
                                                                 child: Padding(
                                                                   padding:
                                                                       const EdgeInsets
-                                                                          .all(
+                                                                              .all(
                                                                           8.0),
                                                                   child: Column(
                                                                     mainAxisAlignment:
@@ -1227,7 +1228,7 @@ class DashboardPage extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(8),
                                               child: Image.asset(
-                                                "assets/images/blog-banner.png",
+                                                "assets/icons/blog-banner.png",
                                                 width: screen.width,
                                                 fit: BoxFit.contain,
                                               ),
@@ -1248,7 +1249,7 @@ class DashboardPage extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(8),
                                               child: Image.asset(
-                                                "assets/images/youtube-banner.png",
+                                                "assets/icons/youtube-banner.png",
                                                 width: screen.width,
                                                 fit: BoxFit.contain,
                                               ),
@@ -1275,7 +1276,7 @@ class DashboardPage extends StatelessWidget {
                             //     elevation: 20.0,
                             //     child: CircleAvatar(
                             //       backgroundColor: kcPrimary,
-                            //       backgroundImage: AssetImage("assets/images/onco.png"),
+                            //       backgroundImage: AssetImage("assets/icons/onco.png"),
                             //       radius: 25,
                             //     ),
                             //     onPressed: () =>
