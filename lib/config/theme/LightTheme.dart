@@ -1,6 +1,6 @@
 import 'package:ui_x/ui_x.dart';
 import 'package:flutter/material.dart';
-import 'package:zstarter_flutter/app/helpers/Global.dart';
+import 'package:oncofix/app/helpers/Global.dart';
 
 import '../Config.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ui_x/helpers/ColorPalette.dart';
-import 'package:zstarter_flutter/app/modules/About/views/widget/AboutWidget.dart';
+import 'package:oncofix/app/modules/About/views/widget/AboutWidget.dart';
 import '../../../helpers/Webview.dart';
 import '../../../shared/views/layouts/MasterLayout.dart';
 

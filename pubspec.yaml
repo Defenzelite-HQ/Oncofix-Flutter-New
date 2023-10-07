@@ -1,4 +1,4 @@
-name: zstarter_flutter
+name: oncofix
 description: A flutter project starting point to get started with flutter projects with ease and some awesome built in features.
 
 publish_to: "none"
@@ -71,7 +71,15 @@ dependencies:
   #image cropper
   image_cropper: ^4.0.1
 
+  # QR Code
+  qr_flutter: ^4.1.0
+  flutter_barcode_scanner: ^2.0.0
 
+  # Html
+  flutter_html: ^3.0.0-beta.2
+
+  # Card swiper
+  card_swiper: ^3.0.1
 
 
 dev_dependencies:

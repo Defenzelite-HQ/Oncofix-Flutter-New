@@ -13,7 +13,7 @@ class ApiDashboardService implements DashboardService {
   
  @override
   Future<ApiResponse> index() async {
-    return await Request.get('/url', authenticate: true);
+  return await Request.get('/dashboard', authenticate: true);
   }
 
   @override
@@ -27,8 +27,9 @@ class ApiDashboardService implements DashboardService {
   }
 
   @override
-  Future<ApiResponse> store({required Map<String, dynamic> body}) async {
-    return await Request.post('/url', body: body, authenticate: true);
+  Future<ApiResponse> storePatientAttendance({required Map<String, dynamic> body}) async {
+    return await Request.post('/patient-attendance/store',
+        body: body, authenticate: true);
   }
 
   @override

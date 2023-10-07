@@ -28,7 +28,7 @@ class MockDashboardService implements DashboardService {
   }
 
   @override
-  Future<ApiResponse> store({required Map<String, dynamic> body}) async {
+  Future<ApiResponse> storePatientAttendance({required Map<String, dynamic> body}) async {
     throw UnimplementedError();
   }
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:ui_x/helpers/ColorPalette.dart';
 import 'package:ui_x/helpers/Sizes.dart';
@@ -288,7 +290,7 @@ class FilterBottomWidget extends StatelessWidget {
                             ),
                             Text(
                               "Apply Filter",
-                              style: TextStyl.body(context)
+                              style: TextStyl.body
                                   ?.copyWith(color: kcWhite, fontSize: 13),
                             ),
                           ],
@@ -296,7 +298,8 @@ class FilterBottomWidget extends StatelessWidget {
                       ),
                       onTap: () {
                         Get.back();
-                        controller.getDoctors();
+                        // TODO: Get Doctor List
+                        // controller.getDoctors();
                       },
                     ),
                   ),
@@ -321,7 +324,7 @@ class FilterBottomWidget extends StatelessWidget {
                             ),
                             Text(
                               "Reset Filter",
-                              style: TextStyl.body(context)
+                              style: TextStyl.body
                                   ?.copyWith(color: kcSecondary, fontSize: 13),
                             ),
                           ],

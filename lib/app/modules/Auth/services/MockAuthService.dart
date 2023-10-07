@@ -27,7 +27,9 @@ class MockAuthService implements AuthService {
         return AuthData.loginError;
       }
 
-      return Config.needsOtpVerification ? AuthData.loginSuccessOtp : AuthData.loginSuccess;
+      return Config.needsOtpVerification
+          ? AuthData.loginSuccessOtp
+          : AuthData.loginSuccess;
     });
   }
 
@@ -56,6 +58,12 @@ class MockAuthService implements AuthService {
 
   @override
   Future<ApiResponse> verifyOtp({required Map<String, dynamic> body}) async {
+    return await 300.milliseconds.delay(() => AuthData.loginSuccess);
+  }
+
+  @override
+  Future<ApiResponse> updateUserDeviceToken(
+      {required Map<String, dynamic> body}) async {
     return await 300.milliseconds.delay(() => AuthData.loginSuccess);
   }
 }

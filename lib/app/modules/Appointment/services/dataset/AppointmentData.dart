@@ -1,4 +1,4 @@
-import 'package:zstarter_flutter/app/models/ApiResponse.dart';
+import 'package:oncofix/app/models/ApiResponse.dart';
 
 class AppointmentData {
   /// Appointment Responses

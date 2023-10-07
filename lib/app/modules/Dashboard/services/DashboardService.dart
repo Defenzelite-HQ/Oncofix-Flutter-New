@@ -6,7 +6,7 @@ import 'MockDashboardService.dart';
 
 abstract class DashboardService {
   /// Configure if Mock is enabled or not @accepts[true|false]
-  static const MOCK_ENABLED = true;
+  static const MOCK_ENABLED = false;
 
   /// Create and get the instance of [DashboardService]
   static DashboardService get instance {
@@ -30,7 +30,7 @@ abstract class DashboardService {
   Future<ApiResponse> create({required Map<String, dynamic> body});
   
   /// Store
-  Future<ApiResponse> store({required Map<String, dynamic> body});
+  Future<ApiResponse> storePatientAttendance({required Map<String, dynamic> body});
  
   /// Edit
   Future<ApiResponse> edit({required Map<String, dynamic> body, required int id});

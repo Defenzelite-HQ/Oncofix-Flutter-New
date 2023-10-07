@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zstarter.app">
+    package="com.oncofix.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -11,7 +11,7 @@
 
     <application
         android:icon="@mipmap/launcher_icon"
-        android:label="zStarter Flutter"
+        android:label="OncoFix"
         android:usesCleartextTraffic="true">
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"

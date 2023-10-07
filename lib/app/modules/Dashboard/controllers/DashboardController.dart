@@ -7,56 +7,84 @@
 @link    <https://www.defenzelite.com>
 */
 
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
+import '../../../models/CategoryElementModel.dart';
 import '../../../shared/controllers/AppController.dart';
 import '../../../helpers/Global.dart';
 import '../../../models/ApiResponse.dart';
+import '../models/FeaturedDoctorModel.dart';
 import '../services/DashboardService.dart';
 import '../models/DashboardModel.dart';
+
 // Third Party Packages
 import 'package:flutter/cupertino.dart';
 import 'package:ui_x/helpers/Toastr.dart';
 
 class DashboardController extends AppController {
-   /// Creating Global Instance
+  /// Creating Global Instance
   static DashboardController get instance {
-    if (!Get.isRegistered<DashboardController>()) Get.put(DashboardController());
+    if (!Get.isRegistered<DashboardController>())
+      Get.put(DashboardController());
     return Get.find<DashboardController>();
   }
 
   /// Initialise [DashboardService] service
   final DashboardService _dashboardService = DashboardService.instance;
-  
-   /// Initialize For Global Usage (Once per app run)
+
+  /// Initialize For Global Usage (Once per app run)
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  
-  
-   /// --- System Handlers ---
+  late ScrollController _scrollController;
+
+  /// --- System Handlers ---
   /// Observables & Getters
- 
+
   // Add Scoped Var Here...
 
   /// --- Functionality Handlers ---
   /// Observables & Getters
+  var _qrcode = ''.obs;
+
+  String get qrcode => _qrcode.value;
+
+  var _data = DashboardModel().obs;
+
+  DashboardModel get data => this._data.value;
+  var _categories = <CategoryElementModel>[].obs;
+
+  List<CategoryElementModel> get categories => this._categories;
+  var _featuredDoctors = <FeaturedDoctorModel>[].obs;
+
+  List<FeaturedDoctorModel> get featuredDoctors => this._featuredDoctors;
+
+  var _isLoading = false.obs;
+
+  bool get isLoading => this._isLoading.value;
+
   var _indexData = DashboardModel().obs;
+
   DashboardModel get indexData => _indexData.value;
-  
+
   var _showData = DashboardModel().obs;
+
   DashboardModel get showData => _showData.value;
-  
+
   /// Variables
   TextEditingController taskInput = TextEditingController();
 
   @override
   void onInit() {
     super.onInit();
-    index();
+    _qrcode.value = '${auth.user.id}';
+    auth.getUser();
+
+    this.getData();
+    _scrollController = ScrollController();
   }
-  
- /// --- Core Functionalities Methods ---
 
+  /// --- Core Functionalities Methods ---
 
- 
   // Index
   Future<void> index({bool refresh = false}) async {
     try {
@@ -68,8 +96,7 @@ class DashboardController extends AppController {
 
       /// Checking Response Error
       if (response.hasError()) {
-        Toastr.show(
-            message: "${response.message}");
+        Toastr.show(message: "${response.message}");
         setBusy(false);
         return;
       }
@@ -92,12 +119,12 @@ class DashboardController extends AppController {
       _dashboardService.init();
 
       /// Call Service to Get API Response
-      ApiResponse response = await _dashboardService.show(id: auth.user.id!.toInt());
+      ApiResponse response =
+          await _dashboardService.show(id: auth.user.id!.toInt());
 
       /// Checking Response Error
       if (response.hasError()) {
-        Toastr.show(
-            message: "${response.message}");
+        Toastr.show(message: "${response.message}");
         setBusy(false);
         return;
       }
@@ -114,158 +141,28 @@ class DashboardController extends AppController {
     }
   }
 
-  // Create
-  Future<void> create({bool refresh = false}) async {
-    if (!formKey.currentState!.validate()) {
+  Future<void> getData() async {
+    _isLoading(true);
+    ApiResponse response = await _dashboardService.index();
+
+    if (response.hasError()) {
+      Toastr.show(message: "${response.message}");
+      _isLoading(false);
       return;
     }
-    try {
-      _dashboardService.init();
 
-       /// Prepare form data to be sent to server.
-      Map<String, dynamic> body = {
-        "task": taskInput.text,
-      };
+    log.w(response.data['categories']);
 
-      /// Call Service to Get API Response
-      ApiResponse response = await _dashboardService.create(body: body);
-
-      /// Checking Validation Errors
-      if (response.hasValidationErrors()) {
-        Toastr.show(
-            message:
-                "${response.validationError}");
-        return;
-      }
-
-      /// Checking Response Error
-      if (response.hasError()) {
-        Toastr.show(
-            message: "${response.message}"); 
-        return;
-      }
-
-      _dashboardService.close();
-      Toastr.show(message: "${response.message}"); 
-    } on Exception catch (e) {
-      print(e);
+    if (response.hasData()) {
+      _categories.assignAll(List<CategoryElementModel>.from(response
+          .data['categories']
+          .map((e) => CategoryElementModel.fromJson(e))));
+      _featuredDoctors.assignAll(List<FeaturedDoctorModel>.from(response
+          .data['featured_doctors']
+          .map((e) => FeaturedDoctorModel.fromJson(e))));
     }
-  }
 
-  // Store
-  Future<void> store({bool refresh = false}) async {
-    if (!formKey.currentState!.validate()) {
-      return;
-    }
-    try {
-      _dashboardService.init();
-
-     /// Prepare form data to be sent to server.
-      Map<String, dynamic> body = {
-        "task": taskInput.text,
-      };
-
-      /// Call Service to Get API Response
-      ApiResponse response = await _dashboardService.store(body: body);
-
-      /// Checking Validation Errors
-      if (response.hasValidationErrors()) {
-        Toastr.show(
-            message:
-                "${response.validationError}");
-        return;
-      }
-
-      /// Checking Response Error
-      if (response.hasError()) {
-        Toastr.show(
-            message: "${response.message}"); 
-        return;
-      }
-
-      _dashboardService.close();
-      Toastr.show(message: "${response.message}"); 
-    } on Exception catch (e) {
-      print(e);
-    }
-  }
-
-  //Edit
-  Future<void> edit({bool refresh = false}) async {
-    if (!formKey.currentState!.validate()) {
-      return;
-    }
-    try {
-      _dashboardService.init();
-
-       /// Prepare form data to be sent to server.
-      Map<String, dynamic> body = {
-        "task": taskInput.text,
-      };
-
-      /// Call Service to Get API Response
-      ApiResponse response =
-          await _dashboardService.edit(body: body, id: auth.user.id!.toInt());
-
-      /// Checking Validation Errors
-      if (response.hasValidationErrors()) {
-        Toastr.show(
-            message:
-                "${response.validationError}"); 
-        return;
-      }
-
-      /// Checking Response Error
-      if (response.hasError()) {
-        Toastr.show(
-            message: "${response.message}");
-        return;
-      }
-
-      _dashboardService.close();
-      Toastr.show(message: "${response.message}"); 
-    } on Exception catch (e) {
-      print(e);
-    }
-  }
-
-  // Update
-  Future<void> patch({bool refresh = false}) async {
-    if (!formKey.currentState!.validate()) {
-      return;
-    }
-    try {
-      _dashboardService.init();
-
-       /// Prepare form data to be sent to server.
-      Map<String, dynamic> body = {
-        "task": taskInput.text,
-      };
-
-      /// Call Service to Get API Response
-      ApiResponse response =
-          await _dashboardService.edit(body: body, id: auth.user.id!.toInt());
-
-      /// Checking Validation Errors
-      if (response.hasValidationErrors()) {
-        Toastr.show(
-            message:
-                "${response.validationError}");
-        return;
-      }
-
-      /// Checking Response Error
-      if (response.hasError()) {
-        Toastr.show(
-            message: "${response.message}"); 
-        return;
-      }
-
-      _dashboardService.close();
-      Toastr.show(message: "${response.message}"); 
-    } on Exception catch (e) {
-      print(e);
-    }
+    _isLoading(false);
   }
 
   //Delete
@@ -280,8 +177,7 @@ class DashboardController extends AppController {
 
       /// Checking Response Error
       if (response.hasError()) {
-        Toastr.show(
-            message: "${response.message}"); 
+        Toastr.show(message: "${response.message}");
         setBusy(false);
         return;
       }
@@ -296,17 +192,54 @@ class DashboardController extends AppController {
     }
   }
 
-
+  Future<void> storePatientAttendance(patientId) async {
+    Map<String, dynamic> body = {
+      "patient_id": patientId,
+      "remark": "",
+    };
+    ApiResponse response =
+        await _dashboardService.storePatientAttendance(body: body);
+    if (response.hasError()) {
+      Toastr.show(message: "${response.message}");
+      return;
+    }
+    Toastr.show(message: "Successfully added patient attendance.");
+  }
 
   /// --- Common Functionalities Methods ---
-   // Here you can add a scoped method...
-   
-  
-  /// --- Supporting Functionalities Methods ---
-   // Here you can add a scoped method...
-   
-  /// --- Form Functionalities Methods --- 
-   // Here you can add a scoped method...
-  
-}
+  // Here you can add a scoped method...
 
+  /// --- Supporting Functionalities Methods ---
+  String scannedQrcode = '';
+
+  Future<void> scanQR() async {
+    try {
+      scannedQrcode = await FlutterBarcodeScanner.scanBarcode(
+          '#0095b6', 'Cancel', true, ScanMode.QR);
+      // log.w(scannedQrcode);
+
+      if (scannedQrcode != '-1') {
+        await storePatientAttendance(scannedQrcode);
+      } else {
+        Toastr.show(message: "This patient is not linked to your account yet!");
+      }
+    } on PlatformException {}
+  }
+
+  /// --- Form Functionalities Methods ---
+  // Here you can add a scoped method...
+
+  /// Mock Data
+  final imageListPatient = [
+    'assets/images/home-banner-07.jpg',
+    'assets/images/home-banner-08.jpg',
+    'assets/images/home-banner-3.png',
+    'assets/images/home-banner-4.png',
+    'assets/images/home-banner-5.png',
+    'assets/images/home-banner-6.png',
+  ];
+  final imageListDoctor = [
+    "assets/images/doctor_slider_banner.jpg",
+    "assets/images/doctor_slider_banner1.jpg"
+  ];
+}

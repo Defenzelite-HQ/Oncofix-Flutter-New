@@ -1,3 +1,10 @@
 export 'Auth/AuthModule.dart';
 export "Splash/SplashModule.dart";
 export 'Webview/WebviewModule.dart';
+export 'OnBoarding/OnBoardingModule.dart';
+export 'Dashboard/DashboardModule.dart';
+export 'Setting/SettingModule.dart';
+export 'About/AboutModule.dart';
+export 'Cases/CasesModule.dart';
+export 'Doctor/DoctorModule.dart';
+export 'Notification/NotificationModule.dart';

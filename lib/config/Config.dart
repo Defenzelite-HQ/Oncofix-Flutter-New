@@ -1,5 +1,5 @@
 import 'package:google_fonts/google_fonts.dart';
-import 'package:zstarter_flutter/app/modules/Auth/AuthModule.dart';
+import 'package:oncofix/app/modules/Auth/AuthModule.dart';
 
 import '../app/helpers/Global.dart';
 
@@ -33,7 +33,6 @@ class Config {
   static bool isPatient() {
     return auth.user.role == "Patient";
   }
-
 
   ///======================================
   /// Default Login With Password, Is Auth Required OTP In App
@@ -89,12 +88,12 @@ class Config {
   ///======================================
   /// API base url
   ///======================================
-  static String apiBaseUrl = "https://zstarter.dze-labs.xyz/api";
+  static String apiBaseUrl = "https://oncofix.com/api/v1";
 
   ///======================================
   /// App Name
   ///======================================
-  static String appName = "zStarter";
+  static String appName = "OncoFix";
 
   ///======================================
   /// Home/Dashboard URL [To be used to redirect user after login]

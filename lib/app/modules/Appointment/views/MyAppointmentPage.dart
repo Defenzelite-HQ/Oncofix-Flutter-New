@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ui_x/helpers/ColorPalette.dart';
 import 'package:ui_x/helpers/Sizes.dart';
-import 'package:zstarter_flutter/app/modules/Appointment/views/widgets/AppointmentCardWidget.dart';
+import 'package:oncofix/app/modules/Appointment/views/widgets/AppointmentCardWidget.dart';
 import '../../../shared/views/layouts/MasterLayout.dart';
 import '../../../shared/views/widgets/Loading.dart';
 import '../controllers/MyAppointmentController.dart';

@@ -6,7 +6,7 @@ import 'MockNotificationService.dart';
 
 abstract class NotificationService {
   /// Configure if Mock is enabled or not @accepts[true|false]
-  static const MOCK_ENABLED = true;
+  static const MOCK_ENABLED = false;
 
   /// Create and get the instance of [NotificationService]
   static NotificationService get instance {

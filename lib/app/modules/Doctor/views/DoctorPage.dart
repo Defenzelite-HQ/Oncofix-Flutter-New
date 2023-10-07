@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:ui_x/ui_x.dart';
-import 'package:zstarter_flutter/app/modules/Doctor/views/widget/FilterBottomWidget.dart';
+import 'package:oncofix/app/modules/Doctor/views/widget/FilterBottomWidget.dart';
 
 import '../../../helpers/Global.dart';
 import '../../../shared/views/errors/NotConnectedErrorPage.dart';

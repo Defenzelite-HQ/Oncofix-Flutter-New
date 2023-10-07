@@ -14,7 +14,7 @@ import 'package:timezone/timezone.dart';
 import 'package:ui_x/helpers/Toastr.dart';
 import 'package:vibration/vibration.dart';
 import 'package:http/http.dart' as http;
-import 'package:zstarter_flutter/app/shared/controllers/FCMController.dart';
+import 'package:oncofix/app/shared/controllers/FCMController.dart';
 import '../../config/Config.dart';
 import '../shared/controllers/AppController.dart';
 import '../shared/controllers/AuthState.dart';

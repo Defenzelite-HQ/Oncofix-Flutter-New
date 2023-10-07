@@ -6,7 +6,7 @@ import 'MockAuthService.dart';
 
 abstract class AuthService {
   /// Configure if Mock is enabled or not
-  static const MOCK_ENABLED = true;
+  static const MOCK_ENABLED = false;
 
   /// Create and get the instance of [AuthService]
   static AuthService get instance {
@@ -30,6 +30,7 @@ abstract class AuthService {
 
   /// Verifies OTP
   Future<ApiResponse> verifyOtp({required Map<String, dynamic> body});
+  Future<ApiResponse> updateUserDeviceToken({required Map<String, dynamic> body});
 
   /// Login user with Google
   Future<ApiResponse> google();

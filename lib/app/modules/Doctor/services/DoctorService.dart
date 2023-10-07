@@ -6,7 +6,7 @@ import 'MockDoctorService.dart';
 
 abstract class DoctorService {
   /// Configure if Mock is enabled or not @accepts[true|false]
-  static const MOCK_ENABLED = true;
+  static const MOCK_ENABLED = false;
 
   /// Create and get the instance of [DoctorService]
   static DoctorService get instance {

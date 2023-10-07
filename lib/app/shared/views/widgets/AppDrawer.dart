@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ui_x/helpers/ColorPalette.dart';
-import 'package:zstarter_flutter/app/helpers/Global.dart';
+import 'package:oncofix/app/helpers/Global.dart';
 
 
 Drawer appDrawer(BuildContext context) {

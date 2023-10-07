@@ -1,4 +1,4 @@
-package com.zstarter.app
+package com.oncofix.app
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:zstarter_flutter/app/modules/Setting/views/widget/SettingPageWidget.dart';
+import 'package:oncofix/app/modules/Setting/views/widget/SettingPageWidget.dart';
 
 import '../../../shared/views/errors/NotConnectedErrorPage.dart';
 import '../../../shared/views/layouts/MasterLayout.dart';

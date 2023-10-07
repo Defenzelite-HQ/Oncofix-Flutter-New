@@ -10,7 +10,6 @@ export 'widgets/LoadingIcon.dart';
 /// Export all Widgets files
 /// =========================
 export 'widgets/buttons/Button.dart';
-export 'widgets/buttons/ButtonIcon.dart';
 export 'widgets/buttons/CustomButton.dart';
 export 'widgets/forms/FormInput.dart';
 export 'widgets/forms/FormInputDate.dart';

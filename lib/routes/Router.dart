@@ -11,4 +11,22 @@ List<GetPage> routes = [
 
   /// WebView Routes
   ...webviewRoutes,
+
+  /// OnBoarding Routes
+  ...onboardingRoutes,
+
+  /// Setting Routes
+  ...settingRoutes,
+
+  /// Dashboard Routes
+  ...dashboardRoutes,
+
+  /// Doctor Routes
+  ...doctorRoutes,
+
+  /// Cases Routes
+  ...casesRoutes,
+
+  /// About Routes
+  ...aboutRoutes,
 ];

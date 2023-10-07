@@ -44,4 +44,10 @@ class ApiAuthService implements AuthService {
     // TODO: implement verifyOtp
     throw UnimplementedError();
   }
+
+  @override
+  Future<ApiResponse> updateUserDeviceToken({required Map<String, dynamic> body}) async{
+    return await Request.post("/update-device-token",
+        body: body, authenticate: true);
+  }
 }

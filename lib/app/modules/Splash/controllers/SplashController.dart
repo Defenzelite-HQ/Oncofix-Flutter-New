@@ -8,9 +8,12 @@
 */
 
 import 'package:get/get.dart';
-import 'package:zstarter_flutter/app/modules/Modules.dart';
+import 'package:oncofix/app/modules/Dashboard/DashboardModule.dart';
+import 'package:oncofix/app/modules/Modules.dart';
+import 'package:oncofix/app/modules/OnBoarding/OnBoardingModule.dart';
 
 import '../../../../config/Config.dart';
+import '../../../helpers/Global.dart';
 import '../../../shared/controllers/AppController.dart';
 import '../../../shared/controllers/AuthState.dart';
 
@@ -32,14 +35,22 @@ class SplashController extends AppController {
 
   /// --- Core Functionalities Methods ---
 
-  Future<void> redirectUser() async {
+  void redirectUser() async {
     if (Config.authRequired) {
+      if (storage.read('initiated') == null && storage.read('initiated') != 1) {
+        await 5.delay(() => Get.offAllNamed(OnBoardingRoutes.onboarding));
+        return;
+      }
       if (await auth.check()) {
         await 5.delay(() => Get.offAllNamed(Config.homeUrl));
       } else {
         await 5.delay(() => Get.offAllNamed(AuthRoutes.login));
       }
     } else {
+      if (storage.read('initiated') == null && storage.read('initiated') != 1) {
+        await 5.delay(() => Get.offAllNamed(OnBoardingRoutes.onboarding));
+        return;
+      }
       await 5.delay(() => Get.offAllNamed(Config.homeUrl));
     }
   }
