@@ -64,7 +64,7 @@ Future<void> getCurrentPosition() async {
 ///
 /// Example:
 ///
-/// final Uint8List markerIcon = await getBytesFromAsset('assets/images/marker_logo.png', 50);
+/// final Uint8List markerIcon = await getBytesFromAsset('assets/icons/marker_logo.png', 50);
 ///
 Future<Uint8List> getBytesFromAsset(String path, int width) async {
   ByteData data = await rootBundle.load(path);
@@ -82,7 +82,7 @@ Future<Uint8List> getBytesFromAsset(String path, int width) async {
 ///  googleMapMarker(
 ///     lat: 22.3991381,
 ///     long: 22.3991381,
-///     image: "assets/images/marker_logo.png",
+///     image: "assets/icons/marker_logo.png",
 ///     title: "Current Location",
 ///     snippet: "Current Address"),
 ///

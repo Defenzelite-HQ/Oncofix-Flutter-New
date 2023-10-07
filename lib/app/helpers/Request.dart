@@ -164,7 +164,7 @@ class Request {
     };
 
     if (token) {
-      var _token = storage.read('token');
+      var _token = storage.read('access_token');
       headers = {
         "Content-type": "application/json",
         "Accept": "application/json",

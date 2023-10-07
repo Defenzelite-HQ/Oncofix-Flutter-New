@@ -70,7 +70,7 @@ class LoginController extends AppController {
         'password',
       );
     }
-    auth.getUser();
+    // auth.getUser();
   }
 
   /// --- Core Functionalities Methods ---

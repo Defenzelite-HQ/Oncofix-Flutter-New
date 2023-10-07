@@ -7,7 +7,7 @@ import 'MockGlobalAuthService.dart';
 
 abstract class GlobalAuthService {
   /// Configure if Mock is enabled or not
-  static const MOCK_ENABLED = true;
+  static const MOCK_ENABLED = false;
 
   /// Create and get the instance of [GlobalAuthService]
   static GlobalAuthService get instance {

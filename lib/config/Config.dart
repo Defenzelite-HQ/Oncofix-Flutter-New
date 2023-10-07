@@ -1,5 +1,5 @@
 import 'package:google_fonts/google_fonts.dart';
-import 'package:oncofix/app/modules/Auth/AuthModule.dart';
+import 'package:oncofix/app/modules/Dashboard/DashboardModule.dart';
 
 import '../app/helpers/Global.dart';
 
@@ -27,6 +27,7 @@ class Config {
   /// Auth Role.
   ///======================================
   static bool isDoctor() {
+    log.w(auth.user.role);
     return auth.user.role == "Doctor";
   }
 
@@ -98,7 +99,7 @@ class Config {
   ///======================================
   /// Home/Dashboard URL [To be used to redirect user after login]
   ///======================================
-  static String homeUrl = AuthRoutes.login;
+  static String homeUrl = DashboardRoutes.dashboard;
 
   // static String homeUrl = DashboardRoutes.dashboard;
 
