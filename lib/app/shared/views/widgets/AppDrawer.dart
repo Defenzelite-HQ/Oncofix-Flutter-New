@@ -145,62 +145,46 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                         //   imageExtension: "svg",
                         //   label: "Doctors Recourse",
                         // ),
-
                         /// +++++++++++++++++++++++
-                        /// Blog
-                        /// +++++++++++++++++++++++
-                        BottomWidget(
-                          onTap: () => webViewOnTap("blogs"),
-                          image: "assets/icons/blog.svg",
-                          imageExtension: "svg",
-                          label: "Blogs",
-                        ),
-
-                        /// +++++++++++++++++++++++
-                        /// Events
+                        /// About Us
                         /// +++++++++++++++++++++++
                         BottomWidget(
-                          onTap: () => webViewOnTap("events"),
-                          image: "assets/icons/events.png",
+                          onTap: () => webViewOnTap("About Us"),
+                          image: "assets/icons/about.png",
                           imageExtension: "png",
-                          label: "Events",
+                          label: "About Us",
+                        ),
+                        /// +++++++++++++++++++++++
+                        /// Contact Us
+                        /// +++++++++++++++++++++++
+                        BottomWidget(
+                          onTap: () => webViewOnTap("Contact Us"),
+                          image: "assets/icons/contactUs.png",
+                          imageExtension: "png",
+                          label: "Contact Us",
+                        ),
+                        /// +++++++++++++++++++++++
+                        /// FAQ's
+                        /// +++++++++++++++++++++++
+                        BottomWidget(
+                          onTap: () => webViewOnTap("FAQ's"),
+                          image: "assets/icons/faq.png",
+                          imageExtension: "png",
+                          label: "FAQ's",
+                        ),
+                        /// +++++++++++++++++++++++
+                        /// Legal
+                        /// +++++++++++++++++++++++
+                        BottomWidget(
+                          onTap: () => webViewOnTap("Legal"),
+                          image: "assets/icons/legal.png",
+                          imageExtension: "png",
+                          label: "Legal",
                         ),
                         Divider(),
-                        BottomWidget(
-                          onTap: () => Get.toNamed(AboutRoutes.about),
-                          image: "assets/icons/info.svg",
-                          imageExtension: "svg",
-                          label: "About Oncofix",
-                        ),
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      auth.logout();
-                    },
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.logout,
-                          color: kcDanger,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          "Logout",
-                          style: TextStyl.body
-                              ?.copyWith(color: kcDanger, fontSize: 15),
-                        )
-                      ],
-                    ),
-                  )
                 ],
               ),
             ),
@@ -209,6 +193,29 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              GestureDetector(
+                onTap: () {
+                  auth.logout();
+                },
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.logout,
+                      color: kcDanger,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      "Logout",
+                      style: TextStyl.body
+                          ?.copyWith(color: kcDanger, fontSize: 15),
+                    )
+                  ],
+                ),
+              ),
               Text(
                 "OncoFix v1.1",
                 style: TextStyl.bodySm?.copyWith(
@@ -219,7 +226,7 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                 textAlign: TextAlign.center,
               ),
               SizedBox(
-                height: 5,
+                height: 20,
               ),
             ],
           ),

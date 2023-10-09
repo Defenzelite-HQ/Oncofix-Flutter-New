@@ -121,7 +121,7 @@ class DashboardController extends AppController {
 
       /// Call Service to Get API Response
       ApiResponse response =
-      await _dashboardService.show(id: auth.user.id!.toInt());
+          await _dashboardService.show(id: auth.user.id!.toInt());
 
       /// Checking Response Error
       if (response.hasError()) {
@@ -177,7 +177,7 @@ class DashboardController extends AppController {
 
       /// Call Service to Get API Response
       ApiResponse response =
-      await _dashboardService.delete(id: auth.user.id!.toInt());
+          await _dashboardService.delete(id: auth.user.id!.toInt());
 
       /// Checking Response Error
       if (response.hasError()) {
@@ -202,7 +202,7 @@ class DashboardController extends AppController {
       "remark": "",
     };
     ApiResponse response =
-    await _dashboardService.storePatientAttendance(body: body);
+        await _dashboardService.storePatientAttendance(body: body);
     if (response.hasError()) {
       Toastr.show(message: "${response.message}");
       return;
@@ -247,6 +247,10 @@ class DashboardController extends AppController {
       "id": "oncofix_screening",
       "image": "assets/icons/home-banner-5.png",
     },
+    {
+      "id": "events",
+      "image": "assets/icons/doctor_slider_banner1.jpg",
+    },
   ];
 
   List<Map<String, String>> imageListDoctor = [
@@ -264,6 +268,10 @@ class DashboardController extends AppController {
     },
     {
       "id": "oncofix_screening",
+      "image": "assets/icons/doctor_slider_banner1.jpg",
+    },
+    {
+      "id": "events",
       "image": "assets/icons/doctor_slider_banner1.jpg",
     },
   ];
