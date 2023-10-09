@@ -78,79 +78,75 @@ class AppointmentPage extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    Obx(
-                      () => controller.isBusy
-                          ? Center(
-                              child: Container(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 72),
-                                  child: LoadingIcon()))
-                          : Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12),
-                              child: Wrap(
-                                direction: Axis.horizontal,
-                                spacing: 4,
-                                children: [
-                                  ...List.generate(controller.schedules.length,
-                                      (index) {
-                                    ScheduleModel schedule =
-                                        controller.schedules[index];
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 4),
-                                      child: Container(
-                                        height: 35,
-                                        child: schedule.booked!
-                                            ? Opacity(
-                                                opacity: 0.3,
-                                                child: Button.danger(
+                    controller.isBusy
+                        ? Center(
+                            child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 72),
+                                child: LoadingIcon()))
+                        : Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            child: Wrap(
+                              direction: Axis.horizontal,
+                              spacing: 4,
+                              children: [
+                                ...List.generate(controller.schedules.length,
+                                    (index) {
+                                  ScheduleModel schedule =
+                                      controller.schedules[index];
+                                  return Padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 4),
+                                    child: Container(
+                                      height: 35,
+                                      child: schedule.booked!
+                                          ? Opacity(
+                                              opacity: 0.3,
+                                              child: Button.danger(
+                                                key: UniqueKey(),
+                                                label: "${schedule.startTime}",
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 8,
+                                                        horizontal: 16),
+                                              ),
+                                            )
+                                          : controller.selectedStartTime ==
+                                                  schedule.startTime
+                                              ? Button.success(
                                                   key: UniqueKey(),
                                                   label:
                                                       "${schedule.startTime}",
                                                   padding: const EdgeInsets
-                                                          .symmetric(
+                                                      .symmetric(
                                                       vertical: 8,
                                                       horizontal: 16),
+                                                  onTap: (set) {
+                                                    if (!schedule.booked!)
+                                                      controller
+                                                          .onTimeDeselect();
+                                                  })
+                                              : Button.light(
+                                                  key: UniqueKey(),
+                                                  label:
+                                                      "${schedule.startTime}",
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      vertical: 8,
+                                                      horizontal: 16),
+                                                  onTap: (set) {
+                                                    if (!schedule.booked!)
+                                                      controller.onTimeSelect(
+                                                          schedule.startTime!,
+                                                          schedule.endTime!);
+                                                  },
                                                 ),
-                                              )
-                                            : controller.selectedStartTime ==
-                                                    schedule.startTime
-                                                ? Button.success(
-                                          key: UniqueKey(),
-                                                    label:
-                                                        "${schedule.startTime}",
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 8,
-                                                        horizontal: 16),
-                                                    onTap: (set) {
-                                                      if (!schedule.booked!)
-                                                        controller
-                                                            .onTimeDeselect();
-                                                    })
-                                                : Button.light(
-                                          key: UniqueKey(),
-                                                    label:
-                                                        "${schedule.startTime}",
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 8,
-                                                        horizontal: 16),
-                                                    onTap: (set) {
-                                                      if (!schedule.booked!)
-                                                        controller.onTimeSelect(
-                                                            schedule.startTime!,
-                                                            schedule.endTime!);
-                                                    },
-                                                  ),
-                                      ),
-                                    );
-                                  }),
-                                ],
-                              ),
+                                    ),
+                                  );
+                                }),
+                              ],
                             ),
-                    ),
+                          ),
                     // Expanded(
                     //   child: ListView.separated(
                     //     separatorBuilder: (context, int) {
@@ -219,16 +215,14 @@ class AppointmentPage extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(24.0),
-            child: Obx(
-              () => Button.block(
-                key: UniqueKey(),
-                label: 'Confirm Appointment',
-                onTap: (set) async {
-                  set.setBusy(true).setDisabled(true);
-                  await controller.bookAppointment();
-                  set.setBusy(false).setDisabled(false);
-                },
-              ),
+            child: Button.block(
+              key: UniqueKey(),
+              label: 'Confirm Appointment',
+              onTap: (set) async {
+                set.setBusy(true).setDisabled(true);
+                await controller.bookAppointment();
+                set.setBusy(false).setDisabled(false);
+              },
             ),
           ),
         ],

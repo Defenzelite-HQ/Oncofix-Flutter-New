@@ -10,7 +10,9 @@ abstract class SettingService {
 
   /// Create and get the instance of [SettingService]
   static SettingService get instance {
-    if (!Get.isRegistered<SettingService>()) Get.lazyPut<SettingService>(() => MOCK_ENABLED ? MockSettingService() : AppSettingService());
+    if (!Get.isRegistered<SettingService>())
+      Get.lazyPut<SettingService>(
+          () => MOCK_ENABLED ? MockSettingService() : AppSettingService());
     return Get.find<SettingService>();
   }
 
@@ -36,7 +38,8 @@ abstract class SettingService {
 
   Future<ApiResponse> deleteAddress({required int id});
 
-  Future<ApiResponse> updateAddress({required Map<String, dynamic> body, required int id});
+  Future<ApiResponse> updateAddress(
+      {required Map<String, dynamic> body, required int id});
 
   Future<ApiResponse> getAddressList();
 

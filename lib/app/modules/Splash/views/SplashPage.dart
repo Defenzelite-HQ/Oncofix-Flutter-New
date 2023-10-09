@@ -25,11 +25,10 @@ class SplashPage extends StatelessWidget {
           children: [
             Spacer(),
             Image.asset(
-             "assets/systems/logo.png",
+              "assets/systems/logo.png",
               width: screen.width * 0.5,
               fit: BoxFit.cover,
               filterQuality: FilterQuality.high,
-              color: Colors.white,
             ),
             Spacer(),
             Padding(

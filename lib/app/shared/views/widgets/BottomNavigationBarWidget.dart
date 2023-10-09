@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:oncofix/app/modules/Appointment/AppointmentModule.dart';
+import 'package:oncofix/app/modules/Cases/CasesModule.dart';
 import 'package:oncofix/app/modules/Dashboard/controllers/DashboardController.dart';
+import 'package:oncofix/app/modules/Doctor/DoctorModule.dart';
+import 'package:oncofix/app/modules/Modules.dart';
 import 'package:ui_x/helpers/ColorPalette.dart';
 import 'package:ui_x/helpers/Sizes.dart';
 import 'package:ui_x/helpers/TextStyl.dart';
@@ -13,8 +17,10 @@ import '../../../helpers/Webview.dart';
 class BottomNavigationBarWidget extends StatelessWidget {
   final String route;
 
-  BottomNavigationBarWidget({Key? key, required this.route, }) : super(key: key);
-
+  BottomNavigationBarWidget({
+    Key? key,
+    required this.route,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,375 +36,76 @@ class BottomNavigationBarWidget extends StatelessWidget {
               ),
             ),
             padding:
-                EdgeInsets.symmetric(vertical: spacer2, horizontal: spacer1),
+                EdgeInsets.symmetric(vertical: spacer3, horizontal: spacer1),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                InkWell(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.home,
-                        color: route == 'home' ? kcBottomBar : kcSecondary,
-                        size: spacer5,
-                      ),
-                      SizedBox(height: spacer1),
-                      Text(
-                        "Home",
-                        style: TextStyl.title!.copyWith(
-                            color: route == 'home' ? kcBottomBar : kcSecondary,
-                            fontWeight: FontWeight.bold,
-                            fontSize: spacer3),
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-                    Get.toNamed('/home');
-                  },
+                NavBarWidget(
+                  active: "home",
+                  onTap: () => Get.toNamed(DashboardRoutes.dashboard),
+                  route: route,
+                  image: "assets/icons/unfill_home.png",
+                  fillImage: "assets/icons/fill_home.png",
                 ),
                 Config.isDoctor()
-                    ? InkWell(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.person,
-                              color: route == 'patient'
-                                  ? kcBottomBar
-                                  : kcSecondary,
-                              size: spacer5,
-                            ),
-                            SizedBox(height: spacer1),
-                            Text(
-                              "Patient",
-                              style: TextStyl.title!.copyWith(
-                                  color: route == 'patient'
-                                      ? kcBottomBar
-                                      : kcSecondary,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: spacer3),
-                            ),
-                          ],
-                        ),
-                        onTap: () {
-                          webViewOnTap("patient");
-                        },
+                    ? NavBarWidget(
+                        active: "patient",
+                        onTap: () => webViewOnTap("patient"),
+                        route: route,
+                        image: "assets/icons/unfill_users.png",
+                        fillImage: "assets/icons/fill_users.png",
                       )
-                    : InkWell(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SvgPicture.asset(
-                              "assets/icons/doctor.svg",
-                              color: route == 'doctors'
-                                  ? kcBottomBar
-                                  : kcSecondary,
-                              height: spacer5,
-                            ),
-                            // Icon(
-                            //   Icons.medication,
-                            //   color: route == 'my-appointments'
-                            //       ? kcBottomBar
-                            //       : kcSecondary,
-                            //   size: spacer5,
-                            // ),
-                            SizedBox(height: spacer1),
-                            Text(
-                              "Doctor",
-                              // "${Config.authRole}",
-                              style: TextStyl.title!.copyWith(
-                                  color: route == 'doctors'
-                                      ? kcBottomBar
-                                      : kcSecondary,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: spacer3),
-                            ),
-                          ],
-                        ),
-                        onTap: () async {
-                          Get.toNamed('/doctors');
-                        },
+                    : NavBarWidget(
+                        active: "doctors",
+                        onTap: () => Get.toNamed(DoctorRoutes.doctor),
+                        route: route,
+                        image: "assets/icons/unfill_doctor.png",
+                        fillImage: "assets/icons/fill_doctor.png",
                       ),
-                Text(""),
-                // InkWell(
-                //   child: Column(
-                //     mainAxisSize: MainAxisSize.min,
-                //     children: [
-                //       Icon(
-                //         Icons.forum,
-                //         color: route == 'forum' ? kcBottomBar : kcSecondary,
-                //         size: spacer5,
-                //       ),
-                //       SizedBox(height: spacer1),
-                //       Text(
-                //         "EMR",
-                //         style: TextStyl.title!.copyWith(
-                //             color: route == 'forum' ? kcBottomBar : kcSecondary,
-                //             fontWeight: FontWeight.bold,
-                //             fontSize: spacer3),
-                //       ),
-                //     ],
-                //   ),
-                //   onTap: () {
-                //     Get.toNamed('/webview', parameters: {
-                //       "url": "https://oncofix.com/erm",
-                //       "title": "EMR"
-                //     });
-                //   },
-                // ),
-                Config.isDoctor()
-                    ? InkWell(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            // Image.asset("assets/icons/book-alt.png",
-                            //   color: route == 'my-appointments'
-                            //   ? kcBottomBar
-                            //       : kcSecondary,
-                            //   height: spacer5,
-                            // ),
 
-                            Icon(
-                              Icons.medication,
-                              color: route == 'my-appointments'
-                                  ? kcBottomBar
-                                  : kcSecondary,
-                              size: spacer5,
-                            ),
-                            SizedBox(height: spacer1),
-                            Text(
-                              "Apts",
-                              style: TextStyl.title!.copyWith(
-                                  color: route == 'my-appointments'
-                                      ? kcBottomBar
-                                      : kcSecondary,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: spacer3),
-                            ),
-                          ],
-                        ),
-                        onTap: () {
-                          // Get.toNamed('/appointments');
-                          webViewOnTap("doctor_appointments");
-                        },
+                Text(""),
+                Config.isDoctor()
+                    ? NavBarWidget(
+                        active: "my-appointments",
+                        onTap: () => webViewOnTap("doctor_appointments"),
+                        route: route,
+                        image: "assets/icons/unfill_calendar-clock.png",
+                        fillImage: "assets/icons/fill_calendar-clock.png",
                       )
-                    : InkWell(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SvgPicture.asset(
-                              "assets/icons/cases.svg",
-                              color:
-                                  route == 'cases' ? kcBottomBar : kcSecondary,
-                              height: spacer5,
-                            ),
-                            // Icon(
-                            //   Icons.cases_outlined,
-                            //   color: route == 'cases' ? kcBottomBar : kcBottomBarLight,
-                            //   size: spacer5,
-                            // ),
-                            SizedBox(height: spacer1),
-                            Text(
-                              "Cases",
-                              style: TextStyl.title!.copyWith(
-                                  color: route == 'cases'
-                                      ? kcBottomBar
-                                      : kcSecondary,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: spacer3),
-                            ),
-                          ],
-                        ),
-                        onTap: () {
-                          Get.toNamed(
-                            '/cases',
-                          );
-                        },
+                    : NavBarWidget(
+                        active: "cases",
+                        onTap: () => webViewOnTap("my_cases"),
+                        // onTap: () => Get.toNamed(
+                        //   CasesRoutes.cases,
+                        // ),
+                        route: route,
+                        image: "assets/icons/unfill_cases.png",
+                        fillImage: "assets/icons/fill_cases.png",
                       ),
+
+                // InkWell(
+                //         child: SvgPicture.asset(
+                //           "assets/icons/cases.svg",
+                //           color: route == 'cases' ? kcBottomBar : kcSecondary,
+                //           height: spacer5,
+                //         ),
+                //         onTap: () {
+                //           Get.toNamed(
+                //             CasesRoutes.cases,
+                //           );
+                //         },
+                //       ),
                 InkWell(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.menu,
-                        color: route == 'more' ? kcBottomBar : kcSecondary,
-                        size: spacer5,
-                      ),
-                      SizedBox(height: spacer1),
-                      Text(
-                        "More",
-                        style: TextStyl.title!.copyWith(
-                            color: route == 'more' ? kcBottomBar : kcSecondary,
-                            fontWeight: FontWeight.bold,
-                            fontSize: spacer3),
-                      ),
-                    ],
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: Image.network(
+                      "${auth.user.avatar}",
+                      height: spacer7,
+                    ),
                   ),
                   onTap: () {
-                    Get.bottomSheet(
-                      SafeArea(
-                        child: Container(
-                          height: screen.height * 0.3,
-                          decoration: new BoxDecoration(
-                            color: kcWhite,
-                            borderRadius: new BorderRadius.only(
-                              topLeft: const Radius.circular(40.0),
-                              topRight: const Radius.circular(40.0),
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: ListView(
-                              children: [
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: Container(
-                                    height: 5,
-                                    width: 40,
-                                    decoration: BoxDecoration(
-                                        color: kcGray,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20))),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 25,
-                                ),
-                                GestureDetector(
-                                  child: Container(
-                                    color: kcWhite,
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.pending_actions,
-                                          color: kcSecondary,
-                                          size: spacer5,
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          "My Appointments",
-                                          style: TextStyl.title!.copyWith(
-                                            color: kcSecondary,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: spacer4,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    Get.back();
-                                    Get.toNamed('/my-appointments');
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 25,
-                                ),
-                                GestureDetector(
-                                  child: Container(
-                                    color: kcWhite,
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.shopping_cart,
-                                          color: kcSecondary,
-                                          size: spacer5,
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          "Orders",
-                                          style: TextStyl.title!.copyWith(
-                                            color: kcSecondary,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: spacer4,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    Get.back();
-                                    Get.toNamed('/my-orders');
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 25,
-                                ),
-                                GestureDetector(
-                                  child: Container(
-                                    color: kcWhite,
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.settings,
-                                          color: kcSecondary,
-                                          size: spacer5,
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          "Settings",
-                                          style: TextStyl.title!.copyWith(
-                                            color: kcSecondary,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: spacer4,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    Get.back();
-                                    Get.toNamed('/settings');
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 25,
-                                ),
-                                GestureDetector(
-                                  child: Container(
-                                    color: kcWhite,
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.logout,
-                                          color: kcSecondary,
-                                          size: spacer5,
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          "Logout",
-                                          style: TextStyl.title!.copyWith(
-                                            color: kcSecondary,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: spacer4,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  onTap: () => auth.logout(),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      barrierColor: kcPrimaryLight.withOpacity(0.2),
-                      isDismissible: true,
-                      enableDrag: true,
-                      isScrollControlled: true,
-                      ignoreSafeArea: false,
-                    );
+                    Get.toNamed(SettingRoutes.setting);
                   },
                 ),
               ],
@@ -420,7 +127,9 @@ class BottomNavigationBarWidget extends StatelessWidget {
                         size: 23,
                       ),
                       onPressed: () {
-                            // controller.scanQR()
+                        final DashboardController dashboardController =
+                            Get.put(DashboardController());
+                        dashboardController.scanQR();
                       },
                     ),
                   )
@@ -445,3 +154,247 @@ class BottomNavigationBarWidget extends StatelessWidget {
   }
 }
 
+/// NavBar Widget
+
+class NavBarWidget extends StatelessWidget {
+  const NavBarWidget({
+    super.key,
+    required this.route,
+    required this.active,
+    required this.onTap,
+    this.imageExtension = "png",
+    this.image,
+    this.iconData,
+    this.fillIconData,
+    this.fillImage,
+  });
+
+  final String route;
+  final String active;
+  final VoidCallback onTap;
+  final String imageExtension;
+  final String? image;
+  final String? fillImage;
+  final IconData? iconData;
+  final IconData? fillIconData;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: imageExtension == "icon"
+          ? Icon(
+              route == active ? fillIconData : iconData,
+              color: route == active ? kcBottomBar : kcSecondary,
+              size: spacer5,
+            )
+          : imageExtension == "svg"
+              ? SvgPicture.asset(
+                  route == active ? "$fillImage" : "$image",
+                  color: route == active ? kcBottomBar : kcSecondary,
+                  height: spacer5,
+                )
+              : Image.asset(
+                  route == active ? "$fillImage" : "$image",
+                  color: route == active ? kcBottomBar : kcSecondary,
+                  height: spacer5,
+                ),
+      onTap: onTap,
+    );
+  }
+}
+
+/// More Widget
+class MoreWidget extends StatelessWidget {
+  const MoreWidget({super.key, required this.route});
+
+  final String route;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            Icons.menu,
+            color: route == 'more' ? kcBottomBar : kcSecondary,
+            size: spacer5,
+          ),
+          SizedBox(height: spacer1),
+          Text(
+            "More",
+            style: TextStyl.title!.copyWith(
+                color: route == 'more' ? kcBottomBar : kcSecondary,
+                fontWeight: FontWeight.bold,
+                fontSize: spacer3),
+          ),
+        ],
+      ),
+      onTap: () {
+        Get.bottomSheet(
+          SafeArea(
+            child: Container(
+              height: screen.height * 0.25,
+              decoration: new BoxDecoration(
+                color: kcWhite,
+                borderRadius: new BorderRadius.only(
+                  topLeft: const Radius.circular(40.0),
+                  topRight: const Radius.circular(40.0),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ListView(
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                        height: 5,
+                        width: 40,
+                        decoration: BoxDecoration(
+                            color: kcGray,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    GestureDetector(
+                      child: Container(
+                        color: kcWhite,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.pending_actions,
+                              color: kcSecondary,
+                              size: spacer5,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "My Appointments",
+                              style: TextStyl.title!.copyWith(
+                                color: kcSecondary,
+                                fontWeight: FontWeight.w500,
+                                fontSize: spacer4,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        Get.back();
+                        Get.toNamed(AppointmentRoutes.appointment,
+                            parameters: {"doctor_id": auth.user.id.toString()});
+                      },
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    // GestureDetector(
+                    //   child: Container(
+                    //     color: kcWhite,
+                    //     child: Row(
+                    //       children: [
+                    //         Icon(
+                    //           Icons.shopping_cart,
+                    //           color: kcSecondary,
+                    //           size: spacer5,
+                    //         ),
+                    //         SizedBox(
+                    //           width: 10,
+                    //         ),
+                    //         Text(
+                    //           "Orders",
+                    //           style: TextStyl.title!.copyWith(
+                    //             color: kcSecondary,
+                    //             fontWeight: FontWeight.w500,
+                    //             fontSize: spacer4,
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ),
+                    //   onTap: () {
+                    //     Get.back();
+                    //     Get.toNamed('/my-orders');
+                    //   },
+                    // ),
+                    // SizedBox(
+                    //   height: 25,
+                    // ),
+                    GestureDetector(
+                      child: Container(
+                        color: kcWhite,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.person,
+                              color: kcSecondary,
+                              size: spacer5,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Profile",
+                              style: TextStyl.title!.copyWith(
+                                color: kcSecondary,
+                                fontWeight: FontWeight.w500,
+                                fontSize: spacer4,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        Get.back();
+                        Get.toNamed(SettingRoutes.setting);
+                      },
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    GestureDetector(
+                      child: Container(
+                        color: kcWhite,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.logout,
+                              color: kcSecondary,
+                              size: spacer5,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Logout",
+                              style: TextStyl.title!.copyWith(
+                                color: kcSecondary,
+                                fontWeight: FontWeight.w500,
+                                fontSize: spacer4,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      onTap: () => auth.logout(),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          barrierColor: kcPrimaryLight.withOpacity(0.2),
+          isDismissible: true,
+          enableDrag: true,
+          isScrollControlled: true,
+          ignoreSafeArea: false,
+        );
+      },
+    );
+  }
+}

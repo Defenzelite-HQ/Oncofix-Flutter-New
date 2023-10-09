@@ -48,7 +48,7 @@ class WebviewController extends AppController {
   void onInit() {
     super.onInit();
     _url(Get.parameters['url']);
-    _pageTitle(Get.parameters['page']);
+    _pageTitle(Get.parameters['title']);
 
     /// This Code are most important to WebView Copy
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();

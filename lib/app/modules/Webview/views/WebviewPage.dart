@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_webview_pro/webview_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ui_x/helpers/ColorPalette.dart';
+import 'package:ui_x/helpers/Sizes.dart';
+import 'package:ui_x/helpers/TextStyl.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../helpers/Global.dart';
 import '../../../shared/views/errors/NotConnectedErrorPage.dart';
 import '../../../shared/views/layouts/MasterLayout.dart';
 import '../../../shared/views/widgets/LoadingIconWidget.dart';
@@ -31,7 +34,20 @@ class WebviewPage extends StatelessWidget {
                       }
                     },
                     child: MasterLayout(
-                      title: "${controller.pageTitle}",
+                      leading: IconButton(
+                        icon: Icon(
+                          Icons.west,
+                          size: spacer7,
+                        ),
+                        onPressed: () {
+                          Get.back();
+                        },
+                      ),
+                      title: Text(
+                        "${controller.pageTitle}",
+                        style: TextStyl.body
+                            ?.copyWith(color: kcWhite, fontSize: 18),
+                      ),
                       body: Obx(
                         () => Stack(
                           children: [
@@ -54,9 +70,9 @@ class WebviewPage extends StatelessWidget {
                                 onPageFinished: (finish) {
                                   controller.onLoadingPercent(100);
                                 },
-                                navigationDelegate:
-                                    (NavigationRequest request) {
-                                  // log.w(request.url);
+                                navigationDelegate: (NavigationRequest request) {
+                                  log.w(request.url);
+                                  log.w(controller.url);
 
                                   /// +++++++++++++++++++++
                                   /// Url Handlers
@@ -95,7 +111,7 @@ class WebviewPage extends StatelessWidget {
                                   }
 
                                   return NavigationDecision.navigate;
-                                },
+                                }, 
                               ),
                             if (controller.loadingPercentage < 100)
                               LinearProgressIndicator(

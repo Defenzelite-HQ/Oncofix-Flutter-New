@@ -66,13 +66,14 @@ class CasesController extends AppController {
       /// Call Service to Get API Response
       ApiResponse response = await _casesService.index();
 
-      /// Checking Response Error
-      if (response.hasError()) {
-        Toastr.show(
-            message: "${response.message}");
-        setBusy(false);
-        return;
-      }
+
+      // /// Checking Response Error
+      // if (response.hasError()) {
+      //   Toastr.show(
+      //       message: "${response.message}");
+      //   setBusy(false);
+      //   return;
+      // }
 
       /// Add Response Data To Variables
       if (response.hasData()) {

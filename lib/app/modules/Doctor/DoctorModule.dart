@@ -6,4 +6,5 @@ export "route/DoctorRouter.dart";
 export "route/DoctorRoutes.dart";
 export "services/DoctorService.dart";
 export "views/DoctorPage.dart";
+export "views/DoctorProfilePage.dart";
 

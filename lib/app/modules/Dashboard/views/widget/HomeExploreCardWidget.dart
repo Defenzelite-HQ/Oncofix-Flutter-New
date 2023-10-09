@@ -6,15 +6,17 @@ import 'package:ui_x/helpers/TextStyl.dart';
 import '../../../../helpers/Global.dart';
 
 class HomeExploreCardWidget extends StatelessWidget {
-  const HomeExploreCardWidget(
-      {super.key,
-      this.onTap,
-      this.image = "",
-      required this.label,
-      this.count = "0",
-      this.maxLines,
-      this.width,
-      this.color});
+  const HomeExploreCardWidget({
+    super.key,
+    this.onTap,
+    this.image = "",
+    required this.label,
+    this.count = "0",
+    this.maxLines,
+    this.width,
+    this.color,
+    this.imageColor,
+  });
 
   final VoidCallback? onTap;
   final String image;
@@ -23,6 +25,7 @@ class HomeExploreCardWidget extends StatelessWidget {
   final int? maxLines;
   final double? width;
   final Color? color;
+  final Color? imageColor;
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +34,10 @@ class HomeExploreCardWidget extends StatelessWidget {
         margin: const EdgeInsets.all(3.0),
         padding: const EdgeInsets.all(3.0),
         decoration: BoxDecoration(
-          color: color ?? kcWhite,
-          border: Border.all(
-            color: kcGray.withOpacity(0.5),
-          ),
+          color: color ??  kcWhite,
+          // border: Border.all(
+          //   color: kcGray.withOpacity(0.5),
+          // ),
           borderRadius: BorderRadius.all(
               Radius.circular(6.0) //                 <--- border radius here
               ),
@@ -47,11 +50,21 @@ class HomeExploreCardWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               image != ""
-                  ? Image.asset(
-                      "$image",
-                      height: 40,
-                      width: 40,
-                      fit: BoxFit.cover,
+                  ? Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      decoration: BoxDecoration(
+                        color: imageColor?.withOpacity(0.08) ??
+                            kcInfo.withOpacity(0.08),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Image.asset(
+                        "$image",
+                        height: 25,
+                        width: 25,
+                        color: imageColor ?? kcInfo,
+                        fit: BoxFit.cover,
+                      ),
                     )
                   : Text(
                       "${formattedTotalAmount(count)}",

@@ -30,8 +30,8 @@ void webViewOnTap(String id) {
     // String appUrlToken = url + "?ref=app&token=${storage.read("token")}";
     String title = webViewItem["title"].toString();
 
-    // log.w("Url::::$appUrlToken");
-    // log.w("Title::::$title");
+    log.w("Url::::$appUrlToken");
+    log.w("Title::::$title");
 
     /// And Redirect to WebView
     Get.toNamed("/webview", parameters: {"url": appUrlToken, "title": title});
@@ -124,7 +124,7 @@ List<Map<String, Object>> webViewItemList = [
   },
   {
     "id": "patient",
-    "title": "Patients",
+    "title": "My Patients",
     "url": "https://oncofix.com/panel/patient/index",
   },
   {
@@ -139,23 +139,28 @@ List<Map<String, Object>> webViewItemList = [
   },
   {
     "id": "patient_report",
-    "title": "Patient Report",
+    "title": "Report",
     "url": "https://oncofix.com/panel/patient/report?cancer=396",
   },
   {
     "id": "report",
-    "title": "Patient Report",
+    "title": "Report",
     "url": "https://oncofix.com/panel/report?from=&to=&type=age&cancer=396",
   },
   {
     "id": "tumour_board_meetings",
-    "title": "Tumour Board Meetings",
+    "title": "Tumour Board",
     "url": "https://oncofix.com/panel/tumour-board",
   },
   {
     "id": "my_events",
     "title": "Events",
     "url": "https://oncofix.com/panel/constant-management/consultant-meeting",
+  },
+  {
+    "id": "events",
+    "title": "Events",
+    "url": "https://oncofix.com/event",
   },
   {
     "id": "doctor_appointments",
@@ -175,7 +180,7 @@ List<Map<String, Object>> webViewItemList = [
   },
   {
     "id": "patient_attendance",
-    "title": "Patient Attendance",
+    "title": "Attendance ",
     "url": "https://oncofix.com/panel/patient_attendance",
   },
   {
@@ -184,8 +189,18 @@ List<Map<String, Object>> webViewItemList = [
     "url": "https://oncofix.com/qrcode",
   },
   {
-    "id": "my_treatments",
-    "title": "My Treatments",
-    "url": "chat.openai.com/auth/login?sso",
+    "id": "my_cases",
+    "title": "My Cases",
+    "url": "https://oncofix.com/panel/patient/case",
+  },
+  {
+    "id": "doctor_pro",
+    "title": "PRO",
+    "url": "https://oncofix.com/panel/doctor/standard-pro",
+  },
+  {
+    "id": "patient_pro",
+    "title": "PRO",
+    "url": "https://oncofix.com/panel/patient/standard-pro/list",
   },
 ];

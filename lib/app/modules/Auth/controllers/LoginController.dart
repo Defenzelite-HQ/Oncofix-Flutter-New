@@ -61,7 +61,7 @@ class LoginController extends AppController {
   void onInit() async {
     super.onInit();
     if (await storage.read('identifier') != null) {
-      identifierInput.text = await storage.read(
+      emailInput.text = await storage.read(
         'identifier',
       );
     }
@@ -99,11 +99,10 @@ class LoginController extends AppController {
         return;
       }
       await updateUserDeviceToken();
+      log.w(response.data);
 
       /// No need to verify OTP
       if (!Config.needsOtpVerification) {
-        log.w(response.data);
-
         /// Assign the user data to user object and store locally.
         await auth.setUserData(response.data['user']);
         await auth.setUserToken(response.data['access_token']);

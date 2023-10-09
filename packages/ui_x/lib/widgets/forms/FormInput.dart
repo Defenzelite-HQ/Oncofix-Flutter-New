@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../helpers/theme/ColorPaletteGerman.dart';
+import '../../helpers/ColorPalette.dart';
+
 
 class FormInput extends StatelessWidget {
   final TextEditingController? controller;

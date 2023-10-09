@@ -40,6 +40,8 @@ class AuthState extends AppController {
     if (storage.read("access_token") != null) {
       ApiResponse response = await _authService.getUser();
 
+      log.w(response.data);
+
       if (response.hasError()) {
         Toastr.show(message: "${response.message}");
         return;

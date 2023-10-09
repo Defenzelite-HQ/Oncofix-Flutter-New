@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:get/get.dart';
+import 'package:oncofix/app/modules/Appointment/AppointmentModule.dart';
 import 'package:ui_x/helpers/Helpers.dart';
+import '../../../helpers/Global.dart';
 import '../../../helpers/Request.dart';
 import '../../../models/ApiResponse.dart';
 import '../../../shared/controllers/AppController.dart';
@@ -19,39 +21,47 @@ class AppointmentController extends AppController {
   List<ScheduleModel> get schedules => this._schedules;
 
   DateTime get selectedDate => this._selectedDate.value;
+
   bool get booking => this._booking.value;
+
   String get selectedStartTime => this._selectedStartTime.value;
+
   String get selectedEndTime => this._selectedEndTime.value;
+
+  final AppointmentService _appointmentService = AppointmentService.instance;
 
   @override
   void onInit() {
     super.onInit();
     _doctorId(Get.parameters['doctor_id']);
-    getSchedules();
+    index();
   }
 
-  Future<void> getSchedules() async {
+  Future<void> index() async {
     setBusy(true);
-    ApiResponse response = await Request.get(
-        '/appointments/schedules/${_doctorId.value}?date=${_selectedDate.value.year}-${_selectedDate.value.month}-${_selectedDate.value.day}&doctor_id=${_doctorId.value}',
-        authenticate: true);
+    // ApiResponse response = await Request.get(
+    //     '/appointments/schedules/${_doctorId.value}?date=${_selectedDate.value.year}-${_selectedDate.value.month}-${_selectedDate.value.day}&doctor_id=${_doctorId.value}',
+    //     authenticate: true);
+    ApiResponse response = await _appointmentService.index(
+        doctorId: _doctorId.value, date: _selectedDate.value);
+
+    log.w(response.data);
 
     if (response.hasError()) {
-     Toastr.show(message: "${response.message}");
+      Toastr.show(message: "${response.message}");
       setBusy(false);
       return;
     }
 
     if (response.hasData()) {
       _scheduleData.assignAll(Map<String, dynamic>.from(response.data));
-      // _schedules.assignAll(List<ScheduleModel>.from(response.data.map((e) => ScheduleModel.fromJson(e))));
 
-
+      log.w(_scheduleData.toJson());
+      setBusy(false);
     }
     onDateSelect(DateTime.now());
     setBusy(false);
   }
-
 
   Future<void> bookAppointment() async {
     _booking(true);
@@ -63,7 +73,8 @@ class AppointmentController extends AppController {
       // "date": Jiffy(_selectedDate.value).format('yyyy-MM-dd'),
     };
 
-    ApiResponse response = await Request.post('/appointments/store', body: body, authenticate: true);
+    ApiResponse response = await Request.post('/appointments/store',
+        body: body, authenticate: true);
 
     if (response.hasError()) {
       Toastr.show(message: "${response.message}");
@@ -71,8 +82,9 @@ class AppointmentController extends AppController {
       return;
     }
 
-    if(response.hasData()){
-      Get.toNamed("/appointments/checkout", parameters: {"appointment": jsonEncode(response.data)});
+    if (response.hasData()) {
+      Get.toNamed("/appointments/checkout",
+          parameters: {"appointment": jsonEncode(response.data)});
       // ShowSnack.toast(message: "${response.message}");
     }
 
@@ -95,14 +107,13 @@ class AppointmentController extends AppController {
     _selectedEndTime("");
   }
 
-
-  String get24HrTime(String time){
+  String get24HrTime(String time) {
     String _amPm = time.split(" ").last;
     String _t = time.split(" ").first;
     String _hour = _t.split(":").first;
     String _minutes = _t.split(":").first;
 
-    if(_amPm.toLowerCase() == "am"){
+    if (_amPm.toLowerCase() == "am") {
       return "$_t:00";
     }
     return (int.parse(_hour) + 12).toString() + ":$_minutes:00";

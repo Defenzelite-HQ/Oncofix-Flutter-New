@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:oncofix/app/modules/Dashboard/views/widget/HomeExploreCardWidget.dart';
 import 'package:oncofix/app/modules/Doctor/DoctorModule.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 import 'package:ui_x/ui_x.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -15,6 +14,7 @@ import '../../../helpers/Webview.dart';
 import '../../../models/CategoryElementModel.dart';
 import '../../../shared/views/errors/NotConnectedErrorPage.dart';
 import '../../../shared/views/layouts/MasterLayout.dart';
+import '../../../shared/views/widgets/AppDrawer.dart';
 import '../../../shared/views/widgets/BottomNavigationBarWidget.dart';
 import '../../../shared/views/widgets/LoadingIconWidget.dart';
 import '../controllers/DashboardController.dart';
@@ -49,16 +49,6 @@ class DashboardPage extends StatelessWidget {
                               ),
                             ),
                             action: [
-                              Config.isDoctor()
-                                  ? GestureDetector(
-                                      onTap: () {
-                                        webViewOnTap("search_patient");
-                                      },
-                                      child: Icon(
-                                        Icons.search,
-                                        size: spacer7,
-                                      ))
-                                  : SizedBox.shrink(),
                               SizedBox(
                                 width: 15,
                               ),
@@ -73,440 +63,39 @@ class DashboardPage extends StatelessWidget {
                               SizedBox(
                                 width: 15,
                               ),
+                              // Config.isDoctor()
+                              //     ? Row(
+                              //         children: [
+                              //           GestureDetector(
+                              //               onTap: () =>
+                              //                   webViewOnTap("add_patient"),
+                              //               child: Icon(
+                              //                 Icons.person_add,
+                              //                 size: 23,
+                              //               )),
+                              //           SizedBox(
+                              //             width: 15,
+                              //           ),
+                              //         ],
+                              //       )
+                              //     : SizedBox.shrink(),
                               Config.isDoctor()
-                                  ? Row(
-                                      children: [
-                                        GestureDetector(
-                                            onTap: () => webViewOnTap("add_patient"),
-                                            child: Icon(
-                                              Icons.person_add,
-                                              size: 23,
-                                            )),
-                                        SizedBox(
-                                          width: 15,
-                                        ),
-                                      ],
+                                  ? GestureDetector(
+                                      onTap: () {
+                                        webViewOnTap("search_patient");
+                                      },
+                                      child: Icon(
+                                        Icons.search,
+                                        size: spacer7,
+                                      ),
                                     )
-                                  : SizedBox.shrink()
+                                  : SizedBox.shrink(),
                             ],
 
                             /// ++++++++++++++++++++++++++++++++++++
                             /// App Drawer Start
                             /// ++++++++++++++++++++++++++++++++++++
-                            drawer: Drawer(
-                              child: Obx(
-                                () => Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Stack(
-                                      children: [
-                                        Image.asset(
-                                          'assets/icons/oncofixbnr.jpg',
-                                          width: double.infinity,
-                                          height: 120,
-                                          fit: BoxFit.cover,
-                                        ),
-                                        GestureDetector(
-                                          child: Container(
-                                            height: 200,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: <Widget>[
-                                                Container(height: 80),
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                  child:
-                                                      auth.user.avatar == null
-                                                          ? Image.asset(
-                                                              'assets/icons/dr6.jpg',
-                                                              width: 50,
-                                                              height: 50,
-                                                              fit: BoxFit.cover,
-                                                            )
-                                                          : CircleAvatar(
-                                                              backgroundColor:
-                                                                  kcWhite,
-                                                              backgroundImage:
-                                                                  NetworkImage(
-                                                                      "${auth.user.avatar}"),
-                                                              radius: 35,
-                                                            ),
-                                                ),
-                                                // CircleAvatar(
-                                                //   radius: 32,
-                                                //   backgroundColor: Colors.grey[200],
-                                                //   child: CircleAvatar(
-                                                //     backgroundColor: kcWhite,
-                                                //     backgroundImage:
-                                                //         NetworkImage("${auth.user.avatar}"),
-                                                //     radius: 32,
-                                                //   ),
-                                                // ),
-                                                Container(height: 2),
-                                                Text(
-                                                  "${auth.user.name}",
-                                                  style: TextStyle(
-                                                      color: kcSecondary,
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                                  maxLines: 1,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                                Text("${auth.user.email}",
-                                                    style: TextStyle(
-                                                        color: Colors
-                                                            .blueGrey[800],
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 12))
-                                              ],
-                                            ),
-                                          ),
-                                          onTap: () {
-                                            Get.offAndToNamed('/settings');
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                    Config.isPatient()
-                                        ? Obx(
-                                            () => QrImageView(
-                                              data: controller.qrcode,
-                                              version: QrVersions.auto,
-                                              size: 120,
-                                              gapless: true,
-                                              padding: EdgeInsets.only(
-                                                  bottom: 10, top: 10),
-                                            ),
-                                          )
-                                        : SizedBox.shrink(),
-                                    Expanded(
-                                      child: SingleChildScrollView(
-                                        child: Container(
-                                          color: kcWhite,
-                                          child: Column(
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () =>
-                                                    Navigator.of(context).pop(),
-                                                child: Container(
-                                                  width: double.maxFinite,
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      vertical: 14,
-                                                      horizontal: 24),
-                                                  color: kcWhite,
-                                                  child: Row(
-                                                    children: [
-                                                      Icon(
-                                                        Icons.home,
-                                                        color: kcSecondary,
-                                                        size: spacer5,
-                                                      ),
-                                                      SizedBox(width: 8),
-                                                      Text(
-                                                        'Home',
-                                                        style: TextStyl.subtitle
-                                                            ?.copyWith(
-                                                                fontSize: 14,
-                                                                color:
-                                                                    kcSecondary),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-
-                                              /// +++++++++++++++++++++++
-                                              /// About Cancer
-                                              /// +++++++++++++++++++++++
-                                              GestureDetector(
-                                                onTap: () => webViewOnTap(
-                                                    "about_cancer"),
-                                                child: Container(
-                                                  width: double.maxFinite,
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      vertical: 14,
-                                                      horizontal: 24),
-                                                  color: kcWhite,
-                                                  child: Row(
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                        "assets/icons/ribbon.svg",
-                                                        height: spacer5,
-                                                        color: kcSecondary,
-                                                      ),
-                                                      SizedBox(width: 8),
-                                                      Text(
-                                                        'About Cancer',
-                                                        style: TextStyl.subtitle
-                                                            ?.copyWith(
-                                                                fontSize: 14,
-                                                                color:
-                                                                    kcSecondary),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-
-                                              /// +++++++++++++++++++++++
-                                              /// Financial Advice
-                                              /// +++++++++++++++++++++++
-                                              GestureDetector(
-                                                onTap: () => webViewOnTap(
-                                                    "financial_advice"),
-                                                child: Container(
-                                                  width: double.maxFinite,
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      vertical: 14,
-                                                      horizontal: 24),
-                                                  color: kcWhite,
-                                                  child: Row(
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                        "assets/icons/advice.svg",
-                                                        height: spacer5,
-                                                        color: kcSecondary,
-                                                      ),
-                                                      SizedBox(width: 8),
-                                                      Text(
-                                                        'Financial Advices',
-                                                        style: TextStyl.subtitle
-                                                            ?.copyWith(
-                                                                fontSize: 14,
-                                                                color:
-                                                                    kcSecondary),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-
-                                              /// +++++++++++++++++++++++
-                                              /// Consent Forms
-                                              /// +++++++++++++++++++++++
-                                              GestureDetector(
-                                                onTap: () =>
-                                                    Get.offAndToNamed("/about"),
-                                                child: Container(
-                                                  width: double.maxFinite,
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      vertical: 14,
-                                                      horizontal: 24),
-                                                  color: kcWhite,
-                                                  child: Row(
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                        "assets/icons/blog.svg",
-                                                        height: spacer5,
-                                                        color: kcSecondary,
-                                                      ),
-                                                      SizedBox(width: 8),
-                                                      Text(
-                                                        'Consent Forms',
-                                                        style: TextStyl.subtitle
-                                                            ?.copyWith(
-                                                                fontSize: 14,
-                                                                color:
-                                                                    kcSecondary),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-
-                                              /// +++++++++++++++++++++++
-                                              /// Refer & Earn
-                                              /// +++++++++++++++++++++++
-                                              GestureDetector(
-                                                onTap: () => Get.offAndToNamed(
-                                                    "/about-cancer"),
-                                                child: Container(
-                                                  width: double.maxFinite,
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      vertical: 14,
-                                                      horizontal: 24),
-                                                  color: kcWhite,
-                                                  child: Row(
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                        "assets/icons/refer.svg",
-                                                        height: spacer5,
-                                                        color: kcSecondary,
-                                                      ),
-                                                      SizedBox(width: 8),
-                                                      Text(
-                                                        'Refer & Earn',
-                                                        style: TextStyl.subtitle
-                                                            ?.copyWith(
-                                                                fontSize: 14,
-                                                                color:
-                                                                    kcSecondary),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-
-                                              // GestureDetector(
-                                              //   onTap: () => Get.offAndToNamed("/about-cancer"),
-                                              //   child: Container(
-                                              //     width: double.maxFinite,
-                                              //     padding: const EdgeInsets.symmetric(
-                                              //         vertical: 14, horizontal: 24),
-                                              //     color: kcWhite,
-                                              //     child: Row(
-                                              //       children: [
-                                              //         SvgPicture.asset("assets/icons/clip.svg",height: spacer5,color: kcSecondary,),
-                                              //         SizedBox(width: 8),
-                                              //         Text(
-                                              //           'Attachments',
-                                              //           style: TextStyl.subtitle(context)
-                                              //               ?.copyWith(
-                                              //                   fontSize: 14,
-                                              //                   color: kcSecondary),
-                                              //         ),
-                                              //       ],
-                                              //     ),
-                                              //   ),
-                                              // ),
-                                              /// +++++++++++++++++++++++
-                                              /// Doctors Recourse
-                                              /// +++++++++++++++++++++++
-                                              GestureDetector(
-                                                onTap: () => webViewOnTap(
-                                                    "doctors_recourse"),
-                                                child: Container(
-                                                  width: double.maxFinite,
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      vertical: 14,
-                                                      horizontal: 24),
-                                                  color: kcWhite,
-                                                  child: Row(
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                        "assets/icons/doctor.svg",
-                                                        height: spacer5,
-                                                        color: kcSecondary,
-                                                      ),
-                                                      SizedBox(width: 8),
-                                                      Text(
-                                                        'Doctors Recourse',
-                                                        style: TextStyl.subtitle
-                                                            ?.copyWith(
-                                                                fontSize: 14,
-                                                                color:
-                                                                    kcSecondary),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-
-                                              /// +++++++++++++++++++++++
-                                              /// Doctors Recourse
-                                              /// +++++++++++++++++++++++
-                                              GestureDetector(
-                                                onTap: () =>
-                                                    webViewOnTap("blogs"),
-                                                child: Container(
-                                                  width: double.maxFinite,
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      vertical: 14,
-                                                      horizontal: 24),
-                                                  color: kcWhite,
-                                                  child: Row(
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                        "assets/icons/blog.svg",
-                                                        height: spacer5,
-                                                        color: kcSecondary,
-                                                      ),
-                                                      SizedBox(width: 8),
-                                                      Text(
-                                                        'Blogs',
-                                                        style: TextStyl.subtitle
-                                                            ?.copyWith(
-                                                                fontSize: 14,
-                                                                color:
-                                                                    kcSecondary),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              Divider(),
-                                              GestureDetector(
-                                                onTap: () =>
-                                                    Get.toNamed("/about"),
-                                                child: Container(
-                                                  width: double.maxFinite,
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      vertical: 14,
-                                                      horizontal: 24),
-                                                  color: kcWhite,
-                                                  child: Row(
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                        "assets/icons/info.svg",
-                                                        height: spacer5,
-                                                        color: kcSecondary,
-                                                      ),
-                                                      SizedBox(width: 8),
-                                                      Text(
-                                                        'About Oncofix',
-                                                        style: TextStyl.subtitle
-                                                            ?.copyWith(
-                                                                fontSize: 14,
-                                                                color:
-                                                                    kcSecondary),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "OncoFix v1.1",
-                                          style: TextStyl.bodySm?.copyWith(
-                                            fontSize: spacer2,
-                                            color: kcSecondary,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            drawer: appDrawer(context, controller),
 
                             /// ++++++++++++++++++++++++++++++++++++
                             /// Body Start
@@ -576,6 +165,7 @@ class DashboardPage extends StatelessWidget {
                                                   break;
                                                 case 2:
                                                   webViewOnTap("shop");
+                                                  webViewOnTap("shop");
                                                   break;
                                               }
                                             });
@@ -612,7 +202,7 @@ class DashboardPage extends StatelessWidget {
                                               Flexible(
                                                 child: HomeExploreCardWidget(
                                                   width: screen.width,
-                                                  color: kcSuccess
+                                                  color: kcAccent
                                                       .withOpacity(0.08),
                                                   count:
                                                       "${auth.user.todayAppointments}",
@@ -624,18 +214,73 @@ class DashboardPage extends StatelessWidget {
                                                   },
                                                 ),
                                               ),
-                                              // Flexible(
-                                              //   child: HomeExploreCardWidget(
-                                              //     width: screen.width,
-                                              //     count: "${auth.user.investigation}",
-                                              //     color: kcWarning.withOpacity(0.08),
-                                              //     label: "Total\nInvestigation",
-                                              //     maxLines: 2,
-                                              //     onTap: () {
-                                              //       webViewOnTap("clinical_trial");
-                                              //     },
-                                              //   ),
-                                              // ),
+                                              Flexible(
+                                                  child: GestureDetector(
+                                                child: Container(
+                                                  margin:
+                                                      const EdgeInsets.all(3.0),
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 15,
+                                                      vertical: 6),
+                                                  decoration: BoxDecoration(
+                                                    color: kcSuccess
+                                                        .withOpacity(0.08),
+                                                    // border: Border.all(
+                                                    //   color: kcGray
+                                                    //       .withOpacity(0.5),
+                                                    // ),
+                                                    borderRadius: BorderRadius.all(
+                                                        Radius.circular(
+                                                            6.0) //                 <--- border radius here
+                                                        ),
+                                                  ),
+                                                  width: screen.width,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Icon(
+                                                          Icons.person_add,
+                                                          size: 22,
+                                                        ),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        Text(
+                                                          "Add\nPatient",
+                                                          style: TextStyl.label!
+                                                              .copyWith(
+                                                                  color:
+                                                                      kcSecondary,
+                                                                  fontSize:
+                                                                      spacer4 /
+                                                                          1.3,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis),
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          maxLines: 2,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                                onTap: () =>
+                                                    webViewOnTap("add_patient"),
+                                              )),
                                             ],
                                           ),
                                         )
@@ -690,133 +335,155 @@ class DashboardPage extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        Config.isPatient()?
-                                            Row(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Expanded(
-                                                  child:
-                                                  HomeExploreCardWidget(
-                                                    image:
-                                                    "assets/icons/case-report.png",
-                                                    label: "My Cases",
-                                                    onTap: () {
-                                                      Get.toNamed('/cases');
-                                                    },
+                                        Config.isPatient()
+                                            ? Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Expanded(
+                                                    child:
+                                                        HomeExploreCardWidget(
+                                                      imageColor: kcDeepOrange,
+                                                      image:
+                                                          "assets/icons/unfill_users.png",
+                                                      label: "My Cases",
+                                                      onTap: () {
+                                                        webViewOnTap(
+                                                            "my_cases");
+                                                      },
+                                                    ),
                                                   ),
-                                                ),
-                                                Expanded(
-                                                  child:
-                                                  HomeExploreCardWidget(
-                                                    image:
-                                                    "assets/icons/schedule.png",
-                                                    label: "Appointments",
-                                                    onTap: () {
-                                                      webViewOnTap(
-                                                          "doctor_appointments");
-                                                    },
+                                                  Expanded(
+                                                    child:
+                                                        HomeExploreCardWidget(
+                                                      imageColor: kcPurple,
+                                                      image:
+                                                          "assets/icons/unfill_calendar-clock.png",
+                                                      label: "Appointments",
+                                                      onTap: () {
+                                                        webViewOnTap(
+                                                            "doctor_appointments");
+                                                      },
+                                                    ),
                                                   ),
-                                                ),
-                                                Expanded(
-                                                  child:
-                                                  HomeExploreCardWidget(
-                                                    image:
-                                                    "assets/icons/report_pro.png",
-                                                    label: "PRO",
-                                                    onTap: () {
-                                                      webViewOnTap(
-                                                          "money_matters");
-                                                    },
+                                                  Expanded(
+                                                    child:
+                                                        HomeExploreCardWidget(
+                                                      imageColor: kcBrown,
+                                                      image:
+                                                          "assets/icons/pro.png",
+                                                      label: "PRO",
+                                                      onTap: () {
+                                                        webViewOnTap(
+                                                            "patient_pro");
+                                                      },
+                                                    ),
+                                                  )
+                                                ],
+                                              )
+                                            : Column(
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      Expanded(
+                                                        child:
+                                                            HomeExploreCardWidget(
+                                                          imageColor: kcInfo,
+                                                          image:
+                                                              "assets/icons/my_patient.png",
+                                                          label: "My Patient",
+                                                          onTap: () {
+                                                            webViewOnTap(
+                                                                'patient');
+                                                          },
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child:
+                                                            HomeExploreCardWidget(
+                                                          imageColor: kcSuccess,
+                                                          image:
+                                                              "assets/icons/attendance.png",
+                                                          label: "Attendance",
+                                                          onTap: () {
+                                                            webViewOnTap(
+                                                                "patient_attendance");
+                                                          },
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child:
+                                                            HomeExploreCardWidget(
+                                                          imageColor: kcPurple,
+                                                          image:
+                                                              "assets/icons/tumour_board.png",
+                                                          label: "Tumour Board",
+                                                          maxLines: 1,
+                                                          onTap: () {
+                                                            webViewOnTap(
+                                                                "tumour_board_meetings");
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                )
-                                              ],
-                                            ):
-                                        Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Expanded(
-                                                  child:
-                                                  HomeExploreCardWidget(
-                                                    image:
-                                                    "assets/icons/case-report.png",
-                                                    label: "My Patient",
-                                                    onTap: () {
-                                                      // Get.toNamed('/cases');
-                                                    },
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child:
-                                                  HomeExploreCardWidget(
-                                                    image:
-                                                    "assets/icons/patient_attendance.png",
-                                                    label: "Attendance",
-                                                    onTap: () {
-                                                      webViewOnTap(
-                                                          "patient_attendance");
-                                                    },
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child:
-                                                  HomeExploreCardWidget(
-                                                    image:
-                                                    "assets/icons/clipboard.png",
-                                                    label: "Tumour Board",
-                                                    maxLines: 1,
-                                                    onTap: () {
-                                                      webViewOnTap(
-                                                          "tumour_board_meetings");
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Expanded(
-                                                  child:
-                                                  HomeExploreCardWidget(
-                                                    image:
-                                                    "assets/icons/case-report.png",
-                                                    label: "Become Host",
-                                                    onTap: () {
-                                                      // Get.toNamed('/cases');
-                                                    },
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child:
-                                                  HomeExploreCardWidget(
-                                                    image:
-                                                    "assets/icons/health-report.png",
-                                                    label: "Report",
-                                                    onTap: () {
-                                                      webViewOnTap("report");
-                                                    },
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child:
-                                                  HomeExploreCardWidget(
-                                                    image:
-                                                    "assets/icons/report_pro.png",
-                                                    label: "PRO",
-                                                    onTap: () {
-                                                      // webViewOnTap("money_matters");
-                                                    },
-                                                  ),
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      Expanded(
+                                                        child:
+                                                            HomeExploreCardWidget(
+                                                          imageColor:
+                                                              kcDeepPurple,
+                                                          image:
+                                                              "assets/icons/become_host.png",
+                                                          label: "Become Host",
+                                                          onTap: () {
+                                                            // Get.toNamed('/cases');
+                                                          },
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child:
+                                                            HomeExploreCardWidget(
+                                                          imageColor:
+                                                              kcDeepOrange,
+                                                          image:
+                                                              "assets/icons/report.png",
+                                                          label: "Report",
+                                                          onTap: () {
+                                                            webViewOnTap(
+                                                                "report");
+                                                          },
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child:
+                                                            HomeExploreCardWidget(
+                                                          imageColor: kcBrown,
+                                                          image:
+                                                              "assets/icons/pro.png",
+                                                          label: "PRO",
+                                                          onTap: () {
+                                                            Config.isDoctor()
+                                                                ? webViewOnTap(
+                                                                    "doctor_pro")
+                                                                : webViewOnTap(
+                                                                    "patient_pro");
+                                                          },
+                                                        ),
+                                                      )
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+
                                         /// Patient
                                         Config.isPatient()
                                             ? Column(
@@ -909,7 +576,7 @@ class DashboardPage extends StatelessWidget {
                                                                 child: Padding(
                                                                   padding:
                                                                       const EdgeInsets
-                                                                              .all(
+                                                                          .all(
                                                                           8.0),
                                                                   child: Column(
                                                                     mainAxisAlignment:
@@ -966,7 +633,8 @@ class DashboardPage extends StatelessWidget {
                                                             ),
                                                             onTap: () {
                                                               Get.toNamed(
-                                                                  '/doctors',
+                                                                  DoctorRoutes
+                                                                      .doctor,
                                                                   parameters: {
                                                                     "category_id":
                                                                         category
@@ -1029,7 +697,8 @@ class DashboardPage extends StatelessWidget {
                                                               ),
                                                               onTap: () {
                                                                 Get.toNamed(
-                                                                    '/doctors');
+                                                                    DoctorRoutes
+                                                                        .doctor);
                                                               },
                                                             ),
                                                           ],
@@ -1144,7 +813,7 @@ class DashboardPage extends StatelessWidget {
                                                                       onTap:
                                                                           () {
                                                                         Get.toNamed(
-                                                                            '/doctor-profile',
+                                                                            DoctorRoutes.doctorProfile,
                                                                             parameters: {
                                                                               "doctor_id": featuredDoctor.id.toString()
                                                                             });
