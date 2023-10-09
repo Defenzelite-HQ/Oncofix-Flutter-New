@@ -77,12 +77,10 @@ class DashboardPage extends StatelessWidget {
                                   ? Row(
                                       children: [
                                         GestureDetector(
-                                            onTap: () {
-                                              controller.scanQR();
-                                            },
+                                            onTap: () => webViewOnTap("add_patient"),
                                             child: Icon(
-                                              Icons.qr_code_scanner_sharp,
-                                              size: spacer6,
+                                              Icons.person_add,
+                                              size: 23,
                                             )),
                                         SizedBox(
                                           width: 15,
@@ -692,186 +690,133 @@ class DashboardPage extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
+                                        Config.isPatient()?
+                                            Row(
+                                              mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Config.isPatient()
-                                                ? Expanded(
-                                                    child:
-                                                        HomeExploreCardWidget(
-                                                      image:
-                                                          "assets/icons/case-report.png",
-                                                      label: "My Cases",
-                                                      onTap: () {
-                                                        Get.toNamed('/cases');
-                                                      },
-                                                    ),
-                                                  )
-                                                : SizedBox.shrink(),
-                                            Config.isDoctor()
-                                                ? Expanded(
-                                                    child:
-                                                        HomeExploreCardWidget(
-                                                      image:
-                                                          "assets/icons/patient_attendance.png",
-                                                      label: "Attendance",
-                                                      onTap: () {
-                                                        webViewOnTap(
-                                                            "patient_attendance");
-                                                      },
-                                                    ),
-                                                  )
-                                                : SizedBox.shrink(),
-                                            Config.isDoctor()
-                                                ? Expanded(
-                                                    child:
-                                                        HomeExploreCardWidget(
-                                                      image:
-                                                          "assets/icons/health-report.png",
-                                                      label: "Report",
-                                                      onTap: () {
-                                                        webViewOnTap("report");
-                                                      },
-                                                    ),
-                                                  )
-                                                : Expanded(
-                                                    child:
-                                                        HomeExploreCardWidget(
-                                                      image:
-                                                          "assets/icons/money-matters.png",
-                                                      label: "Money Matter",
-                                                      onTap: () {
-                                                        webViewOnTap(
-                                                            "money_matters");
-                                                      },
-                                                    ),
+                                              children: [
+                                                Expanded(
+                                                  child:
+                                                  HomeExploreCardWidget(
+                                                    image:
+                                                    "assets/icons/case-report.png",
+                                                    label: "My Cases",
+                                                    onTap: () {
+                                                      Get.toNamed('/cases');
+                                                    },
                                                   ),
-                                            Expanded(
-                                              child: HomeExploreCardWidget(
-                                                image:
-                                                    "assets/icons/events.png",
-                                                label: "Events",
-                                                onTap: () {
-                                                  Config.isDoctor()
-                                                      ? webViewOnTap(
-                                                          "my_events")
-                                                      : webViewOnTap("events");
-                                                },
-                                              ),
+                                                ),
+                                                Expanded(
+                                                  child:
+                                                  HomeExploreCardWidget(
+                                                    image:
+                                                    "assets/icons/schedule.png",
+                                                    label: "Appointments",
+                                                    onTap: () {
+                                                      webViewOnTap(
+                                                          "doctor_appointments");
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child:
+                                                  HomeExploreCardWidget(
+                                                    image:
+                                                    "assets/icons/report_pro.png",
+                                                    label: "PRO",
+                                                    onTap: () {
+                                                      webViewOnTap(
+                                                          "money_matters");
+                                                    },
+                                                  ),
+                                                )
+                                              ],
+                                            ):
+                                        Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Expanded(
+                                                  child:
+                                                  HomeExploreCardWidget(
+                                                    image:
+                                                    "assets/icons/case-report.png",
+                                                    label: "My Patient",
+                                                    onTap: () {
+                                                      // Get.toNamed('/cases');
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child:
+                                                  HomeExploreCardWidget(
+                                                    image:
+                                                    "assets/icons/patient_attendance.png",
+                                                    label: "Attendance",
+                                                    onTap: () {
+                                                      webViewOnTap(
+                                                          "patient_attendance");
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child:
+                                                  HomeExploreCardWidget(
+                                                    image:
+                                                    "assets/icons/clipboard.png",
+                                                    label: "Tumour Board",
+                                                    maxLines: 1,
+                                                    onTap: () {
+                                                      webViewOnTap(
+                                                          "tumour_board_meetings");
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
                                             ),
+                                            Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Expanded(
+                                                  child:
+                                                  HomeExploreCardWidget(
+                                                    image:
+                                                    "assets/icons/case-report.png",
+                                                    label: "Become Host",
+                                                    onTap: () {
+                                                      // Get.toNamed('/cases');
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child:
+                                                  HomeExploreCardWidget(
+                                                    image:
+                                                    "assets/icons/health-report.png",
+                                                    label: "Report",
+                                                    onTap: () {
+                                                      webViewOnTap("report");
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child:
+                                                  HomeExploreCardWidget(
+                                                    image:
+                                                    "assets/icons/report_pro.png",
+                                                    label: "PRO",
+                                                    onTap: () {
+                                                      // webViewOnTap("money_matters");
+                                                    },
+                                                  ),
+                                                )
+                                              ],
+                                            )
                                           ],
                                         ),
-                                        SizedBox(
-                                          height: 2,
-                                        ),
-                                        Config.isDoctor()
-                                            ? Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  Expanded(
-                                                    child:
-                                                        HomeExploreCardWidget(
-                                                      image:
-                                                          "assets/icons/report_pro.png",
-                                                      label: "PRO",
-                                                      onTap: () {
-                                                        webViewOnTap(
-                                                            "money_matters");
-                                                      },
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child:
-                                                        HomeExploreCardWidget(
-                                                      image:
-                                                          "assets/icons/clipboard.png",
-                                                      label: "Tumour Board",
-                                                      maxLines: 1,
-                                                      onTap: () {
-                                                        webViewOnTap(
-                                                            "tumour_board_meetings");
-                                                      },
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child:
-                                                        HomeExploreCardWidget(
-                                                      image:
-                                                          "assets/icons/schedule.png",
-                                                      label: "Schedules",
-                                                      onTap: () {
-                                                        webViewOnTap(
-                                                            "my_schedule");
-                                                      },
-                                                    ),
-                                                  ),
-                                                ],
-                                              )
-                                            : SizedBox.shrink(),
-
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Expanded(
-                                              child: HomeExploreCardWidget(
-                                                image:
-                                                    "assets/icons/clinical-trails.png",
-                                                label: "Clinical Trials",
-                                                onTap: () {
-                                                  webViewOnTap(
-                                                      "clinical_trial");
-                                                },
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: HomeExploreCardWidget(
-                                                image: "assets/icons/forum.png",
-                                                label: "Support Group",
-                                                onTap: () {
-                                                  webViewOnTap("support_group");
-                                                },
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: HomeExploreCardWidget(
-                                                image: "assets/icons/risk.png",
-                                                label: "Risk Assessment",
-                                                onTap: () {
-                                                  webViewOnTap(
-                                                      "oncofix_screening");
-                                                },
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Config.isPatient()
-                                            ? Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  Expanded(
-                                                    child:
-                                                        HomeExploreCardWidget(
-                                                      image:
-                                                          "assets/icons/schedule.png",
-                                                      label: "Appointments",
-                                                      onTap: () {
-                                                        webViewOnTap(
-                                                            "doctor_appointments");
-                                                      },
-                                                    ),
-                                                  ),
-                                                  Expanded(child: Text("")),
-                                                  Expanded(child: Text("")),
-                                                ],
-                                              )
-                                            : SizedBox.shrink(),
-
                                         /// Patient
                                         Config.isPatient()
                                             ? Column(
@@ -1259,7 +1204,6 @@ class DashboardPage extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-
                                   SizedBox(
                                     height: 10,
                                   ),

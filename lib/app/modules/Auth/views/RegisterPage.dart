@@ -86,69 +86,88 @@ class RegisterPage extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(height: 15),
-                              FormInput.text(
-                                controller: controller.usernameInput,
-                                placeholder: "Name",
-                                leading: Icon(Icons.person_outline),
-                                validator: (value) => Validator("Name", value!)
-                                    .required()
-                                    .validate(),
-                              ),
-                              SizedBox(height: 15),
-                              FormInput.email(
-                                controller: controller.emailInput,
-                                placeholder: "Email",
-                                leading: Icon(Icons.email_outlined),
-                                validator: (value) => Validator("Email", value!)
-                                    .email()
-                                    .required()
-                                    .validate(),
-                              ),
-                              SizedBox(height: 15),
-                              FormInput.number(
-                                controller: controller.phoneInput,
-                                placeholder: "Phone",
-                                leading: Icon(Icons.phone),
-                                validator: (value) => Validator("Phone", value!)
-                                    .number()
-                                    .required()
-                                    .validate(),
-                              ),
-                              SizedBox(height: 15),
-                              FormInput.password(
-                                controller: controller.passwordInput,
-                                placeholder: "Password",
-                                leading: Icon(Icons.lock_outline),
-                                validator: (value) =>
-                                    Validator("Password", value!)
-                                        .required()
-                                        .validate(),
-                              ),
-                              SizedBox(height: 15),
-                              FormInput.password(
-                                controller: controller.confirmPasswordInput,
-                                placeholder: "Confirm Password",
-                                leading: Icon(Icons.visibility_off_outlined),
-                                validator: (value) =>
-                                    Validator("Confirm Password", value!)
-                                        .required()
-                                        .validate(),
-                              ),
-                              SizedBox(height: 15),
-                              FormInput.email(
-                                controller: controller.referralCodeInput,
-                                placeholder: "Referral Code",
-                                leading: Icon(Icons.numbers_rounded),
-                              ),
-                              SizedBox(height: 15),
-                              Button.block(
-                                  key: UniqueKey(),
-                                  label: "Register",
-                                  onTap: (set) async {
-                                    set.setBusy(true).setDisabled(true);
-                                    await controller.register();
-                                    set.setBusy(false).setDisabled(false);
-                                  }),
+                            Column(
+                              children: [
+                                Obx(
+                                      () => controller.selectedRole == "Patient"?
+                                  Column(
+                                    children: [
+                                      FormInput.text(
+                                        controller: controller.usernameInput,
+                                        placeholder: "Name",
+                                        leading: Icon(Icons.person_outline),
+                                        validator: (value) => Validator("Name", value!)
+                                            .required()
+                                            .validate(),
+                                      ),
+                                      SizedBox(height: 15),
+                                      FormInput.email(
+                                        controller: controller.emailInput,
+                                        placeholder: "Email",
+                                        leading: Icon(Icons.email_outlined),
+                                        validator: (value) => Validator("Email", value!)
+                                            .email()
+                                            .required()
+                                            .validate(),
+                                      ),
+                                      SizedBox(height: 15),
+                                      FormInput.number(
+                                        controller: controller.phoneInput,
+                                        placeholder: "Phone",
+                                        leading: Icon(Icons.phone),
+                                        validator: (value) => Validator("Phone", value!)
+                                            .number()
+                                            .required()
+                                            .validate(),
+                                      ),
+                                      SizedBox(height: 15),
+                                      FormInput.password(
+                                        controller: controller.passwordInput,
+                                        placeholder: "Password",
+                                        leading: Icon(Icons.lock_outline),
+                                        validator: (value) =>
+                                            Validator("Password", value!)
+                                                .required()
+                                                .validate(),
+                                      ),
+                                      SizedBox(height: 15),
+                                      FormInput.password(
+                                        controller: controller.confirmPasswordInput,
+                                        placeholder: "Confirm Password",
+                                        leading: Icon(Icons.visibility_off_outlined),
+                                        validator: (value) =>
+                                            Validator("Confirm Password", value!)
+                                                .required()
+                                                .validate(),
+                                      ),
+                                      SizedBox(height: 15),
+                                      FormInput.email(
+                                        controller: controller.referralCodeInput,
+                                        placeholder: "Referral Code",
+                                        leading: Icon(Icons.numbers_rounded),
+                                      ),
+                                      SizedBox(height: 15),
+                                      Button.block(
+                                          key: UniqueKey(),
+                                          label: "Register",
+                                          onTap: (set) async {
+                                            set.setBusy(true).setDisabled(true);
+                                            await controller.register();
+                                            set.setBusy(false).setDisabled(false);
+                                          }),
+
+                                    ],
+                                  ):
+                                  Column(
+                                    children: [
+                                      SizedBox(height: 200,),
+                                      Center(child: Text("Currently we are not looking for the doctors",style: TextStyl.bodySm?.copyWith(fontWeight: FontWeight.w600,fontSize: 15),)),
+                                      SizedBox(height: 200,),
+                                    ],
+                                  ),
+                                ) ],
+                            )
+                              ,
                               SizedBox(height: 16),
                               GestureDetector(
                                 onTap: () => Get.offNamed(AuthRoutes.login),
