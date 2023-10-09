@@ -27,7 +27,6 @@ class Config {
   /// Auth Role.
   ///======================================
   static bool isDoctor() {
-    log.w(auth.user.role);
     return auth.user.role == "Doctor";
   }
 

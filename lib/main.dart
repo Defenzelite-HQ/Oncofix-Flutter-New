@@ -13,7 +13,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_translator/google_translator.dart';
 
 import 'app/modules/Modules.dart';
-import 'app/modules/Setting/controllers/SettingController.dart';
 import 'app/shared/controllers/AuthState.dart';
 import 'app/shared/controllers/FCMController.dart';
 import 'app/shared/controllers/FCMCrashlyticsController.dart';
@@ -119,7 +118,6 @@ class MyApp extends StatelessWidget {
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
               themeMode: ThemeMode.light,
-              //_themeMode
               initialRoute: SplashRoutes.splash,
               getPages: routes,
             ),

@@ -80,6 +80,7 @@ class DashboardController extends AppController {
     auth.getUser();
     this.getData();
     _scrollController = ScrollController();
+    index();
   }
 
   /// --- Core Functionalities Methods ---
@@ -99,6 +100,7 @@ class DashboardController extends AppController {
         setBusy(false);
         return;
       }
+      log.w(response.data);
 
       /// Add Response Data To Variables
       if (response.hasData()) {
@@ -232,16 +234,45 @@ class DashboardController extends AppController {
   // Here you can add a scoped method...
 
   /// Mock Data
-  final imageListPatient = [
-    'assets/icons/home-banner-07.jpg',
-    'assets/icons/home-banner-08.jpg',
-    'assets/icons/home-banner-3.png',
-    'assets/icons/home-banner-4.png',
-    'assets/icons/home-banner-5.png',
-    'assets/icons/home-banner-6.png',
+  List<Map<String, String>> imageListPatient = [
+    {
+      "id": "about_cancer",
+      "image": "assets/icons/home-banner-07.jpg",
+    },
+    {
+      "id": "money_matters",
+      "image": "assets/icons/home-banner-3.png",
+    },
+    {
+      "id": "oncofix_screening",
+      "image": "assets/icons/home-banner-5.png",
+    },
+    {
+      "id": "events",
+      "image": "assets/icons/doctor_slider_banner1.jpg",
+    },
   ];
-  final imageListDoctor = [
-    "assets/icons/doctor_slider_banner.jpg",
-    "assets/icons/doctor_slider_banner1.jpg"
+
+  List<Map<String, String>> imageListDoctor = [
+    {
+      "id": "about_cancer",
+      "image": "assets/icons/doctor_slider_banner.jpg",
+    },
+    {
+      "id": "money_matters",
+      "image": "assets/icons/doctor_slider_banner1.jpg",
+    },
+    {
+      "id": "clinical_trial",
+      "image": "assets/icons/doctor_slider_banner.jpg",
+    },
+    {
+      "id": "oncofix_screening",
+      "image": "assets/icons/doctor_slider_banner1.jpg",
+    },
+    {
+      "id": "events",
+      "image": "assets/icons/doctor_slider_banner1.jpg",
+    },
   ];
 }

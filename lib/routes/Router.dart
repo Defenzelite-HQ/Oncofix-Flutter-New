@@ -1,4 +1,5 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:oncofix/app/modules/Appointment/AppointmentModule.dart';
 
 import '../app/modules/Modules.dart';
 
@@ -29,4 +30,10 @@ List<GetPage> routes = [
 
   /// About Routes
   ...aboutRoutes,
+
+  /// Appointment Routes
+  ...appointmentRoutes,
+
+  /// Notification Routes
+  ...notificationRoutes,
 ];

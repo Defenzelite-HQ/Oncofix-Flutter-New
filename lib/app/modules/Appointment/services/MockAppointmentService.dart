@@ -13,7 +13,7 @@ class MockAppointmentService implements AppointmentService {
   void close() => null;
   
   @override
-  Future<ApiResponse> index() async {
+  Future<ApiResponse> index({DateTime? date, required doctorId}) async {
     return await 300.milliseconds.delay(() => AppointmentData.appointment);
   }
 

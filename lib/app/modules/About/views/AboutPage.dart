@@ -25,11 +25,11 @@ class AboutPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
           child: Column(
             children: [
-              AboutWidget(
-                  about: "About Us",
-                  onTap: () => webViewOnTap("about_us")),
-              AboutWidget(about: "Contact Us", onTap: () {}),
-              AboutWidget(about: "FAQ's", onTap: () {}),
+              // AboutWidget(
+              //     about: "About Us",
+              //     onTap: () => webViewOnTap("about_us")),
+              // AboutWidget(about: "Contact Us", onTap: () {}),
+              // AboutWidget(about: "FAQ's", onTap: () {}),
               AboutWidget(
                   about: "Terms & Conditions",
                   onTap: () => webViewOnTap("terms_&_condition")),

@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_webview_pro/webview_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ui_x/helpers/ColorPalette.dart';
+import 'package:ui_x/helpers/Sizes.dart';
+import 'package:ui_x/helpers/TextStyl.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../helpers/Global.dart';
 import '../../../shared/views/errors/NotConnectedErrorPage.dart';
 import '../../../shared/views/layouts/MasterLayout.dart';
 import '../../../shared/views/widgets/LoadingIconWidget.dart';
@@ -31,6 +34,15 @@ class WebviewPage extends StatelessWidget {
                       }
                     },
                     child: MasterLayout(
+                      leading: IconButton(
+                        icon: Icon(
+                          Icons.west,
+                          size: spacer7,
+                        ),
+                        onPressed: () {
+                          Get.back();
+                        },
+                      ),
                       title: "${controller.pageTitle}",
                       body: Obx(
                         () => Stack(
@@ -57,6 +69,7 @@ class WebviewPage extends StatelessWidget {
                                 navigationDelegate:
                                     (NavigationRequest request) {
                                   // log.w(request.url);
+                                  // log.w(controller.url);
 
                                   /// +++++++++++++++++++++
                                   /// Url Handlers

@@ -148,15 +148,15 @@ final ThemeData lightThemeData = ThemeData(
     iconTheme: IconThemeData(color: kcOffWhite),
     toolbarTextStyle: TextTheme(
       headline6: TextStyle(
-        color: kcOffWhite,
-        fontSize: 20,
+        color: kcWhite,
+        fontSize: 16,
         fontWeight: FontWeight.w500,
       ),
     ).headline6,
     titleTextStyle: TextTheme(
       headline6: TextStyle(
-        color: kcOffWhite,
-        fontSize: 20,
+        color: kcWhite,
+        fontSize: 16,
         fontWeight: FontWeight.w500,
       ),
     ).headline6,

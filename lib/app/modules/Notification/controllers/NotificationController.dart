@@ -38,8 +38,8 @@ class NotificationController extends AppController {
 
   /// --- Functionality Handlers ---
   /// Observables & Getters
-  var _indexData = NotificationModel().obs;
-  NotificationModel get indexData => _indexData.value;
+  var _indexData = <NotificationModel>[].obs;
+  List<NotificationModel> get indexData => _indexData;
   
   var _showData = NotificationModel().obs;
   NotificationModel get showData => _showData.value;
@@ -76,7 +76,8 @@ class NotificationController extends AppController {
 
       /// Add Response Data To Variables
       if (response.hasData()) {
-        _indexData(NotificationModel.fromJson(response.data));
+        _indexData(List<NotificationModel>.from(
+            response.data.map((x) => NotificationModel.fromJson(x))));
       }
       _notificationService.close();
       setBusy(false);

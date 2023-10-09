@@ -73,25 +73,25 @@ class LoginPage extends StatelessWidget {
                                         .validate(),
                               ),
                               SizedBox(height: 25),
-                            Button.block(
-                                    key: UniqueKey(),
-                                    label: "Login",
-                                    onTap: (set) {
-                                      set.setBusy(true).setDisabled(true);
-                                      controller.submit();
-                                      set.setBusy(false).setDisabled(false);
-                                    }),
+                              Button.block(
+                                  key: UniqueKey(),
+                                  label: "Login",
+                                  onTap: (set) async {
+                                    set.setBusy(true).setDisabled(true);
+                                    await controller.submit();
+                                    set.setBusy(false).setDisabled(false);
+                                  }),
                               SizedBox(height: 16),
                               GestureDetector(
                                 onTap: () => Get.offNamed(AuthRoutes.register),
                                 child: Text.rich(
                                   TextSpan(
                                     text: "Don't have an account?",
-                                    style: TextStyl.button
-                                        ?.copyWith(color: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1
-                                        ?.color),
+                                    style: TextStyl.button?.copyWith(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1
+                                            ?.color),
                                     children: [
                                       TextSpan(
                                         text: " Join Now",

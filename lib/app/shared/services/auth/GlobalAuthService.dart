@@ -25,6 +25,7 @@ abstract class GlobalAuthService {
   /// Stop the server request
   @override
   void close() => Request.close();
+
   /// Get and refresh user data
   Future<ApiResponse> getUser();
 

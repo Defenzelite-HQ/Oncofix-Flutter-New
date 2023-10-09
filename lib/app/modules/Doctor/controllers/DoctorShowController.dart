@@ -19,12 +19,12 @@ import '../models/FeedbackModel.dart';
 import '../models/MeetingModel.dart';
 import '../services/DoctorService.dart';
 
-class DoctorShowController extends AppController {
+class ShowDoctorController extends AppController {
   /// Creating Global Instance
-  static DoctorShowController get instance {
-    if (!Get.isRegistered<DoctorShowController>())
-      Get.put(DoctorShowController());
-    return Get.find<DoctorShowController>();
+  static ShowDoctorController get instance {
+    if (!Get.isRegistered<ShowDoctorController>())
+      Get.put(ShowDoctorController());
+    return Get.find<ShowDoctorController>();
   }
 
   /// Initialise [DoctorService] service
@@ -41,11 +41,18 @@ class DoctorShowController extends AppController {
   /// --- Functionality Handlers ---
   /// Observables & Getters
   var _feedback = FeedbackModel().obs;
+
+  FeedbackModel get feedback => this._feedback.value;
   var _meetings = <MeetingModel>[].obs;
-  var _doctorId = "".obs;
+
+  List<MeetingModel> get meetings => this._meetings;
   var _showData = DoctorModel().obs;
 
   DoctorModel get showData => _showData.value;
+
+  var _doctorId = "".obs;
+
+  String get doctorId => _doctorId.value;
 
   /// Variables
   TextEditingController taskInput = TextEditingController();

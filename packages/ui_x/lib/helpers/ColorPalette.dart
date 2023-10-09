@@ -26,6 +26,11 @@ const Color kcSuccess = Color(0xFF46db43);
 const Color kcInfo = Color(0xFF2775C8);
 const Color kcWarning = Color(0xFFF59E0B);
 const Color kcTabBar = Color(0xFF03AFF1);
+const Color kcPurple = Color(0xFF8854D0);
+const Color kcDeepPurple = Color(0xFF543d98);
+const Color kcDink = Color(0xFFea1a65);
+const Color kcDeepOrange = Color(0xFFe64d25);
+const Color kcBrown = Color(0xFF4e352e);
 
 /// Design specific colors
 const Color bodyBackgroundColor = Color(0xFFFAFAFA);

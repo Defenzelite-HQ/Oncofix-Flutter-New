@@ -12,8 +12,8 @@ class ApiAppointmentService implements AppointmentService {
   void close() => Request.close();
   
  @override
-  Future<ApiResponse> index() async {
-    return await Request.get('/url', authenticate: true);
+  Future<ApiResponse> index({DateTime? date, required doctorId}) async {
+    return await Request.get('/appointments/schedules/$doctorId?date=${date!.year}-${date.month}-${date.day}&doctor_id=$doctorId', authenticate: true);
   }
 
   @override
