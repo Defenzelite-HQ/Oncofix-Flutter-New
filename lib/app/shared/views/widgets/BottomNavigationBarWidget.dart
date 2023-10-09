@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:oncofix/app/modules/Dashboard/controllers/DashboardController.dart';
 import 'package:ui_x/helpers/ColorPalette.dart';
 import 'package:ui_x/helpers/Sizes.dart';
 import 'package:ui_x/helpers/TextStyl.dart';
@@ -10,11 +10,11 @@ import '../../../../config/Config.dart';
 import '../../../helpers/Global.dart';
 import '../../../helpers/Webview.dart';
 
-
 class BottomNavigationBarWidget extends StatelessWidget {
   final String route;
 
-  BottomNavigationBarWidget({Key? key, required this.route}) : super(key: key);
+  BottomNavigationBarWidget({Key? key, required this.route, }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -281,8 +281,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
                                         ),
                                         Text(
                                           "My Appointments",
-                                          style:
-                                              TextStyl.title!.copyWith(
+                                          style: TextStyl.title!.copyWith(
                                             color: kcSecondary,
                                             fontWeight: FontWeight.w500,
                                             fontSize: spacer4,
@@ -314,8 +313,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
                                         ),
                                         Text(
                                           "Orders",
-                                          style:
-                                              TextStyl.title!.copyWith(
+                                          style: TextStyl.title!.copyWith(
                                             color: kcSecondary,
                                             fontWeight: FontWeight.w500,
                                             fontSize: spacer4,
@@ -347,8 +345,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
                                         ),
                                         Text(
                                           "Settings",
-                                          style:
-                                              TextStyl.title!.copyWith(
+                                          style: TextStyl.title!.copyWith(
                                             color: kcSecondary,
                                             fontWeight: FontWeight.w500,
                                             fontSize: spacer4,
@@ -380,8 +377,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
                                         ),
                                         Text(
                                           "Logout",
-                                          style:
-                                              TextStyl.title!.copyWith(
+                                          style: TextStyl.title!.copyWith(
                                             color: kcSecondary,
                                             fontWeight: FontWeight.w500,
                                             fontSize: spacer4,
@@ -420,10 +416,12 @@ class BottomNavigationBarWidget extends StatelessWidget {
                     child: new FloatingActionButton(
                       elevation: 20.0,
                       child: Icon(
-                        Icons.person_add,
+                        Icons.qr_code_scanner_sharp,
                         size: 23,
                       ),
-                      onPressed: () => webViewOnTap("add_patient"),
+                      onPressed: () {
+                            // controller.scanQR()
+                      },
                     ),
                   )
                 : Container(
@@ -446,3 +444,4 @@ class BottomNavigationBarWidget extends StatelessWidget {
         ]);
   }
 }
+
