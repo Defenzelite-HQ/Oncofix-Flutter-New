@@ -13,7 +13,7 @@ class ApiNotificationService implements NotificationService {
   
  @override
   Future<ApiResponse> index() async {
-    return await Request.get('/url', authenticate: true);
+    return await Request.get('/notifications', authenticate: true);
   }
 
   @override

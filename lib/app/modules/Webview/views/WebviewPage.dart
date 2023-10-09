@@ -43,11 +43,7 @@ class WebviewPage extends StatelessWidget {
                           Get.back();
                         },
                       ),
-                      title: Text(
-                        "${controller.pageTitle}",
-                        style: TextStyl.body
-                            ?.copyWith(color: kcWhite, fontSize: 18),
-                      ),
+                      title: "${controller.pageTitle}",
                       body: Obx(
                         () => Stack(
                           children: [
@@ -70,9 +66,10 @@ class WebviewPage extends StatelessWidget {
                                 onPageFinished: (finish) {
                                   controller.onLoadingPercent(100);
                                 },
-                                navigationDelegate: (NavigationRequest request) {
-                                  log.w(request.url);
-                                  log.w(controller.url);
+                                navigationDelegate:
+                                    (NavigationRequest request) {
+                                  // log.w(request.url);
+                                  // log.w(controller.url);
 
                                   /// +++++++++++++++++++++
                                   /// Url Handlers
@@ -111,7 +108,7 @@ class WebviewPage extends StatelessWidget {
                                   }
 
                                   return NavigationDecision.navigate;
-                                }, 
+                                },
                               ),
                             if (controller.loadingPercentage < 100)
                               LinearProgressIndicator(

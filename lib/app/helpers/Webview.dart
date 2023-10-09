@@ -48,11 +48,6 @@ List<Map<String, Object>> webViewItemList = [
     "url": "https://oncofix.com/learn/116",
   },
   {
-    "id": "financial_advice",
-    "title": "Financial Advice",
-    "url": "https://oncofix.com/money-mattress",
-  },
-  {
     "id": "about_us",
     "title": "About Us",
     "url": "https://oncofix.com/about-us",
@@ -124,7 +119,7 @@ List<Map<String, Object>> webViewItemList = [
   },
   {
     "id": "patient",
-    "title": "My Patients",
+    "title": "Patients",
     "url": "https://oncofix.com/panel/patient/index",
   },
   {
@@ -154,7 +149,7 @@ List<Map<String, Object>> webViewItemList = [
   },
   {
     "id": "my_events",
-    "title": "Events",
+    "title": "Become Host",
     "url": "https://oncofix.com/panel/constant-management/consultant-meeting",
   },
   {

@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:oncofix/app/modules/Dashboard/views/widget/HomeExploreCardWidget.dart';
 import 'package:oncofix/app/modules/Doctor/DoctorModule.dart';
+import 'package:oncofix/app/modules/Modules.dart';
 import 'package:ui_x/ui_x.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -17,7 +18,6 @@ import '../../../shared/views/layouts/MasterLayout.dart';
 import '../../../shared/views/widgets/AppDrawer.dart';
 import '../../../shared/views/widgets/BottomNavigationBarWidget.dart';
 import '../../../shared/views/widgets/LoadingIconWidget.dart';
-import '../controllers/DashboardController.dart';
 import '../models/FeaturedDoctorModel.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -54,7 +54,8 @@ class DashboardPage extends StatelessWidget {
                               ),
                               GestureDetector(
                                   onTap: () {
-                                    Get.toNamed('/notifications');
+                                    Get.toNamed(
+                                        NotificationRoutes.notification);
                                   },
                                   child: SvgPicture.asset(
                                       "assets/icons/bell.svg",
@@ -141,43 +142,61 @@ class DashboardPage extends StatelessWidget {
                                         )
                                       : SizedBox.shrink(),
 
-                                  Container(
-                                    height: 175,
-                                    child: Swiper(
-                                      autoplay: true,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        return GestureDetector(
-                                            child: Image.asset(
-                                              Config.isPatient()
-                                                  ? controller
-                                                      .imageListPatient[index]
-                                                  : controller
-                                                      .imageListDoctor[index],
-                                              width: double.maxFinite,
-                                              fit: BoxFit.cover,
-                                            ),
-                                            onTap: () {
-                                              switch (index) {
-                                                case 1:
-                                                  Get.toNamed(
-                                                      DoctorRoutes.doctor);
-                                                  break;
-                                                case 2:
-                                                  webViewOnTap("shop");
-                                                  webViewOnTap("shop");
-                                                  break;
-                                              }
-                                            });
-                                      },
-                                      itemCount: Config.isPatient()
-                                          ? controller.imageListPatient.length
-                                          : controller.imageListDoctor.length,
-                                      autoplayDelay: 10000,
-                                      viewportFraction: 1.0,
-                                      scale: 1.0,
-                                    ),
-                                  ),
+                                  Config.isPatient()
+                                      ? Container(
+                                          height: 175,
+                                          child: Swiper(
+                                            autoplay: true,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              Map<String, String> slider =
+                                                  controller
+                                                      .imageListPatient[index];
+                                              return GestureDetector(
+                                                  child: Image.asset(
+                                                    "${slider["image"]}",
+                                                    width: double.maxFinite,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                  onTap: () {
+                                                    webViewOnTap(
+                                                        "${slider["id"]}");
+                                                  });
+                                            },
+                                            itemCount: controller
+                                                .imageListPatient.length,
+                                            autoplayDelay: 10000,
+                                            viewportFraction: 1.0,
+                                            scale: 1.0,
+                                          ),
+                                        )
+                                      : Container(
+                                          height: 175,
+                                          child: Swiper(
+                                            autoplay: true,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              Map<String, String> slider =
+                                                  controller
+                                                      .imageListDoctor[index];
+                                              return GestureDetector(
+                                                  child: Image.asset(
+                                                    "${slider["image"]}",
+                                                    width: double.maxFinite,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                  onTap: () {
+                                                    webViewOnTap(
+                                                        "${slider["id"]}");
+                                                  });
+                                            },
+                                            itemCount: controller
+                                                .imageListDoctor.length,
+                                            autoplayDelay: 10000,
+                                            viewportFraction: 1.0,
+                                            scale: 1.0,
+                                          ),
+                                        ),
 
                                   Config.isDoctor()
                                       ? Padding(
@@ -192,7 +211,7 @@ class DashboardPage extends StatelessWidget {
                                                       kcInfo.withOpacity(0.08),
                                                   count:
                                                       "${auth.user.patients}",
-                                                  label: "Total\nPatient",
+                                                  label: "Total\nPatients",
                                                   maxLines: 2,
                                                   onTap: () {
                                                     webViewOnTap("patient");
@@ -206,11 +225,12 @@ class DashboardPage extends StatelessWidget {
                                                       .withOpacity(0.08),
                                                   count:
                                                       "${auth.user.todayAppointments}",
-                                                  label: "Today\nAppointments",
+                                                  label:
+                                                      "Today's\nAppointments",
                                                   maxLines: 2,
                                                   onTap: () {
                                                     webViewOnTap(
-                                                        "clinical_trial");
+                                                        "today_appointments");
                                                   },
                                                 ),
                                               ),
@@ -395,7 +415,7 @@ class DashboardPage extends StatelessWidget {
                                                           imageColor: kcInfo,
                                                           image:
                                                               "assets/icons/my_patient.png",
-                                                          label: "My Patient",
+                                                          label: "My Patients",
                                                           onTap: () {
                                                             webViewOnTap(
                                                                 'patient');
@@ -445,7 +465,8 @@ class DashboardPage extends StatelessWidget {
                                                               "assets/icons/become_host.png",
                                                           label: "Become Host",
                                                           onTap: () {
-                                                            // Get.toNamed('/cases');
+                                                            webViewOnTap(
+                                                                "my_events");
                                                           },
                                                         ),
                                                       ),

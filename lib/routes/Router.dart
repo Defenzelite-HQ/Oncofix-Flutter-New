@@ -29,8 +29,11 @@ List<GetPage> routes = [
   ...casesRoutes,
 
   /// About Routes
-  ...aboutRoutes, 
+  ...aboutRoutes,
 
   /// Appointment Routes
   ...appointmentRoutes,
+
+  /// Notification Routes
+  ...notificationRoutes,
 ];
