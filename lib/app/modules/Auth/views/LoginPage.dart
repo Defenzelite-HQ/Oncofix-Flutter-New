@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ui_x/ui_x.dart';
-
 import '../../../helpers/Global.dart';
 import '../../../shared/views/layouts/AuthLayout.dart';
 import '../../Modules.dart';

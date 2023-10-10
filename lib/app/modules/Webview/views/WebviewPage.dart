@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_webview_pro/webview_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ui_x/helpers/ColorPalette.dart';
 import 'package:ui_x/helpers/Sizes.dart';
-import 'package:ui_x/helpers/TextStyl.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../helpers/Global.dart';
 import '../../../shared/views/errors/NotConnectedErrorPage.dart';
 import '../../../shared/views/layouts/MasterLayout.dart';
 import '../../../shared/views/widgets/LoadingIconWidget.dart';
@@ -16,6 +15,11 @@ class WebviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     return GetBuilder<WebviewController>(
       init: WebviewController(),
       builder: (WebviewController controller) {
@@ -25,6 +29,9 @@ class WebviewPage extends StatelessWidget {
                 ? LoadingIconWidget(message: "Please wait...")
                 : WillPopScope(
                     onWillPop: () async {
+                      SystemChrome.setPreferredOrientations([
+                        DeviceOrientation.portraitUp,
+                      ]);
                       bool? goBack = await webcontroller.canGoBack();
                       if (goBack != true)
                         return true;
@@ -113,8 +120,8 @@ class WebviewPage extends StatelessWidget {
                             if (controller.loadingPercentage < 100)
                               LinearProgressIndicator(
                                 value: controller.loadingPercentage / 100.0,
-                                color: kcPrimary,
-                                backgroundColor: kcWhite,
+                                color: kcTabBar,
+                                backgroundColor: kcOffWhite,
                               ),
                           ],
                         ),

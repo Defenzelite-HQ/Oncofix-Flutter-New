@@ -53,12 +53,12 @@ class BottomNavigationBarWidget extends StatelessWidget {
                         active: "patient",
                         onTap: () => webViewOnTap("patient"),
                         route: route,
-                        image: "assets/icons/unfill_users.png",
-                        fillImage: "assets/icons/fill_users.png",
+                        image: "assets/icons/myCases.png",
+                        fillImage: "assets/icons/myCaseFill.png",
                       )
                     : NavBarWidget(
                         active: "doctors",
-                        onTap: () => Get.toNamed(DoctorRoutes.doctor),
+                        onTap: () => webViewOnTap("doctor_list"),
                         route: route,
                         image: "assets/icons/unfill_doctor.png",
                         fillImage: "assets/icons/fill_doctor.png",
@@ -83,7 +83,6 @@ class BottomNavigationBarWidget extends StatelessWidget {
                         image: "assets/icons/unfill_cases.png",
                         fillImage: "assets/icons/fill_cases.png",
                       ),
-
                 // InkWell(
                 //         child: SvgPicture.asset(
                 //           "assets/icons/cases.svg",
@@ -97,15 +96,13 @@ class BottomNavigationBarWidget extends StatelessWidget {
                 //         },
                 //       ),
                 InkWell(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
-                    child: Image.network(
-                      "${auth.user.avatar}",
-                      height: spacer7,
-                    ),
+                  child: Image.asset(
+                    "assets/icons/user.png",
+                    height: 21,
+                    color: kcBottomBar,
                   ),
                   onTap: () {
-                    Get.toNamed(SettingRoutes.setting);
+                    webViewOnTap('doctor_profile');
                   },
                 ),
               ],
@@ -124,7 +121,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
                       elevation: 20.0,
                       child: Icon(
                         Icons.qr_code_scanner_sharp,
-                        size: 23,
+                        size: 30,
                       ),
                       onPressed: () {
                         final DashboardController dashboardController =

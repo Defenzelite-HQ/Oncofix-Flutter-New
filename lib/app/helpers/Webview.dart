@@ -104,13 +104,13 @@ List<Map<String, Object>> webViewItemList = [
   },
   {
     "id": "oncofix_screening",
-    "title": "OncoFix Screening",
-    "url": "https://screening.oncofix.com/",
+    "title": "Screening",
+    "url": "https://screening.oncofix.com/assessment",
   },
   {
     "id": "oncofix_youtube",
     "title": "Oncofix",
-    "url": "https://www.youtube.com/channel/UCb24CCIAUNHbF9PAuAK9s7g",
+    "url": "https://www.yaoutube.com/channel/UCb24CCIAUNHbF9PAuAK9s7g",
   },
   {
     "id": "doctor_chat",
@@ -163,10 +163,14 @@ List<Map<String, Object>> webViewItemList = [
     "url": "https://oncofix.com/panel/appointment",
   },
   {
+    "id": "doctor_profile",
+    "title": "profile",
+    "url": "https://oncofix.com/panel/user-profile",
+  },
+  {
     "id": "today_appointments",
     "title": "Appointments",
-    "url":
-        "https://oncofix.com/panel/appointment?date=${Jiffy(DateTime.now().toString()).format("yyyy-MM-dd")}",
+    "url": "https://oncofix.com/panel/appointment?date=${Jiffy(DateTime.now().toString()).format("yyyy-MM-dd")}",
   },
   {
     "id": "my_schedule",
@@ -177,6 +181,11 @@ List<Map<String, Object>> webViewItemList = [
     "id": "patient_attendance",
     "title": "Attendance ",
     "url": "https://oncofix.com/panel/patient_attendance",
+  },
+  {
+    "id": "doctor_list",
+    "title": "Doctors ",
+    "url": "https://oncofix.com/doctor",
   },
   {
     "id": "qrcode",
@@ -197,5 +206,10 @@ List<Map<String, Object>> webViewItemList = [
     "id": "patient_pro",
     "title": "PRO",
     "url": "https://oncofix.com/panel/patient/standard-pro/list",
+  },
+  {
+    "id": "notification_doctor",
+    "title": "Notification",
+    "url": "https://oncofix.com/panel/constant-management/notification",
   },
 ];
