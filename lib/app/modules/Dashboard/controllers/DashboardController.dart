@@ -11,14 +11,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:ui_x/helpers/Toastr.dart';
 
+import '../../../../database/LocationSeeder.dart';
 import '../../../helpers/Global.dart';
 import '../../../models/ApiResponse.dart';
 import '../../../models/CategoryElementModel.dart';
 import '../../../shared/controllers/AppController.dart';
+import '../models/CurrentAddressModel.dart';
 import '../models/DashboardModel.dart';
+import '../models/DatabaseLocationModel.dart';
 import '../models/FeaturedDoctorModel.dart';
 import '../services/DashboardService.dart';
 
@@ -48,9 +53,17 @@ class DashboardController extends AppController {
 
   String get qrcode => _qrcode.value;
 
-  var _data = DashboardModel().obs;
 
+  var _destinationAddresss = CurrentAddressModel().obs;
+  Position get currentPositions => _currentPositions.value;
+
+  var _locationData = DatabaseLocationModel().obs;
+  DatabaseLocationModel get locationData => _locationData.value;
+
+
+  var _data = DashboardModel().obs;
   DashboardModel get data => this._data.value;
+
   var _categories = <CategoryElementModel>[].obs;
 
   List<CategoryElementModel> get categories => this._categories;
@@ -82,6 +95,18 @@ class DashboardController extends AppController {
     _scrollController = ScrollController();
     index();
   }
+
+  var _currentPositions = Position(
+    altitude: 0.0,
+    latitude: 0.0,
+    longitude: 0.0,
+    accuracy: 0.0,
+    heading: 0.0,
+    speed: 0.0,
+    speedAccuracy: 0.0,
+    isMocked: true,
+    timestamp: DateTime.now(), altitudeAccuracy: 0.0, headingAccuracy: 0.0,
+  ).obs;
 
   /// --- Core Functionalities Methods ---
 
@@ -169,6 +194,8 @@ class DashboardController extends AppController {
     }
   }
 
+
+
   //Delete
   Future<void> delete({bool refresh = false}) async {
     try {
@@ -225,27 +252,26 @@ class DashboardController extends AppController {
       if (scannedQrcode != '-1') {
         await storePatientAttendance(scannedQrcode);
       } else {
-        Toastr.show(message: "This patient is not linked to your account yet!");
+        Toastr.show(message: "We could not locate the patient");
       }
     } on PlatformException {}
   }
 
   /// --- Form Functionalities Methods ---
   // Here you can add a scoped method...
-
   /// Mock Data
   List<Map<String, String>> imageListPatient = [
     {
       "id": "about_cancer",
-      "image": "assets/icons/home-banner-07.jpg",
+      "image": "assets/icons/about-cancer.jpg",
     },
     {
       "id": "money_matters",
-      "image": "assets/icons/home-banner-3.png",
+      "image": "assets/icons/home-banner-5.png",
     },
     {
       "id": "oncofix_screening",
-      "image": "assets/icons/home-banner-5.png",
+      "image": "assets/icons/risk-assessment.jpg",
     },
     {
       "id": "events",
@@ -256,7 +282,7 @@ class DashboardController extends AppController {
   List<Map<String, String>> imageListDoctor = [
     {
       "id": "about_cancer",
-      "image": "assets/icons/doctor_slider_banner.jpg",
+      "image": "assets/icons/about-cancer.jpg",
     },
     {
       "id": "money_matters",
@@ -264,11 +290,11 @@ class DashboardController extends AppController {
     },
     {
       "id": "clinical_trial",
-      "image": "assets/icons/doctor_slider_banner.jpg",
+      "image": "assets/icons/clinical-trial.jpg",
     },
     {
       "id": "oncofix_screening",
-      "image": "assets/icons/doctor_slider_banner1.jpg",
+      "image": "assets/icons/risk-assessment.jpg",
     },
     {
       "id": "events",

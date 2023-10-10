@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import '../../../models/ApiResponse.dart';
 import 'ApiAuthService.dart';
 import 'MockAuthService.dart';

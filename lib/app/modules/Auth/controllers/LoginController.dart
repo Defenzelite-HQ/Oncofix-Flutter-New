@@ -106,7 +106,7 @@ class LoginController extends AppController {
         /// Assign the user data to user object and store locally.
         await auth.setUserData(response.data['user']);
         await auth.setUserToken(response.data['access_token']);
-        Toastr.show(message: "${response.message}");
+        // Toastr.show(message: "${response.message}");
         Get.offAllNamed(DashboardRoutes.dashboard);
       } else {
         /// Need to verify OTP

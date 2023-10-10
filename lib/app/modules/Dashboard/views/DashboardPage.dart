@@ -54,8 +54,10 @@ class DashboardPage extends StatelessWidget {
                               ),
                               GestureDetector(
                                   onTap: () {
-                                    Get.toNamed(
-                                        NotificationRoutes.notification);
+                                    webViewOnTap("notification_doctor");
+                                    // Get.toNamed(
+                                    //
+                                    //     NotificationRoutes.notification);
                                   },
                                   child: SvgPicture.asset(
                                       "assets/icons/bell.svg",
@@ -85,9 +87,13 @@ class DashboardPage extends StatelessWidget {
                                       onTap: () {
                                         webViewOnTap("search_patient");
                                       },
-                                      child: Icon(
-                                        Icons.search,
-                                        size: spacer7,
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 10),
+                                        child: Icon(
+                                          Icons.search,
+                                          size: spacer7,
+                                        ),
                                       ),
                                     )
                                   : SizedBox.shrink(),
@@ -120,7 +126,8 @@ class DashboardPage extends StatelessWidget {
                                               ),
                                               SizedBox(width: 5),
                                               Text(
-                                                "Seoni, MadhyaPradesh",
+                                                "Seoni, Madhya Pradesh",
+                                                // "${controller.locationData.currentLocation?.address}",
                                                 style: TextStyl.label!.copyWith(
                                                   color: kcWhite,
                                                   fontSize: spacer3 / 1.2,
@@ -128,20 +135,25 @@ class DashboardPage extends StatelessWidget {
                                                 ),
                                               ),
                                               Spacer(),
-                                              Text(
-                                                "Change",
-                                                style: TextStyl.label!.copyWith(
-                                                  color:
-                                                      kcWhite.withOpacity(0.8),
-                                                  fontSize: spacer3 / 1.2,
-                                                  fontWeight: FontWeight.w600,
+                                              GestureDetector(
+                                                onTap:  () {
+                                                  webViewOnTap(
+                                                      "doctor_profile");
+                                                },
+                                                child: Text(
+                                                  "Change",
+                                                  style: TextStyl.label!.copyWith(
+                                                    color:
+                                                        kcWhite.withOpacity(0.8),
+                                                    fontSize: spacer3 / 1.2,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
                                                 ),
                                               )
                                             ],
                                           ),
                                         )
                                       : SizedBox.shrink(),
-
                                   Config.isPatient()
                                       ? Container(
                                           height: 175,
@@ -366,7 +378,7 @@ class DashboardPage extends StatelessWidget {
                                                         HomeExploreCardWidget(
                                                       imageColor: kcDeepOrange,
                                                       image:
-                                                          "assets/icons/unfill_users.png",
+                                                          "assets/icons/myCases.png",
                                                       label: "My Cases",
                                                       onTap: () {
                                                         webViewOnTap(
@@ -504,7 +516,6 @@ class DashboardPage extends StatelessWidget {
                                                   )
                                                 ],
                                               ),
-
                                         /// Patient
                                         Config.isPatient()
                                             ? Column(
@@ -536,7 +547,7 @@ class DashboardPage extends StatelessWidget {
                                                             const EdgeInsets
                                                                 .only(left: 5),
                                                         child: Text(
-                                                          "Categories",
+                                                          "Find doctor by cause",
                                                           style: TextStyl.title!
                                                               .copyWith(
                                                             color: kcSecondary,
@@ -850,7 +861,7 @@ class DashboardPage extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-
+                                  Config.isPatient() ?
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         left: 8, right: 8, top: 8),
@@ -893,10 +904,52 @@ class DashboardPage extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
+                                  )
+                                    : SizedBox.shrink(),
+                                  Config.isDoctor() ?
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 8, right: 8, top: 8),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: InkWell(
+                                            onTap: () => webViewOnTap("blogs"),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              child: Image.asset(
+                                                "assets/icons/small-bnr1.jpg",
+                                                width: screen.width,
+                                                fit: BoxFit.contain,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Expanded(
+                                          child: InkWell(
+                                            onTap: () => launchUrl(
+                                                Uri.parse(
+                                                    "https://www.youtube.com/channel/UCb24CCIAUNHbF9PAuAK9s7g"),
+                                                mode: LaunchMode
+                                                    .externalApplication),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              child: Image.asset(
+                                                "assets/icons/small-bnr2.jpg",
+                                                width: screen.width,
+                                                fit: BoxFit.contain,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ) : SizedBox.shrink()
                                 ],
                               ),
                             ),

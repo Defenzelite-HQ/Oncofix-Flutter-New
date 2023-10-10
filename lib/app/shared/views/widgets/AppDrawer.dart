@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:oncofix/app/modules/Modules.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:ui_x/helpers/Helpers.dart';
 import 'package:oncofix/app/helpers/Global.dart';
 import '../../../../config/Config.dart';
 import '../../../helpers/Webview.dart';
-import '../../../modules/Dashboard/DashboardModule.dart';
 
 Drawer appDrawer(BuildContext context, DashboardController controller) {
   return Drawer(
@@ -42,11 +39,18 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                                 height: 50,
                                 fit: BoxFit.cover,
                               )
-                            : CircleAvatar(
-                                backgroundColor: kcWhite,
-                                backgroundImage:
-                                    NetworkImage("${auth.user.avatar}"),
-                                radius: 35,
+                            : Container(
+                          padding: EdgeInsets.all(12),
+                                height: 62,
+                                width: 62,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(60),
+                                    color: kcWhite),
+                                child: Image.asset(
+                                  "assets/icons/user.png",
+                                  height: 20,
+                                  color: kcBottomBar,
+                                ),
                               ),
                       ),
                       // CircleAvatar(
@@ -86,12 +90,16 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                   () => QrImageView(
                     data: controller.qrcode,
                     version: QrVersions.auto,
-                    size: 120,
+                    size: 110,
                     gapless: true,
                     padding: EdgeInsets.only(bottom: 10, top: 10),
                   ),
                 )
               : SizedBox.shrink(),
+          // Config.isPatient() ?
+          // Text("Your Oncofix Smart Card", style: TextStyl.subtitle
+          //     ?.copyWith(fontSize: 12),)
+          //     : SizedBox.shrink(),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
@@ -105,7 +113,6 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                           image: "assets/icons/fill_home.png",
                           label: "Home",
                         ),
-
                         /// +++++++++++++++++++++++
                         /// About Cancer
                         /// +++++++++++++++++++++++
@@ -115,7 +122,6 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                         //   imageExtension: "svg",
                         //   label: "About Cancer",
                         // ),
-
                         /// +++++++++++++++++++++++
                         /// Financial Advice
                         /// +++++++++++++++++++++++
@@ -125,7 +131,6 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                         //   imageExtension: "svg",
                         //   label: "Financial Advices",
                         // ),
-
                         /// +++++++++++++++++++++++
                         /// Refer & Earn
                         /// +++++++++++++++++++++++
@@ -149,38 +154,20 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                         /// About Us
                         /// +++++++++++++++++++++++
                         BottomWidget(
-                          onTap: () => webViewOnTap("About Us"),
+                          onTap: () => webViewOnTap("about_us"),
                           image: "assets/icons/about.png",
                           imageExtension: "png",
                           label: "About Us",
                         ),
-                        /// +++++++++++++++++++++++
-                        /// Contact Us
-                        /// +++++++++++++++++++++++
-                        BottomWidget(
-                          onTap: () => webViewOnTap("Contact Us"),
-                          image: "assets/icons/contactUs.png",
-                          imageExtension: "png",
-                          label: "Contact Us",
-                        ),
-                        /// +++++++++++++++++++++++
-                        /// FAQ's
-                        /// +++++++++++++++++++++++
-                        BottomWidget(
-                          onTap: () => webViewOnTap("FAQ's"),
-                          image: "assets/icons/faq.png",
-                          imageExtension: "png",
-                          label: "FAQ's",
-                        ),
-                        /// +++++++++++++++++++++++
-                        /// Legal
-                        /// +++++++++++++++++++++++
-                        BottomWidget(
-                          onTap: () => webViewOnTap("Legal"),
-                          image: "assets/icons/legal.png",
-                          imageExtension: "png",
-                          label: "Legal",
-                        ),
+                        // /// +++++++++++++++++++++++
+                        // /// Legal
+                        // /// +++++++++++++++++++++++
+                        // BottomWidget(
+                        //   onTap: () => webViewOnTap("Legal"),
+                        //   image: "assets/icons/legal.png",
+                        //   imageExtension: "png",
+                        //   label: "Legal",
+                        // ),
                         Divider(),
                       ],
                     ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ui_x/ui_x.dart';
 import 'package:oncofix/app/modules/Auth/AuthModule.dart';
-
 import '../../../helpers/Global.dart';
 import '../../../shared/views/layouts/AuthLayout.dart';
 import '../../../shared/views/widgets/TabPillWidget.dart';
@@ -179,17 +178,24 @@ class RegisterPage extends StatelessWidget {
                                         : Column(
                                             children: [
                                               SizedBox(
-                                                height: 200,
+                                                height: 180,
                                               ),
                                               Center(
-                                                  child: Text(
-                                                "Currently we are not looking for the doctors",
-                                                style: TextStyl.bodySm
-                                                    ?.copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontSize: 15),
-                                              )),
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Due to heavy uses currently we temporary blocked Doctor onboarding\nPlease contact Oncofix customer desk for more information ",
+                                                      style: TextStyl.bodySm
+                                                      ?.copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 15),
+                                                    ),
+                                                    // Image.asset("assets/icons/alert.png", height: 40),
+                                                  ],
+                                                ),
+                                              ),
                                               SizedBox(
                                                 height: 200,
                                               ),
@@ -199,24 +205,26 @@ class RegisterPage extends StatelessWidget {
                                 ],
                               ),
                               SizedBox(height: 16),
-                              GestureDetector(
-                                onTap: () => Get.offNamed(AuthRoutes.login),
-                                child: Text.rich(
-                                  TextSpan(
-                                    text: "Already have an account?",
-                                    style: TextStyl.button?.copyWith(
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1
-                                            ?.color),
-                                    children: [
-                                      TextSpan(
-                                        text: " Login",
-                                        style: TextStyl.button?.copyWith(
-                                            color:
-                                                Theme.of(context).primaryColor),
-                                      ),
-                                    ],
+                              Center(
+                                child: GestureDetector(
+                                  onTap: () => Get.offNamed(AuthRoutes.login),
+                                  child: Text.rich(
+                                    TextSpan(
+                                      text: "Already have an account?",
+                                      style: TextStyl.button?.copyWith(
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1
+                                              ?.color),
+                                      children: [
+                                        TextSpan(
+                                          text: " Login",
+                                          style: TextStyl.button?.copyWith(
+                                              color:
+                                                  Theme.of(context).primaryColor),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
