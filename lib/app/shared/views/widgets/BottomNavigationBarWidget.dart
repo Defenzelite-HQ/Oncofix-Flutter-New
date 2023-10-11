@@ -80,8 +80,8 @@ class BottomNavigationBarWidget extends StatelessWidget {
                         //   CasesRoutes.cases,
                         // ),
                         route: route,
-                        image: "assets/icons/unfill_cases.png",
-                        fillImage: "assets/icons/fill_cases.png",
+                        image: "assets/icons/caseUnfill.png",
+                        fillImage: "assets/icons/caseFill.png",
                       ),
                 // InkWell(
                 //         child: SvgPicture.asset(
@@ -98,8 +98,8 @@ class BottomNavigationBarWidget extends StatelessWidget {
                 InkWell(
                   child: Image.asset(
                     "assets/icons/user.png",
-                    height: 21,
-                    color: kcBottomBar,
+                    height: 25,
+                    color: kcSecondary,
                   ),
                   onTap: () {
                     webViewOnTap('doctor_profile');
@@ -109,27 +109,20 @@ class BottomNavigationBarWidget extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 28,
+            bottom: 20,
             child: Config.isDoctor()
-                ? Container(
-                    height: 55,
-                    width: 55,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                    ),
-                    child: new FloatingActionButton(
-                      elevation: 20.0,
-                      child: Icon(
-                        Icons.qr_code_scanner_sharp,
-                        size: 30,
-                      ),
-                      onPressed: () {
-                        final DashboardController dashboardController =
-                            Get.put(DashboardController());
-                        dashboardController.scanQR();
-                      },
-                    ),
-                  )
+                ? new FloatingActionButton(
+                  elevation: 10.0,
+                  child: Icon(
+                    Icons.qr_code_scanner_sharp,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    final DashboardController dashboardController =
+                        Get.put(DashboardController());
+                    dashboardController.scanQR();
+                  },
+                )
                 : Container(
                     height: 55,
                     width: 55,

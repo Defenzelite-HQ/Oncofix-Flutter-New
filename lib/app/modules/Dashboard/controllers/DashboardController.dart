@@ -8,6 +8,7 @@
 */
 
 // Third Party Packages
+import 'package:location/location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -15,7 +16,6 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:ui_x/helpers/Toastr.dart';
-
 import '../../../../database/LocationSeeder.dart';
 import '../../../helpers/Global.dart';
 import '../../../models/ApiResponse.dart';
@@ -26,6 +26,7 @@ import '../models/DashboardModel.dart';
 import '../models/DatabaseLocationModel.dart';
 import '../models/FeaturedDoctorModel.dart';
 import '../services/DashboardService.dart';
+
 
 class DashboardController extends AppController {
   /// Creating Global Instance
@@ -54,11 +55,6 @@ class DashboardController extends AppController {
   String get qrcode => _qrcode.value;
 
 
-  var _destinationAddresss = CurrentAddressModel().obs;
-  Position get currentPositions => _currentPositions.value;
-
-  var _locationData = DatabaseLocationModel().obs;
-  DatabaseLocationModel get locationData => _locationData.value;
 
 
   var _data = DashboardModel().obs;
@@ -86,27 +82,20 @@ class DashboardController extends AppController {
   /// Variables
   TextEditingController taskInput = TextEditingController();
 
+
+
   @override
-  void onInit() {
+  void onInit() async{
+    auth.getUser();
+    getData();
+    index();
+
+    _scrollController = ScrollController();
     super.onInit();
     _qrcode.value = '${auth.user.id}';
-    auth.getUser();
-    this.getData();
-    _scrollController = ScrollController();
-    index();
   }
 
-  var _currentPositions = Position(
-    altitude: 0.0,
-    latitude: 0.0,
-    longitude: 0.0,
-    accuracy: 0.0,
-    heading: 0.0,
-    speed: 0.0,
-    speedAccuracy: 0.0,
-    isMocked: true,
-    timestamp: DateTime.now(), altitudeAccuracy: 0.0, headingAccuracy: 0.0,
-  ).obs;
+
 
   /// --- Core Functionalities Methods ---
 
@@ -125,7 +114,6 @@ class DashboardController extends AppController {
         setBusy(false);
         return;
       }
-      log.w(response.data);
 
       /// Add Response Data To Variables
       if (response.hasData()) {
@@ -172,7 +160,6 @@ class DashboardController extends AppController {
       setBusy(true);
       ApiResponse response = await _dashboardService.index();
 
-      log.w(response.data);
       if (response.hasError()) {
         Toastr.show(message: "${response.message}");
         setBusy(false);
@@ -201,7 +188,6 @@ class DashboardController extends AppController {
     try {
       setBusy(true);
       _dashboardService.init();
-
       /// Call Service to Get API Response
       ApiResponse response =
           await _dashboardService.delete(id: auth.user.id!.toInt());
@@ -234,7 +220,7 @@ class DashboardController extends AppController {
       Toastr.show(message: "${response.message}");
       return;
     }
-    Toastr.show(message: "Successfully added patient attendance.");
+    Toastr.show(message: "Invalid QR code");
   }
 
   /// --- Common Functionalities Methods ---
@@ -247,8 +233,7 @@ class DashboardController extends AppController {
     try {
       scannedQrcode = await FlutterBarcodeScanner.scanBarcode(
           '#0095b6', 'Cancel', true, ScanMode.QR);
-      // log.w(scannedQrcode);
-
+      log.w(scannedQrcode);
       if (scannedQrcode != '-1') {
         await storePatientAttendance(scannedQrcode);
       } else {
@@ -274,7 +259,7 @@ class DashboardController extends AppController {
       "image": "assets/icons/risk-assessment.jpg",
     },
     {
-      "id": "events",
+      "id": "doctor_list",
       "image": "assets/icons/doctor_slider_banner1.jpg",
     },
   ];
@@ -285,20 +270,12 @@ class DashboardController extends AppController {
       "image": "assets/icons/about-cancer.jpg",
     },
     {
-      "id": "money_matters",
-      "image": "assets/icons/doctor_slider_banner1.jpg",
-    },
-    {
       "id": "clinical_trial",
       "image": "assets/icons/clinical-trial.jpg",
     },
     {
       "id": "oncofix_screening",
       "image": "assets/icons/risk-assessment.jpg",
-    },
-    {
-      "id": "events",
-      "image": "assets/icons/doctor_slider_banner1.jpg",
     },
   ];
 }

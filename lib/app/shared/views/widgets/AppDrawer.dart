@@ -8,6 +8,8 @@ import 'package:oncofix/app/helpers/Global.dart';
 import '../../../../config/Config.dart';
 import '../../../helpers/Webview.dart';
 
+
+
 Drawer appDrawer(BuildContext context, DashboardController controller) {
   return Drawer(
     child: Obx(
@@ -18,7 +20,7 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
           Stack(
             children: [
               Image.asset(
-                'assets/icons/oncofixbnr.jpg',
+                'assets/icons/bg-bnr-onco-01.jpg',
                 width: double.infinity,
                 height: 120,
                 fit: BoxFit.cover,
@@ -30,39 +32,39 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Container(height: 80),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(12.0),
-                        child: auth.user.avatar == null
-                            ? Image.asset(
-                                'assets/icons/dr6.jpg',
-                                width: 50,
-                                height: 50,
-                                fit: BoxFit.cover,
-                              )
-                            : Container(
-                          padding: EdgeInsets.all(12),
-                                height: 62,
-                                width: 62,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(60),
-                                    color: kcWhite),
-                                child: Image.asset(
-                                  "assets/icons/user.png",
-                                  height: 20,
-                                  color: kcBottomBar,
-                                ),
-                              ),
-                      ),
-                      // CircleAvatar(
-                      //   radius: 32,
-                      //   backgroundColor: Colors.grey[200],
-                      //   child: CircleAvatar(
-                      //     backgroundColor: kcWhite,
-                      //     backgroundImage:
-                      //         NetworkImage("${auth.user.avatar}"),
-                      //     radius: 32,
-                      //   ),
+                      // ClipRRect(
+                      //   borderRadius: BorderRadius.circular(12.0),
+                      //   child: auth.user.avatar == null
+                      //       ? Image.asset(
+                      //           'assets/icons/dr6.jpg',
+                      //           width: 50,
+                      //           height: 50,
+                      //           fit: BoxFit.cover,
+                      //         )
+                      //       : Container(
+                      //     padding: EdgeInsets.all(12),
+                      //           height: 62,
+                      //           width: 62,
+                      //           decoration: BoxDecoration(
+                      //               borderRadius: BorderRadius.circular(60),
+                      //               color: kcWhite),
+                      //           child: Image.asset(
+                      //             "assets/icons/user.png",
+                      //             height: 20,
+                      //             color: kcBottomBar,
+                      //           ),
+                      //         ),
                       // ),
+                      CircleAvatar(
+                        radius: 32,
+                        backgroundColor: Colors.grey[200],
+                        child: CircleAvatar(
+                          backgroundColor: kcWhite,
+                          backgroundImage:
+                              NetworkImage("${auth.user.avatar}"),
+                          radius: 32,
+                        ),
+                      ),
                       Container(height: 2),
                       Text(
                         "${auth.user.name}",
@@ -87,19 +89,27 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
           ),
           Config.isPatient()
               ? Obx(
-                  () => QrImageView(
-                    data: controller.qrcode,
-                    version: QrVersions.auto,
-                    size: 110,
-                    gapless: true,
-                    padding: EdgeInsets.only(bottom: 10, top: 10),
+                  () => Container(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    margin: EdgeInsets.only(top: 10,bottom: 10),
+                    width: screen.width* 0.4,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: kcSecondary)
+                    ),
+                    child: QrImageView(
+                      data: controller.qrcode,
+                      version: QrVersions.auto,
+                      size: 110,
+                      gapless: true,
+                    ),
                   ),
                 )
               : SizedBox.shrink(),
-          // Config.isPatient() ?
-          // Text("Your Oncofix Smart Card", style: TextStyl.subtitle
-          //     ?.copyWith(fontSize: 12),)
-          //     : SizedBox.shrink(),
+          Config.isPatient() ?
+              Text("Your Oncofix Smart Card", style: TextStyl.subtitle
+                  ?.copyWith(fontSize: 12),)
+              : SizedBox.shrink(),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
@@ -135,21 +145,11 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                         /// Refer & Earn
                         /// +++++++++++++++++++++++
                         BottomWidget(
-                          onTap: () {},
+                          onTap: () => webViewOnTap("refer_earn"),
                           image: "assets/icons/refer.svg",
                           imageExtension: "svg",
                           label: "Refer & Earn",
                         ),
-
-                        /// +++++++++++++++++++++++
-                        /// Doctors Recourse
-                        /// +++++++++++++++++++++++
-                        // BottomWidget(
-                        //   onTap: () => webViewOnTap("doctors_recourse"),
-                        //   image: "assets/icons/doctor.svg",
-                        //   imageExtension: "svg",
-                        //   label: "Doctors Recourse",
-                        // ),
                         /// +++++++++++++++++++++++
                         /// About Us
                         /// +++++++++++++++++++++++
@@ -159,15 +159,17 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                           imageExtension: "png",
                           label: "About Us",
                         ),
-                        // /// +++++++++++++++++++++++
-                        // /// Legal
-                        // /// +++++++++++++++++++++++
-                        // BottomWidget(
-                        //   onTap: () => webViewOnTap("Legal"),
-                        //   image: "assets/icons/legal.png",
-                        //   imageExtension: "png",
-                        //   label: "Legal",
-                        // ),
+                        /// +++++++++++++++++++++++
+                        /// Legal
+                        /// +++++++++++++++++++++++
+                        BottomWidget(
+                          onTap: () {
+                            Get.toNamed(AboutRoutes.about);
+                          },
+                          image: "assets/icons/legal.png",
+                          imageExtension: "png",
+                          label: "Legal",
+                        ),
                         Divider(),
                       ],
                     ),
