@@ -2,6 +2,7 @@ import '../../../helpers/Request.dart';
 import '../../../models/ApiResponse.dart';
 import 'GlobalAuthService.dart';
 
+
 class AppGlobalAuthService implements GlobalAuthService {
 
   /// Start the server request

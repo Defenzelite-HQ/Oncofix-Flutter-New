@@ -58,7 +58,7 @@ class MasterLayout extends StatelessWidget {
               "${title != null ? title : Config.appName}",
               style: TextStyl.label?.copyWith(
                 color: kcWhite,
-                fontSize: spacer5,
+                fontSize: spacer4,
                 fontWeight: FontWeight.bold,
               ),
             ),

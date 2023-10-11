@@ -19,6 +19,7 @@ import 'app/shared/controllers/FCMCrashlyticsController.dart';
 import 'app/shared/views/widgets/ThemeBuilder.dart';
 import 'config/Config.dart';
 import 'config/theme/AppTheme.dart';
+import 'database/LocationSeeder.dart';
 import 'firebase_options.dart';
 import 'routes/Router.dart';
 
@@ -54,6 +55,12 @@ void main() async {
   //runZonedGuarded<Future<void>>(() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
+
+  /// Location Database Create First Time
+  var count = await LocationSeeder.instance.queryRecord();
+  if (count.length < 7) {
+    LocationSeeder.locationSeed();
+  }
 
   /// Firebase Initialize
   await Firebase.initializeApp(

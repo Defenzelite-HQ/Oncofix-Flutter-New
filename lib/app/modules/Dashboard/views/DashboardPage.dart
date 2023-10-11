@@ -126,9 +126,10 @@ class DashboardPage extends StatelessWidget {
                                               ),
                                               SizedBox(width: 5),
                                               Text(
-                                                "Seoni, Madhya Pradesh",
-                                                // "${controller.locationData.currentLocation?.address}",
-                                                style: TextStyl.label!.copyWith(
+                                                auth.user.address == ""
+                                                    ? "${auth.user.address}"
+                                                    : "Select Address",
+                                                style: TextStyle(
                                                   color: kcWhite,
                                                   fontSize: spacer3 / 1.2,
                                                   fontWeight: FontWeight.w800,
@@ -136,15 +137,16 @@ class DashboardPage extends StatelessWidget {
                                               ),
                                               Spacer(),
                                               GestureDetector(
-                                                onTap:  () {
+                                                onTap: () {
                                                   webViewOnTap(
                                                       "doctor_profile");
                                                 },
                                                 child: Text(
                                                   "Change",
-                                                  style: TextStyl.label!.copyWith(
-                                                    color:
-                                                        kcWhite.withOpacity(0.8),
+                                                  style:
+                                                      TextStyl.label!.copyWith(
+                                                    color: kcWhite
+                                                        .withOpacity(0.8),
                                                     fontSize: spacer3 / 1.2,
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -516,6 +518,7 @@ class DashboardPage extends StatelessWidget {
                                                   )
                                                 ],
                                               ),
+
                                         /// Patient
                                         Config.isPatient()
                                             ? Column(
@@ -664,22 +667,9 @@ class DashboardPage extends StatelessWidget {
                                                               ),
                                                             ),
                                                             onTap: () {
-                                                              Get.toNamed(
-                                                                  DoctorRoutes
-                                                                      .doctor,
-                                                                  parameters: {
-                                                                    "category_id":
-                                                                        category
-                                                                            .id
-                                                                            .toString()
-                                                                  });
-                                                              final DoctorController
-                                                                  doctorsController =
-                                                                  Get.put(
-                                                                      DoctorController());
-                                                              // TODO: Filter Add To Add Doctor filter Method
-                                                              // doctorsController
-                                                              //     .getFilter();
+                                                              webViewOnTap(
+                                                                  "doctor_category");
+                                                               // TODO: Filter Add To Add Doctor filter Method
                                                             },
                                                           );
                                                         }),
@@ -861,95 +851,102 @@ class DashboardPage extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  Config.isPatient() ?
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 8, right: 8, top: 8),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: InkWell(
-                                            onTap: () => webViewOnTap("blogs"),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              child: Image.asset(
-                                                "assets/icons/blog-banner.png",
-                                                width: screen.width,
-                                                fit: BoxFit.contain,
+                                  Config.isPatient()
+                                      ? Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8, right: 8, top: 8),
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                child: InkWell(
+                                                  onTap: () =>
+                                                      webViewOnTap("blogs"),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    child: Image.asset(
+                                                      "assets/icons/blog-banner.png",
+                                                      width: screen.width,
+                                                      fit: BoxFit.contain,
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Expanded(
-                                          child: InkWell(
-                                            onTap: () => launchUrl(
-                                                Uri.parse(
-                                                    "https://www.youtube.com/channel/UCb24CCIAUNHbF9PAuAK9s7g"),
-                                                mode: LaunchMode
-                                                    .externalApplication),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              child: Image.asset(
-                                                "assets/icons/youtube-banner.png",
-                                                width: screen.width,
-                                                fit: BoxFit.contain,
+                                              SizedBox(
+                                                width: 10,
                                               ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                    : SizedBox.shrink(),
-                                  Config.isDoctor() ?
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 8, right: 8, top: 8),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: InkWell(
-                                            onTap: () => webViewOnTap("blogs"),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              child: Image.asset(
-                                                "assets/icons/small-bnr1.jpg",
-                                                width: screen.width,
-                                                fit: BoxFit.contain,
+                                              Expanded(
+                                                child: InkWell(
+                                                  onTap: () => launchUrl(
+                                                      Uri.parse(
+                                                          "https://www.youtube.com/channel/UCb24CCIAUNHbF9PAuAK9s7g"),
+                                                      mode: LaunchMode
+                                                          .externalApplication),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    child: Image.asset(
+                                                      "assets/icons/youtube-banner.png",
+                                                      width: screen.width,
+                                                      fit: BoxFit.contain,
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
+                                            ],
                                           ),
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Expanded(
-                                          child: InkWell(
-                                            onTap: () => launchUrl(
-                                                Uri.parse(
-                                                    "https://www.youtube.com/channel/UCb24CCIAUNHbF9PAuAK9s7g"),
-                                                mode: LaunchMode
-                                                    .externalApplication),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              child: Image.asset(
-                                                "assets/icons/small-bnr2.jpg",
-                                                width: screen.width,
-                                                fit: BoxFit.contain,
+                                        )
+                                      : SizedBox.shrink(),
+                                  Config.isDoctor()
+                                      ? Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8, right: 8, top: 8),
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                child: InkWell(
+                                                  onTap: () =>
+                                                      webViewOnTap("blogs"),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    child: Image.asset(
+                                                      "assets/icons/small-bnr1.jpg",
+                                                      width: screen.width,
+                                                      fit: BoxFit.contain,
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Expanded(
+                                                child: InkWell(
+                                                  onTap: () => launchUrl(
+                                                      Uri.parse(
+                                                          "https://www.youtube.com/channel/UCb24CCIAUNHbF9PAuAK9s7g"),
+                                                      mode: LaunchMode
+                                                          .externalApplication),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    child: Image.asset(
+                                                      "assets/icons/small-bnr2.jpg",
+                                                      width: screen.width,
+                                                      fit: BoxFit.contain,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ) : SizedBox.shrink()
+                                        )
+                                      : SizedBox.shrink()
                                 ],
                               ),
                             ),
