@@ -8,6 +8,7 @@
 */
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_webview_pro/webview_flutter.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,7 @@ import 'dart:io' show Platform;
 import '../../../shared/controllers/AppController.dart';
 import '../../../shared/views/errors/ServerErrorPage.dart';
 import '../services/WebviewService.dart';
+import 'package:http/http.dart' as http;
 
 class WebviewController extends AppController {
   /// Create and get the instance of the controller
@@ -47,6 +49,9 @@ class WebviewController extends AppController {
 
   @override
   void onInit() {
+    if (kIsWeb) {
+
+    }
     super.onInit();
     _url(Get.parameters['url']);
     _pageTitle(Get.parameters['title']);

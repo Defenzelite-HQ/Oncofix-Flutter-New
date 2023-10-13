@@ -77,7 +77,7 @@ class FormInput extends StatelessWidget {
     this.rows = 1,
     this.onSaved,
     this.action = TextInputAction.next,
-    this.type = TextInputType.number,
+    this.type = TextInputType.number, required int maxLength,
   })  : isPassword = false,
         super(key: key);
 

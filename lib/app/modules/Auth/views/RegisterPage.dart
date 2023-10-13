@@ -121,11 +121,8 @@ class RegisterPage extends StatelessWidget {
                                                     controller.phoneInput,
                                                 placeholder: "Phone",
                                                 leading: Icon(Icons.phone),
-                                                validator: (value) =>
-                                                    Validator("Phone", value!)
-                                                        .number()
-                                                        .required()
-                                                        .validate(),
+                                                validator: (value) => Validator("Phone", value!).required().max(12).min(10).validate(),
+                                                maxLength: 13,
                                               ),
                                               SizedBox(height: 15),
                                               FormInput.password(

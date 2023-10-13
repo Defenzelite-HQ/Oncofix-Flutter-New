@@ -34,6 +34,4 @@ List<GetPage> routes = [
   /// Appointment Routes
   ...appointmentRoutes,
 
-  /// Notification Routes
-  ...notificationRoutes,
 ];

@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:oncofix/app/modules/Appointment/AppointmentModule.dart';
-import 'package:oncofix/app/modules/Cases/CasesModule.dart';
-import 'package:oncofix/app/modules/Dashboard/controllers/DashboardController.dart';
-import 'package:oncofix/app/modules/Doctor/DoctorModule.dart';
 import 'package:oncofix/app/modules/Modules.dart';
 import 'package:ui_x/helpers/ColorPalette.dart';
 import 'package:ui_x/helpers/Sizes.dart';
 import 'package:ui_x/helpers/TextStyl.dart';
-
 import '../../../../config/Config.dart';
 import '../../../helpers/Global.dart';
 import '../../../helpers/Webview.dart';
@@ -54,7 +50,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
                         onTap: () => webViewOnTap("patient"),
                         route: route,
                         image: "assets/icons/myCases.png",
-                        fillImage: "assets/icons/myCaseFill.png",
+                        fillImage: "assets/icons/myCases.png",
                       )
                     : NavBarWidget(
                         active: "doctors",

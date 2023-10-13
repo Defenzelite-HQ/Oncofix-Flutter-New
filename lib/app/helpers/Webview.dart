@@ -9,7 +9,7 @@ import 'Global.dart';
 /// Example:
 ///    onTap: () => webViewOnTap("about_cancer"),
 ///
-void webViewOnTap(String id) {
+void webViewOnTap(String id, {String parameter = "", String titleName = ""}) {
   /// Find the map in webViewItemList where the 'id' matches the provided 'id'
   Map<String, Object> webViewItem =
       webViewItemList.firstWhere((t) => t["id"] == id);
@@ -19,16 +19,24 @@ void webViewOnTap(String id) {
     String url = webViewItem["url"].toString();
     String token = auth.user.accessCode;
     String appUrlToken;
-    if (url.contains('?')) {
-      // If the URL already has query parameters, add the token with an ampersand
-      appUrlToken = url + '&ref=app&token=$token';
+    String title;
+    if (parameter == "") {
+      if (url.contains('?')) {
+        // If the URL already has query parameters, add the token with an ampersand
+        appUrlToken = url + '&ref=app&token=$token';
+      } else {
+        // Otherwise, add the token with a question mark
+        appUrlToken = url + '?ref=app&token=$token';
+      }
     } else {
-      // Otherwise, add the token with a question mark
-      appUrlToken = url + '?ref=app&token=$token';
+      appUrlToken = url + parameter + '&ref=app&token=$token';
     }
 
-    // String appUrlToken = url + "?ref=app&token=${storage.read("token")}";
-    String title = webViewItem["title"].toString();
+    if (titleName == "") {
+      title = webViewItem["title"].toString();
+    } else {
+      title = titleName;
+    }
 
     log.w("Url::::$appUrlToken");
     log.w("Title::::$title");
@@ -96,6 +104,11 @@ List<Map<String, Object>> webViewItemList = [
     "id": "clinical_trial",
     "title": "Clinical Trial",
     "url": "https://oncofix.com/clinical-trial",
+  },
+  {
+    "id": "explore",
+    "title": "Oncofix",
+    "url": "https://www.youtube.com/channel/UCb24CCIAUNHbF9PAuAK9s7g",
   },
   {
     "id": "money_matters",
@@ -170,7 +183,8 @@ List<Map<String, Object>> webViewItemList = [
   {
     "id": "today_appointments",
     "title": "Appointments",
-    "url": "https://oncofix.com/panel/appointment?date=${Jiffy(DateTime.now().toString()).format("yyyy-MM-dd")}",
+    "url": "https://oncofix.com/panel/appointment"
+    // "https://oncofix.com/panel/appointment?date=${Jiffy(DateTime.now().toString()).format("yyyy-MM-dd")}",
   },
   {
     "id": "my_schedule",
@@ -215,11 +229,16 @@ List<Map<String, Object>> webViewItemList = [
   {
     "id": "doctor_category",
     "title": "Doctor",
-    "url": "https://oncofix.com/doctor?doctor=&profile_type=",
+    "url": "https://oncofix.com/doctor",
   },
   {
     "id": "refer_earn",
     "title": "Refer & Earn",
     "url": "https://oncofix.com/panel/refer-earn",
+  },
+  {
+    "id": "cancer_hub",
+    "title": "Oncofix",
+    "url": "https://edu.oncofix.com/",
   },
 ];

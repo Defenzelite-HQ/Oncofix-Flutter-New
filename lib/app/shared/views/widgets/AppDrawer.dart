@@ -32,29 +32,6 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Container(height: 80),
-                      // ClipRRect(
-                      //   borderRadius: BorderRadius.circular(12.0),
-                      //   child: auth.user.avatar == null
-                      //       ? Image.asset(
-                      //           'assets/icons/dr6.jpg',
-                      //           width: 50,
-                      //           height: 50,
-                      //           fit: BoxFit.cover,
-                      //         )
-                      //       : Container(
-                      //     padding: EdgeInsets.all(12),
-                      //           height: 62,
-                      //           width: 62,
-                      //           decoration: BoxDecoration(
-                      //               borderRadius: BorderRadius.circular(60),
-                      //               color: kcWhite),
-                      //           child: Image.asset(
-                      //             "assets/icons/user.png",
-                      //             height: 20,
-                      //             color: kcBottomBar,
-                      //           ),
-                      //         ),
-                      // ),
                       CircleAvatar(
                         radius: 32,
                         backgroundColor: Colors.grey[200],

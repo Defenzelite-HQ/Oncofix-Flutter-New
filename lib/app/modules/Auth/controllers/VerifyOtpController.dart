@@ -93,7 +93,7 @@ class VerifyOtpController extends AppController {
     }
 
     await auth.setUserData(response.data['user']);
-    await auth.setUserToken(response.data['token']);
+    // await auth.setUserToken(response.data['token']);
 
     // if (int.parse(auth.user.progress!) < 1) {
     //   Get.offAllNamed('/profile');

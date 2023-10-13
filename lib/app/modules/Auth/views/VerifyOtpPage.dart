@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_countr/Countr.dart';
 import 'package:flutter_countr/CountrDuration.dart';
 import 'package:get/get.dart';
+import 'package:oncofix/app/modules/Dashboard/DashboardModule.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 import 'package:ui_x/ui_x.dart';
-
 import '../../../helpers/Global.dart';
 import '../../../shared/views/layouts/AuthLayout.dart';
 import '../controllers/VerifyOtpController.dart';
@@ -33,9 +33,11 @@ class VerifyOtpPage extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         SizedBox(height: 20),
-                        Image.asset(
-                         "assets/systems/logo.png",
-                          width: 55,
+                        Container(
+                          child: Image.asset(
+                            image('logo.png'),
+                            height: 50,
+                          ),
                         ),
                         const SizedBox(height: spacer),
                         Text("Verify OTP,", style: TextStyl.subtitle!.copyWith(fontWeight: FontWeight.bold, fontSize: 20)),
@@ -103,71 +105,9 @@ class VerifyOtpPage extends StatelessWidget {
                           label: "Verify OTP",
                           onTap: (btn) async {
                             btn.setBusy(true).setDisabled(true);
-                            // await controller.submitOtp();
-                            Get.toNamed('/dashboard');
+                            Get.toNamed(DashboardRoutes.dashboard);
                             btn.setBusy(false).setDisabled(false);
                           },
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          height: 50,
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: kcSuccess,
-                              ),
-                              height: 40,
-                              width: 40,
-                              child: Image.asset(
-                                'assets/icons/shield-check.png',
-                                color: kcBlack.withOpacity(0.5),
-                                width: 1,
-                                height: 1,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 12,
-                            ),
-                            Text(
-                              'All your personal information is safely\nencrypted and secured',
-                              style: TextStyle(fontSize: 13),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: kcSuccess,
-                              ),
-                              height: 40,
-                              width: 40,
-                              child: Image.asset(
-                                'assets/icons/shield-check.png',
-                                color: kcBlack.withOpacity(0.5),
-                                width: 1,
-                                height: 1,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 12,
-                            ),
-                            Text(
-                              'We use your data purely for purchase \n and transaction updates',
-                              style: TextStyle(fontSize: 13),
-                            ),
-                          ],
                         ),
                       ],
                     ),
