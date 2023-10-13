@@ -49,6 +49,12 @@ class LoginController extends AppController {
 
   String get selectedRole => this._selectedRole.value;
 
+  var _hide = false.obs;
+  bool get hide => _hide.value;
+
+  var _show = true.obs;
+  bool get show => _show.value;
+
   final TextEditingController identifierInput = TextEditingController();
   final TextEditingController passwordInput = TextEditingController();
   final TextEditingController usernameInput = TextEditingController();
@@ -167,6 +173,14 @@ class LoginController extends AppController {
   /// --- Supporting Functionalities Methods ---
   void onSelectedRole(String value) {
     _selectedRole(value);
+  }
+
+  Future<void> onHide(bool value) async {
+    _hide(value);
+  }
+
+  Future<void> onShow(bool value) async {
+    _show(value);
   }
 
   /// --- Form Functionalities Methods ---

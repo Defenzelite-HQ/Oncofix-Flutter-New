@@ -10,7 +10,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:logger/logger.dart';
-import 'package:timezone/timezone.dart';
 import 'package:ui_x/helpers/Toastr.dart';
 import 'package:vibration/vibration.dart';
 import 'package:http/http.dart' as http;

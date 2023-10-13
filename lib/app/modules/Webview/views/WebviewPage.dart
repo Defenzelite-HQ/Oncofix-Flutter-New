@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_webview_pro/webview_flutter.dart';
 import 'package:get/get.dart';
+import 'package:oncofix/app/helpers/Global.dart';
 import 'package:ui_x/helpers/ColorPalette.dart';
 import 'package:ui_x/helpers/Sizes.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -32,6 +33,7 @@ class WebviewPage extends StatelessWidget {
                       SystemChrome.setPreferredOrientations([
                         DeviceOrientation.portraitUp,
                       ]);
+                      await auth.getUser();
                       bool? goBack = await webcontroller.canGoBack();
                       if (goBack != true)
                         return true;
@@ -46,7 +48,8 @@ class WebviewPage extends StatelessWidget {
                           Icons.west,
                           size: spacer5,
                         ),
-                        onPressed: () {
+                        onPressed: () async {
+                          await auth.getUser();
                           Get.back();
                         },
                       ),
@@ -75,8 +78,8 @@ class WebviewPage extends StatelessWidget {
                                 },
                                 navigationDelegate:
                                     (NavigationRequest request) {
-                                  // log.w(request.url);
-                                  // log.w(controller.url);
+                                  log.w(request.url);
+                                  log.w(controller.url);
 
                                   /// +++++++++++++++++++++
                                   /// Url Handlers

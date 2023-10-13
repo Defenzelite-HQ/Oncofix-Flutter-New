@@ -7,4 +7,3 @@ export 'Setting/SettingModule.dart';
 export 'About/AboutModule.dart';
 export 'Cases/CasesModule.dart';
 export 'Doctor/DoctorModule.dart';
-export 'Notification/NotificationModule.dart';

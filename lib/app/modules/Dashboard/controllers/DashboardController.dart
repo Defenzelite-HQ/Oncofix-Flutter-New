@@ -8,22 +8,16 @@
 */
 
 // Third Party Packages
-import 'package:location/location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:ui_x/helpers/Toastr.dart';
-import '../../../../database/LocationSeeder.dart';
 import '../../../helpers/Global.dart';
 import '../../../models/ApiResponse.dart';
 import '../../../models/CategoryElementModel.dart';
 import '../../../shared/controllers/AppController.dart';
-import '../models/CurrentAddressModel.dart';
 import '../models/DashboardModel.dart';
-import '../models/DatabaseLocationModel.dart';
 import '../models/FeaturedDoctorModel.dart';
 import '../services/DashboardService.dart';
 
@@ -276,6 +270,10 @@ class DashboardController extends AppController {
     {
       "id": "oncofix_screening",
       "image": "assets/icons/risk-assessment.jpg",
+    },
+    {
+      "id": "explore",
+      "image": "assets/icons/youtube-bnr.jpg",
     },
   ];
 }

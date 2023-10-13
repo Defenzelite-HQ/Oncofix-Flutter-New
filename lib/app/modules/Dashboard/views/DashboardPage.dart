@@ -4,7 +4,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:oncofix/app/modules/Dashboard/views/widget/HomeExploreCardWidget.dart';
-import 'package:oncofix/app/modules/Doctor/DoctorModule.dart';
 import 'package:oncofix/app/modules/Modules.dart';
 import 'package:ui_x/ui_x.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -125,16 +124,26 @@ class DashboardPage extends StatelessWidget {
                                                 color: kcPrimaryLight,
                                               ),
                                               SizedBox(width: 5),
-                                              Text(
-                                                auth.user.address == ""
-                                                    ? "${auth.user.address}"
-                                                    : "Select Address",
-                                                style: TextStyle(
-                                                  color: kcWhite,
-                                                  fontSize: spacer3 / 1.2,
-                                                  fontWeight: FontWeight.w800,
-                                                ),
-                                              ),
+                                              auth.user.address == null
+                                                  ? Text(
+                                                      "Select Address ",
+                                                      // auth.user.address,
+                                                      style: TextStyle(
+                                                        color: kcWhite,
+                                                        fontSize: spacer3 / 1.2,
+                                                        fontWeight:
+                                                            FontWeight.w800,
+                                                      ),
+                                                    )
+                                                  : Text(
+                                                      "${auth.user.address}",
+                                                      style: TextStyle(
+                                                        color: kcWhite,
+                                                        fontSize: spacer3 / 1.2,
+                                                        fontWeight:
+                                                            FontWeight.w800,
+                                                      ),
+                                                    ),
                                               Spacer(),
                                               GestureDetector(
                                                 onTap: () {
@@ -211,7 +220,6 @@ class DashboardPage extends StatelessWidget {
                                             scale: 1.0,
                                           ),
                                         ),
-
                                   Config.isDoctor()
                                       ? Padding(
                                           padding: const EdgeInsets.only(
@@ -260,10 +268,6 @@ class DashboardPage extends StatelessWidget {
                                                   decoration: BoxDecoration(
                                                     color: kcSuccess
                                                         .withOpacity(0.08),
-                                                    // border: Border.all(
-                                                    //   color: kcGray
-                                                    //       .withOpacity(0.5),
-                                                    // ),
                                                     borderRadius: BorderRadius.all(
                                                         Radius.circular(
                                                             6.0) //                 <--- border radius here
@@ -476,7 +480,7 @@ class DashboardPage extends StatelessWidget {
                                                           imageColor:
                                                               kcDeepPurple,
                                                           image:
-                                                              "assets/icons/become_host.png",
+                                                              "assets/icons/host.png",
                                                           label: "Become Host",
                                                           onTap: () {
                                                             webViewOnTap(
@@ -668,8 +672,10 @@ class DashboardPage extends StatelessWidget {
                                                             ),
                                                             onTap: () {
                                                               webViewOnTap(
-                                                                  "doctor_category");
-                                                               // TODO: Filter Add To Add Doctor filter Method
+                                                                "doctor_category",
+                                                                parameter: "?doctor=&profile_type=${category.id}",
+                                                                titleName: "${category.name}",
+                                                              );
                                                             },
                                                           );
                                                         }),
@@ -926,17 +932,19 @@ class DashboardPage extends StatelessWidget {
                                               ),
                                               Expanded(
                                                 child: InkWell(
-                                                  onTap: () => launchUrl(
-                                                      Uri.parse(
-                                                          "https://www.youtube.com/channel/UCb24CCIAUNHbF9PAuAK9s7g"),
-                                                      mode: LaunchMode
-                                                          .externalApplication),
+                                                  onTap: () =>
+                                                  webViewOnTap("cancer_hub"),
+                                                  //     launchUrl(
+                                                  //     Uri.parse(
+                                                  //         "https://www.youtube.com/channel/UCb24CCIAUNHbF9PAuAK9s7g"),
+                                                  //     mode: LaunchMode.externalApplication
+                                                  // ),
                                                   child: ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             8),
                                                     child: Image.asset(
-                                                      "assets/icons/small-bnr2.jpg",
+                                                      "assets/icons/education.jpg",
                                                       width: screen.width,
                                                       fit: BoxFit.contain,
                                                     ),
