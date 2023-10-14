@@ -107,7 +107,7 @@ List<Map<String, Object>> webViewItemList = [
   },
   {
     "id": "explore",
-    "title": "Oncofix",
+    "title": "Videos",
     "url": "https://www.youtube.com/channel/UCb24CCIAUNHbF9PAuAK9s7g",
   },
   {
@@ -122,12 +122,12 @@ List<Map<String, Object>> webViewItemList = [
   },
   {
     "id": "oncofix_youtube",
-    "title": "Oncofix",
+    "title": "Videos",
     "url": "https://www.yaoutube.com/channel/UCb24CCIAUNHbF9PAuAK9s7g",
   },
   {
     "id": "doctor_chat",
-    "title": "Dr.Onco",
+    "title": "Dr. Onco",
     "url": "https://chatbot.oncofix.com/chat?id=12",
   },
   {
@@ -232,7 +232,12 @@ List<Map<String, Object>> webViewItemList = [
     "url": "https://oncofix.com/doctor",
   },
   {
-    "id": "refer_earn",
+    "id": "refer_earn_doctor",
+    "title": "Refer & Earn",
+    "url": "https://oncofix.com/panel/refer-earn",
+  },
+  {
+    "id": "refer_earn_patient",
     "title": "Refer & Earn",
     "url": "https://oncofix.com/panel/refer-earn",
   },

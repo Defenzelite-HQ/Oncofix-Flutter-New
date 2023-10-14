@@ -10,7 +10,9 @@ import '../../../../config/Config.dart';
 import '../../../helpers/Global.dart';
 import '../../../helpers/Webview.dart';
 
-class BottomNavigationBarWidget extends StatelessWidget {
+
+class
+BottomNavigationBarWidget extends StatelessWidget {
   final String route;
 
   BottomNavigationBarWidget({
@@ -20,7 +22,76 @@ class BottomNavigationBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    Future<bool> showExitPopup() async {
+      return await showDialog(
+        context: context,
+        builder: (context) => Dialog(
+          backgroundColor: kcWhite,
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+                vertical: spacer8, horizontal: spacer)
+                .copyWith(bottom: 4),
+            decoration: BoxDecoration(
+              color: kcWhite,
+              borderRadius: BorderRadius.circular(spacer2),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Exit App",
+                  style: TextStyl.subtitle?.copyWith(fontSize: 18),
+                ),
+                const SizedBox(height: spacer1),
+                Text(
+                  "Do you want to exit an App?",
+                  style: TextStyl.bodySm?.copyWith(color: kcDarkAlt),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: spacer5),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                            backgroundColor: Colors.transparent),
+                        child: Text(
+                          "Cancel",
+                          style:
+                          TextStyl.button?.copyWith(color: kcDarkAlt),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop(false);
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: spacer3),
+                    Expanded(
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                            backgroundColor: Colors.transparent),
+                        child: Text(
+                          "Exit",
+                          style: TextStyl.button?.copyWith(color: kcDanger),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop(true);
+                        },
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ) ??
+          false;
+    }
+    return WillPopScope(
+        onWillPop: showExitPopup,
+      child: Stack(
         alignment: Alignment.center,
         clipBehavior: Clip.none,
         children: [
@@ -32,7 +103,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
               ),
             ),
             padding:
-                EdgeInsets.symmetric(vertical: spacer3, horizontal: spacer1),
+            EdgeInsets.symmetric(vertical: spacer3, horizontal: spacer1),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,51 +117,39 @@ class BottomNavigationBarWidget extends StatelessWidget {
                 ),
                 Config.isDoctor()
                     ? NavBarWidget(
-                        active: "patient",
-                        onTap: () => webViewOnTap("patient"),
-                        route: route,
-                        image: "assets/icons/myCases.png",
-                        fillImage: "assets/icons/myCases.png",
-                      )
+                  active: "patient",
+                  onTap: () => webViewOnTap("patient"),
+                  route: route,
+                  image: "assets/icons/myCases.png",
+                  fillImage: "assets/icons/myCases.png",
+                )
                     : NavBarWidget(
-                        active: "doctors",
-                        onTap: () => webViewOnTap("doctor_list"),
-                        route: route,
-                        image: "assets/icons/unfill_doctor.png",
-                        fillImage: "assets/icons/fill_doctor.png",
-                      ),
+                  active: "doctors",
+                  onTap: () => webViewOnTap("doctor_list"),
+                  route: route,
+                  image: "assets/icons/unfill_doctor.png",
+                  fillImage: "assets/icons/fill_doctor.png",
+                ),
 
                 Text(""),
                 Config.isDoctor()
                     ? NavBarWidget(
-                        active: "my-appointments",
-                        onTap: () => webViewOnTap("doctor_appointments"),
-                        route: route,
-                        image: "assets/icons/unfill_calendar-clock.png",
-                        fillImage: "assets/icons/fill_calendar-clock.png",
-                      )
+                  active: "my-appointments",
+                  onTap: () => webViewOnTap("doctor_appointments"),
+                  route: route,
+                  image: "assets/icons/unfill_calendar-clock.png",
+                  fillImage: "assets/icons/fill_calendar-clock.png",
+                )
                     : NavBarWidget(
-                        active: "cases",
-                        onTap: () => webViewOnTap("my_cases"),
-                        // onTap: () => Get.toNamed(
-                        //   CasesRoutes.cases,
-                        // ),
-                        route: route,
-                        image: "assets/icons/caseUnfill.png",
-                        fillImage: "assets/icons/caseFill.png",
-                      ),
-                // InkWell(
-                //         child: SvgPicture.asset(
-                //           "assets/icons/cases.svg",
-                //           color: route == 'cases' ? kcBottomBar : kcSecondary,
-                //           height: spacer5,
-                //         ),
-                //         onTap: () {
-                //           Get.toNamed(
-                //             CasesRoutes.cases,
-                //           );
-                //         },
-                //       ),
+                  active: "cases",
+                  onTap: () => webViewOnTap("my_cases"),
+                  // onTap: () => Get.toNamed(
+                  //   CasesRoutes.cases,
+                  // ),
+                  route: route,
+                  image: "assets/icons/caseUnfill.png",
+                  fillImage: "assets/icons/caseFill.png",
+                ),
                 InkWell(
                   child: Image.asset(
                     "assets/icons/user.png",
@@ -108,35 +167,39 @@ class BottomNavigationBarWidget extends StatelessWidget {
             bottom: 20,
             child: Config.isDoctor()
                 ? new FloatingActionButton(
-                  elevation: 10.0,
-                  child: Icon(
-                    Icons.qr_code_scanner_sharp,
-                    size: 30,
-                  ),
-                  onPressed: () {
-                    final DashboardController dashboardController =
-                        Get.put(DashboardController());
-                    dashboardController.scanQR();
-                  },
-                )
+              elevation: 10.0,
+              child: Icon(
+                Icons.qr_code_scanner_sharp,
+                size: 30,
+              ),
+              onPressed: () {
+                final DashboardController dashboardController =
+                Get.put(DashboardController());
+                dashboardController.scanQR();
+              },
+            )
                 : Container(
-                    height: 55,
-                    width: 55,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                    ),
-                    child: new FloatingActionButton(
-                      elevation: 20.0,
-                      child: CircleAvatar(
-                        backgroundColor: kcPrimary,
-                        backgroundImage: AssetImage("assets/icons/onco.png"),
-                        radius: 45,
-                      ),
-                      onPressed: () => webViewOnTap("doctor_chat"),
-                    ),
-                  ),
+              height: 55,
+              width: 55,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              ),
+              child: new FloatingActionButton(
+                elevation: 20.0,
+                child: CircleAvatar(
+                  backgroundColor: kcPrimary,
+                  backgroundImage: AssetImage("assets/icons/onco.png"),
+                  radius: 45,
+                ),
+                onPressed: () => webViewOnTap("doctor_chat"),
+              ),
+            ),
           ),
-        ]);
+        ]),
+    );
+
+
+
   }
 }
 

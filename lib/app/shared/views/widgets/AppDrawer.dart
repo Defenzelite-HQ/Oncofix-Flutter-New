@@ -121,12 +121,21 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                         /// +++++++++++++++++++++++
                         /// Refer & Earn
                         /// +++++++++++++++++++++++
+                        Config.isPatient() ?
                         BottomWidget(
-                          onTap: () => webViewOnTap("refer_earn"),
+                          onTap: () => webViewOnTap("refer_earn_patient"),
                           image: "assets/icons/refer.svg",
                           imageExtension: "svg",
                           label: "Refer & Earn",
-                        ),
+                        ) :
+                        Config.isDoctor() ?
+                        BottomWidget(
+                          onTap: () => webViewOnTap("refer_earn_doctor"),
+                          image: "assets/icons/refer.svg",
+                          imageExtension: "svg",
+                          label: "Refer & Earn",
+                        ):
+                            SizedBox.shrink(),
                         /// +++++++++++++++++++++++
                         /// About Us
                         /// +++++++++++++++++++++++
@@ -147,6 +156,12 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                           imageExtension: "png",
                           label: "Legal",
                         ),
+                        Config.isDoctor() ?
+                        GestureDetector( onTap: () => webViewOnTap("doctor_chat"),
+                          child: Text("Talk with Dr. Onco", style: TextStyl.subtitle
+                              ?.copyWith(fontSize: 13),),
+                        )
+                        :SizedBox.shrink(),
                         Divider(),
                       ],
                     ),

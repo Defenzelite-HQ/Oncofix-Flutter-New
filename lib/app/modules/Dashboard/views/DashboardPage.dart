@@ -61,43 +61,26 @@ class DashboardPage extends StatelessWidget {
                                   child: SvgPicture.asset(
                                       "assets/icons/bell.svg",
                                       height: spacer5,
-                                      color: kcWhite)),
-                              SizedBox(
-                                width: 15,
+                                      color: kcWhite)
                               ),
-                              // Config.isDoctor()
-                              //     ? Row(
-                              //         children: [
-                              //           GestureDetector(
-                              //               onTap: () =>
-                              //                   webViewOnTap("add_patient"),
-                              //               child: Icon(
-                              //                 Icons.person_add,
-                              //                 size: 23,
-                              //               )),
-                              //           SizedBox(
-                              //             width: 15,
-                              //           ),
-                              //         ],
-                              //       )
-                              //     : SizedBox.shrink(),
+                              SizedBox(
+                                width: 18,
+                              ),
                               Config.isDoctor()
                                   ? GestureDetector(
                                       onTap: () {
                                         webViewOnTap("search_patient");
                                       },
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 10),
-                                        child: Icon(
-                                          Icons.search,
-                                          size: spacer7,
-                                        ),
-                                      ),
+                                      child:  Padding(
+                                        padding: const EdgeInsets.only(right: 12),
+                                        child: SvgPicture.asset(
+                                            "assets/icons/search.svg",
+                                            height: spacer5,
+                                            color: kcWhite),
+                                      )
                                     )
                                   : SizedBox.shrink(),
                             ],
-
                             /// ++++++++++++++++++++++++++++++++++++
                             /// App Drawer Start
                             /// ++++++++++++++++++++++++++++++++++++
@@ -323,7 +306,6 @@ class DashboardPage extends StatelessWidget {
                                           ),
                                         )
                                       : SizedBox.shrink(),
-
                                   Padding(
                                     padding: const EdgeInsets.only(
                                       left: 8,
@@ -564,18 +546,6 @@ class DashboardPage extends StatelessWidget {
                                                           ),
                                                         ),
                                                       ),
-                                                      // InkWell(
-                                                      //   child: Text(
-                                                      //     "See All",
-                                                      //     style: TextStyl.caption!.copyWith(
-                                                      //       fontSize: spacer3,
-                                                      //       fontWeight: FontWeight.w500,
-                                                      //     ),
-                                                      //   ),
-                                                      //   onTap: () {
-                                                      //     Get.toNamed('/categories');
-                                                      //   },
-                                                      // ),
                                                     ],
                                                   ),
                                                   SizedBox(

@@ -16,6 +16,9 @@ class ApiAuthService implements AuthService {
     return await Request.post('/login', body: body);
   }
 
+  Future<ApiResponse> loginWithPhone({required Map<String, dynamic> body}) async {
+    return await Request.post('/login/phone', body: body);
+  }
   @override
   Future<ApiResponse> register({required Map<String, dynamic> body}) async {
     return await Request.post('/register', body: body);

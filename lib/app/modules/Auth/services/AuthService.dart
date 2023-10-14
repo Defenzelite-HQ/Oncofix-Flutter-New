@@ -23,6 +23,7 @@ abstract class AuthService {
 
   /// Login the user
   Future<ApiResponse> login({required Map<String, dynamic> body});
+  Future<ApiResponse> loginWithPhone({required Map<String, dynamic> body});
 
   /// Registers user
   Future<ApiResponse> register({required Map<String, dynamic> body});
