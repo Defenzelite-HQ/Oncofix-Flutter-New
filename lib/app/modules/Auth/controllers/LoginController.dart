@@ -76,6 +76,11 @@ class LoginController extends AppController {
         'password',
       );
     }
+    if (await storage.read('phone') != null) {
+      phoneInput.text = await storage.read(
+        'phone',
+      );
+    }
     // auth.getUser();
   }
 
@@ -91,6 +96,7 @@ class LoginController extends AppController {
       Map<String, dynamic> body = {
         "email": emailInput.text,
         "password": passwordInput.text,
+
       };
 
       /// Init API Request Server.
@@ -98,6 +104,55 @@ class LoginController extends AppController {
 
       /// Call api to login user.
       ApiResponse response = await _authService.login(body: body);
+
+      /// Check for any errors.
+      if (response.hasError()) {
+        Toastr.show(message: "${response.message}");
+        return;
+      }
+      await updateUserDeviceToken();
+      log.w(response.data);
+
+      /// No need to verify OTP
+      if (!Config.needsOtpVerification) {
+        /// Assign the user data to user object and store locally.
+        await auth.setUserData(response.data['user']);
+        await auth.setUserToken(response.data['access_token']);
+        // Toastr.show(message: "${response.message}");
+        Get.offAllNamed(DashboardRoutes.dashboard);
+      } else {
+        /// Need to verify OTP
+        ///
+        /// Redirect to Verify OTP Page with identifier
+        Get.toNamed(AuthRoutes.verifyOtp,
+            parameters: {"identifier": identifierInput.text});
+      }
+
+      /// Close API Request Server
+      _authService.close();
+    } on Exception catch (e) {
+      Get.to(() => ServerErrorPage(message: "${e.toString()}"));
+    }
+  }
+
+  Future<void> loginWithPhone() async {
+    if (!formKey.currentState!.validate()) return;
+
+    try {
+      await storage.write('phone', phoneInput.text);
+
+      /// Prepare form data to be sent to server.
+      Map<String, dynamic> body = {
+        "phone": phoneInput.text,
+        "password": passwordInput.text,
+
+      };
+
+      /// Init API Request Server.
+      _authService.init();
+
+      /// Call api to login user.
+      ApiResponse response = await _authService.loginWithPhone(body: body);
 
       /// Check for any errors.
       if (response.hasError()) {

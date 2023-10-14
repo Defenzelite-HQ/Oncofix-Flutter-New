@@ -173,35 +173,24 @@ class RegisterPage extends StatelessWidget {
                                             ],
                                           )
                                         : Column(
-                                            children: [
-                                              SizedBox(
-                                                height: 180,
-                                              ),
-                                              Center(
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      "Due to heavy uses currently we temporary blocked Doctor onboarding\nPlease contact Oncofix customer desk for more information ",
-                                                      style: TextStyl.bodySm
-                                                      ?.copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 15),
-                                                    ),
-                                                    // Image.asset("assets/icons/alert.png", height: 40),
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 200,
-                                              ),
-                                            ],
-                                          ),
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            SizedBox(height: 120),
+                                            Text(
+                                              "Due to heavy uses currently we temporary blocked Doctor onboarding\nPlease contact Oncofix customer desk for more information ",
+                                              style: TextStyl.bodySm
+                                              ?.copyWith(
+                                                  fontWeight:
+                                                      FontWeight.w500,
+                                                  fontSize: 15,),textAlign: TextAlign.center,
+                                            ),
+                                            // Image.asset("assets/icons/alert.png", height: 40),
+                                          ],
+                                        ),
                                   )
                                 ],
                               ),
-                              SizedBox(height: 16),
+                              SizedBox(height: 120),
                               Center(
                                 child: GestureDetector(
                                   onTap: () => Get.offNamed(AuthRoutes.login),

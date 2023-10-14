@@ -6,6 +6,7 @@ import '../../../shared/views/layouts/AuthLayout.dart';
 import '../../Modules.dart';
 
 
+
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -77,7 +78,7 @@ class LoginPage extends StatelessWidget {
                                 ),
                                 if (controller.show)
                                   FormInput.number(
-                                    // controller: controller.phoneNumberInput,
+                                    controller: controller.phoneInput,
                                     // focusNode: controller.passwordFocusNode,
                                     placeholder: "Phone Number",
                                     leading: Icon(Icons.phone),
@@ -85,14 +86,28 @@ class LoginPage extends StatelessWidget {
                                     maxLength: 13,
                                     action: TextInputAction.done,
                                   ),
-                                SizedBox(height: 15),
+                                if (controller.show)
+                                  SizedBox(height: 25),
+                                if (controller.show)
+                                FormInput.password(
+                                  controller: controller.passwordInput,
+                                  placeholder: "Password",
+                                  leading: Icon(Icons.lock_outline),
+                                  validator: (value) =>
+                                      Validator("password", value!)
+                                          .required()
+                                          .validate(),
+                                ),
+                                SizedBox(height: 25),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     InkWell(
                                       onTap: () async {
-                                        controller.hide ? controller.onHide(false) : controller.onHide(true);
-                                        controller.show ? controller.onShow(false) : controller.onShow(true);
+                                            controller.hide ? controller.onHide(false)
+                                            : controller.onHide(true);
+                                             controller.show ? controller.onShow(false)
+                                            : controller.onShow(true);
                                       },
                                       child: Text.rich(
                                         TextSpan(
@@ -100,7 +115,7 @@ class LoginPage extends StatelessWidget {
                                           style: TextStyl.button?.copyWith(color: Theme.of(context).primaryColor),
                                           children: [
                                             TextSpan(
-                                              text: controller.show ? "Password" : "Mobile Number",
+                                              text: controller.show ? "Email" : "Phone Number",
                                               style: TextStyl.button?.copyWith(color: Theme.of(context).primaryColor),
                                             ),
                                           ],
@@ -110,22 +125,13 @@ class LoginPage extends StatelessWidget {
                                   ],
                                 ),
                                 SizedBox(height: 15),
-                                if (controller.hide)
                                 Button.block(
                                     key: UniqueKey(),
                                     label: "Login",
                                     onTap: (set) async {
                                       set.setBusy(true).setDisabled(true);
-                                      await controller.submit();
-                                      set.setBusy(false).setDisabled(false);
-                                    }),
-                                if (controller.show)
-                                Button.block(
-                                    key: UniqueKey(),
-                                    label: "Continue",
-                                    onTap: (set) async {
-                                      set.setBusy(true).setDisabled(true);
-                                      Get.toNamed(AuthRoutes.verifyOtp);
+                                         !controller.show ? await controller.submit()
+                                         :  await controller.loginWithPhone();
                                       set.setBusy(false).setDisabled(false);
                                     }),
                                 SizedBox(height: 16),

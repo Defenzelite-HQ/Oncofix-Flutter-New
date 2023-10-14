@@ -66,4 +66,10 @@ class MockAuthService implements AuthService {
       {required Map<String, dynamic> body}) async {
     return await 300.milliseconds.delay(() => AuthData.loginSuccess);
   }
+
+  @override
+  Future<ApiResponse> loginWithPhone({required Map<String, dynamic> body}) {
+    // TODO: implement loginWithPhone
+    throw UnimplementedError();
+  }
 }

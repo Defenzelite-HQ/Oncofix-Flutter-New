@@ -33,7 +33,9 @@ class WebviewPage extends StatelessWidget {
                       SystemChrome.setPreferredOrientations([
                         DeviceOrientation.portraitUp,
                       ]);
+                      if(controller.url.split("?").first.contains("https://oncofix.com/panel/user-profile")){
                       await auth.getUser();
+                      }
                       bool? goBack = await webcontroller.canGoBack();
                       if (goBack != true)
                         return true;
@@ -49,7 +51,9 @@ class WebviewPage extends StatelessWidget {
                           size: spacer5,
                         ),
                         onPressed: () async {
-                          await auth.getUser();
+                          if(controller.url.split("?").first.contains("https://oncofix.com/panel/user-profile")){
+                            await auth.getUser();
+                          }
                           Get.back();
                         },
                       ),
