@@ -77,14 +77,15 @@ class WebviewPage extends StatelessWidget {
                                 onProgress: (progress) {
                                   controller.onLoadingPercent(progress);
                                 },
-                                onPageFinished: (finish) {
+                                onPageFinished: (finish) async {
                                   controller.onLoadingPercent(100);
                                 },
-                                navigationDelegate:
-                                    (NavigationRequest request) {
+                                onWebResourceError: (WebResourceError error) {
+                                  print("WebResourceError: ${error.description}");
+                                },
+                                navigationDelegate: (NavigationRequest request) {
                                   log.w(request.url);
                                   log.w(controller.url);
-
                                   /// +++++++++++++++++++++
                                   /// Url Handlers
                                   /// +++++++++++++++++++++

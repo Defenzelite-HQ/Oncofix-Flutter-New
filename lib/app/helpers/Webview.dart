@@ -68,12 +68,7 @@ List<Map<String, Object>> webViewItemList = [
   {
     "id": "privacy_policy",
     "title": "Privacy Policy",
-    "url": "https://oncofix.com/page/privacy",
-  },
-  {
-    "id": "return_policy",
-    "title": "Return Policy",
-    "url": "https://oncofix.com/page/privacy",
+    "url": "https://www.oncofix.com/page/privacy",
   },
   {
     "id": "doctors_recourse",
