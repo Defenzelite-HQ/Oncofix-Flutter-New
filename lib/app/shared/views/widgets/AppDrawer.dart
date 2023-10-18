@@ -198,7 +198,7 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                 ),
               ),
               Text(
-                "OncoFix v1.1",
+                "Copyrigt © 2023 OncoFix",
                 style: TextStyl.bodySm?.copyWith(
                   fontSize: spacer2,
                   color: kcSecondary,
