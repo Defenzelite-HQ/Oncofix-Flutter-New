@@ -34,12 +34,9 @@ class AboutPage extends StatelessWidget {
               AboutWidget(
                   about: "Terms & Conditions",
                   onTap: () => webViewOnTap("terms_&_condition")),
-              // AboutWidget(
-              //     about: "Return Policy",
-              //     onTap: () => webViewOnTap("privacy_policy")),
-              // AboutWidget(
-              //     about: "Privacy Policy",
-              //     onTap: () => webViewOnTap("privacy_policy")),
+              AboutWidget(
+                  about: "Privacy Policy",
+                  onTap: () => webViewOnTap("privacy_policy")),
             ],
           ),
         ));
