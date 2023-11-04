@@ -105,7 +105,7 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                         /// +++++++++++++++++++++++
                         BottomWidget(
                           onTap: () => webViewOnTap("patient_doctor_pro"),
-                          image: "assets/icons/ribbon.svg",
+                          image: "assets/icons/patientpro.svg",
                           imageExtension: "svg",
                           label: "Patient PRO",
                         ),
