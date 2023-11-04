@@ -232,6 +232,16 @@ List<Map<String, Object>> webViewItemList = [
     "url": "https://oncofix.com/panel/refer-earn",
   },
   {
+    "id": "patient_doctor_pro",
+    "title": "Patient PRO",
+    "url": "https://oncofix.com/panel/doctor/standard-pro/forked",
+  },
+  {
+    "id": "schedule",
+    "title": "Schedule",
+    "url": "https://oncofix.com/panel/doctor/my-schedule",
+  },
+  {
     "id": "refer_earn_patient",
     "title": "Refer & Earn",
     "url": "https://oncofix.com/panel/refer-earn",

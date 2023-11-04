@@ -33,8 +33,11 @@ class WebviewPage extends StatelessWidget {
                       SystemChrome.setPreferredOrientations([
                         DeviceOrientation.portraitUp,
                       ]);
-                      if(controller.url.split("?").first.contains("https://oncofix.com/panel/user-profile")){
-                      await auth.getUser();
+                      if (controller.url
+                          .split("?")
+                          .first
+                          .contains("https://oncofix.com/panel/user-profile")) {
+                        await auth.getUser();
                       }
                       bool? goBack = await webcontroller.canGoBack();
                       if (goBack != true)
@@ -51,7 +54,8 @@ class WebviewPage extends StatelessWidget {
                           size: spacer5,
                         ),
                         onPressed: () async {
-                          if(controller.url.split("?").first.contains("https://oncofix.com/panel/user-profile")){
+                          if (controller.url.split("?").first.contains(
+                              "https://oncofix.com/panel/user-profile")) {
                             await auth.getUser();
                           }
                           Get.back();
@@ -67,6 +71,7 @@ class WebviewPage extends StatelessWidget {
                               )
                             else
                               WebView(
+                                debuggingEnabled: true,
                                 onWebViewCreated: (controller) =>
                                     webcontroller = controller,
                                 initialUrl: controller.url,
@@ -81,11 +86,19 @@ class WebviewPage extends StatelessWidget {
                                   controller.onLoadingPercent(100);
                                 },
                                 onWebResourceError: (WebResourceError error) {
-                                  print("WebResourceError: ${error.description}");
+                                  log.e(
+                                      "WebResourceError: ${error.description}");
+                                  // if (error.errorCode == 100) {
+                                  //   // Handle JavaScript errors here.
+                                  //   log.e(
+                                  //       "JavaScript error occurred on the web page.");
+                                  // }
                                 },
-                                navigationDelegate: (NavigationRequest request) {
-                                  log.w(request.url);
+                                navigationDelegate:
+                                    (NavigationRequest request) {
                                   log.w(controller.url);
+                                  log.w(request.url);
+
                                   /// +++++++++++++++++++++
                                   /// Url Handlers
                                   /// +++++++++++++++++++++
@@ -121,7 +134,9 @@ class WebviewPage extends StatelessWidget {
                                       return NavigationDecision.prevent;
                                     }
                                   }
-
+                                  if (request.url.startsWith('javascript:')) {
+                                    return NavigationDecision.prevent;
+                                  }
                                   return NavigationDecision.navigate;
                                 },
                               ),

@@ -101,23 +101,23 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                           label: "Home",
                         ),
                         /// +++++++++++++++++++++++
-                        /// About Cancer
+                        /// Patient PRO
                         /// +++++++++++++++++++++++
-                        // BottomWidget(
-                        //   onTap: () => webViewOnTap("about_cancer"),
-                        //   image: "assets/icons/ribbon.svg",
-                        //   imageExtension: "svg",
-                        //   label: "About Cancer",
-                        // ),
+                        BottomWidget(
+                          onTap: () => webViewOnTap("patient_doctor_pro"),
+                          image: "assets/icons/ribbon.svg",
+                          imageExtension: "svg",
+                          label: "Patient PRO",
+                        ),
                         /// +++++++++++++++++++++++
-                        /// Financial Advice
+                        /// Schedule
                         /// +++++++++++++++++++++++
-                        // BottomWidget(
-                        //   onTap: () => webViewOnTap("financial_advice"),
-                        //   image: "assets/icons/advice.svg",
-                        //   imageExtension: "svg",
-                        //   label: "Financial Advices",
-                        // ),
+                        BottomWidget(
+                          onTap: () => webViewOnTap("schedule"),
+                          image: "assets/icons/advice.svg",
+                          imageExtension: "svg",
+                          label: "Schedule",
+                        ),
                         /// +++++++++++++++++++++++
                         /// Refer & Earn
                         /// +++++++++++++++++++++++
@@ -198,7 +198,7 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                 ),
               ),
               Text(
-                "Copyrigt © 2023 OncoFix",
+                "Copyright © 2023 OncoFix",
                 style: TextStyl.bodySm?.copyWith(
                   fontSize: spacer2,
                   color: kcSecondary,
