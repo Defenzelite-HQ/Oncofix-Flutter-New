@@ -103,21 +103,23 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                         /// +++++++++++++++++++++++
                         /// Patient PRO
                         /// +++++++++++++++++++++++
+                        Config.isDoctor() ?
                         BottomWidget(
                           onTap: () => webViewOnTap("patient_doctor_pro"),
                           image: "assets/icons/patientpro.svg",
                           imageExtension: "svg",
                           label: "Patient PRO",
-                        ),
+                        ):SizedBox.shrink(),
                         /// +++++++++++++++++++++++
                         /// Schedule
                         /// +++++++++++++++++++++++
+                        Config.isDoctor() ?
                         BottomWidget(
                           onTap: () => webViewOnTap("schedule"),
                           image: "assets/icons/advice.svg",
                           imageExtension: "svg",
                           label: "Schedule",
-                        ),
+                        ):SizedBox.shrink(),
                         /// +++++++++++++++++++++++
                         /// Refer & Earn
                         /// +++++++++++++++++++++++
