@@ -51,6 +51,7 @@ class DashboardPage extends StatelessWidget {
                               SizedBox(
                                 width: 15,
                               ),
+
                               GestureDetector(
                                   onTap: () {
                                     webViewOnTap("notification_doctor");
@@ -61,26 +62,25 @@ class DashboardPage extends StatelessWidget {
                                   child: SvgPicture.asset(
                                       "assets/icons/bell.svg",
                                       height: spacer5,
-                                      color: kcWhite)
-                              ),
+                                      color: kcWhite)),
                               SizedBox(
                                 width: 18,
                               ),
-                              Config.isDoctor()
-                                  ? GestureDetector(
-                                      onTap: () {
-                                        webViewOnTap("search_patient");
-                                      },
-                                      child:  Padding(
-                                        padding: const EdgeInsets.only(right: 12),
-                                        child: SvgPicture.asset(
-                                            "assets/icons/search.svg",
-                                            height: spacer5,
-                                            color: kcWhite),
-                                      )
-                                    )
-                                  : SizedBox.shrink(),
+                              GestureDetector(
+                                  onTap: () {
+                                    Config.isDoctor()
+                                        ? webViewOnTap("search_patient")
+                                        : webViewOnTap("doctor_list");
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 12),
+                                    child: SvgPicture.asset(
+                                        "assets/icons/search.svg",
+                                        height: spacer5,
+                                        color: kcWhite),
+                                  )),
                             ],
+
                             /// ++++++++++++++++++++++++++++++++++++
                             /// App Drawer Start
                             /// ++++++++++++++++++++++++++++++++++++
@@ -287,7 +287,7 @@ class DashboardPage extends StatelessWidget {
                                                                           1.3,
                                                                   fontWeight:
                                                                       FontWeight
-                                                                          .w500,
+                                                                          .w600,
                                                                   overflow:
                                                                       TextOverflow
                                                                           .ellipsis),
@@ -643,8 +643,10 @@ class DashboardPage extends StatelessWidget {
                                                             onTap: () {
                                                               webViewOnTap(
                                                                 "doctor_category",
-                                                                parameter: "?doctor=&profile_type=${category.id}",
-                                                                titleName: "${category.name}",
+                                                                parameter:
+                                                                    "?doctor=&profile_type=${category.id}",
+                                                                titleName:
+                                                                    "${category.name}",
                                                               );
                                                             },
                                                           );
@@ -902,8 +904,8 @@ class DashboardPage extends StatelessWidget {
                                               ),
                                               Expanded(
                                                 child: InkWell(
-                                                  onTap: () =>
-                                                  webViewOnTap("cancer_hub"),
+                                                  onTap: () => webViewOnTap(
+                                                      "cancer_hub"),
                                                   //     launchUrl(
                                                   //     Uri.parse(
                                                   //         "https://www.youtube.com/channel/UCb24CCIAUNHbF9PAuAK9s7g"),

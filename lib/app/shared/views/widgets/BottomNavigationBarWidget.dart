@@ -164,7 +164,7 @@ BottomNavigationBarWidget extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 20,
+            bottom: 25,
             child: Config.isDoctor()
                 ? new FloatingActionButton(
               elevation: 10.0,
@@ -231,22 +231,31 @@ class NavBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: imageExtension == "icon"
-          ? Icon(
-              route == active ? fillIconData : iconData,
-              color: route == active ? kcBottomBar : kcSecondary,
-              size: spacer5,
-            )
+          ? Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 5),
+            child: Icon(
+                route == active ? fillIconData : iconData,
+                color: route == active ? kcBottomBar : kcSecondary,
+                size: spacer5,
+              ),
+          )
           : imageExtension == "svg"
-              ? SvgPicture.asset(
-                  route == active ? "$fillImage" : "$image",
-                  color: route == active ? kcBottomBar : kcSecondary,
-                  height: spacer5,
-                )
-              : Image.asset(
-                  route == active ? "$fillImage" : "$image",
-                  color: route == active ? kcBottomBar : kcSecondary,
-                  height: spacer5,
-                ),
+              ? Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 5),
+                child: SvgPicture.asset(
+                    route == active ? "$fillImage" : "$image",
+                    color: route == active ? kcBottomBar : kcSecondary,
+                    height: spacer5,
+                  ),
+              )
+              : Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 5),
+                child: Image.asset(
+                            route == active ? "$fillImage" : "$image",
+                            color: route == active ? kcBottomBar : kcSecondary,
+                            height: spacer5,
+                          ),
+              ),
       onTap: onTap,
     );
   }

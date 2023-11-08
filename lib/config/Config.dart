@@ -88,7 +88,7 @@ class Config {
   ///======================================
   /// API base url
   ///======================================
-  static String apiBaseUrl = "https://oncofix.com/api/v1";
+    static String apiBaseUrl = "https://oncofix.com/api/v1";
 
   ///======================================
   /// App Name

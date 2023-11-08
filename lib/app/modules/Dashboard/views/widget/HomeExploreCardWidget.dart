@@ -79,7 +79,7 @@ class HomeExploreCardWidget extends StatelessWidget {
                 style: TextStyl.label!.copyWith(
                     color: kcSecondary,
                     fontSize: spacer4 / 1.3,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                     overflow: TextOverflow.ellipsis),
                 textAlign: TextAlign.center,
                 maxLines: maxLines ?? 1,
