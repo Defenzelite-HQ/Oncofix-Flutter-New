@@ -157,7 +157,7 @@ BottomNavigationBarWidget extends StatelessWidget {
                     color: kcSecondary,
                   ),
                   onTap: () {
-                    webViewOnTap('doctor_profile');
+                    webViewOnTap('profile');
                   },
                 ),
               ],

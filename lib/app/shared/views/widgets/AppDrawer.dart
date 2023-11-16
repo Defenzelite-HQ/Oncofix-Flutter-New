@@ -8,8 +8,6 @@ import 'package:oncofix/app/helpers/Global.dart';
 import '../../../../config/Config.dart';
 import '../../../helpers/Webview.dart';
 
-
-
 Drawer appDrawer(BuildContext context, DashboardController controller) {
   return Drawer(
     child: Obx(
@@ -37,8 +35,7 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                         backgroundColor: Colors.grey[200],
                         child: CircleAvatar(
                           backgroundColor: kcWhite,
-                          backgroundImage:
-                              NetworkImage("${auth.user.avatar}"),
+                          backgroundImage: NetworkImage("${auth.user.avatar}"),
                           radius: 32,
                         ),
                       ),
@@ -59,7 +56,8 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                   ),
                 ),
                 onTap: () {
-                  Get.offAndToNamed(SettingRoutes.setting);
+                  webViewOnTap('profile');
+                  // Get.offAndToNamed(SettingRoutes.setting);
                 },
               ),
             ],
@@ -68,12 +66,11 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
               ? Obx(
                   () => Container(
                     padding: EdgeInsets.symmetric(vertical: 10),
-                    margin: EdgeInsets.only(top: 10,bottom: 10),
-                    width: screen.width* 0.4,
+                    margin: EdgeInsets.only(top: 10, bottom: 10),
+                    width: screen.width * 0.4,
                     alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: kcSecondary)
-                    ),
+                    decoration:
+                        BoxDecoration(border: Border.all(color: kcSecondary)),
                     child: QrImageView(
                       data: controller.qrcode,
                       version: QrVersions.auto,
@@ -83,9 +80,11 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                   ),
                 )
               : SizedBox.shrink(),
-          Config.isPatient() ?
-              Text("Your Oncofix Smart Card", style: TextStyl.subtitle
-                  ?.copyWith(fontSize: 12),)
+          Config.isPatient()
+              ? Text(
+                  "Your Oncofix Smart Card",
+                  style: TextStyl.subtitle?.copyWith(fontSize: 12),
+                )
               : SizedBox.shrink(),
           Expanded(
             child: SingleChildScrollView(
@@ -100,44 +99,51 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                           image: "assets/icons/fill_home.png",
                           label: "Home",
                         ),
+
                         /// +++++++++++++++++++++++
                         /// Patient PRO
                         /// +++++++++++++++++++++++
-                        Config.isDoctor() ?
-                        BottomWidget(
-                          onTap: () => webViewOnTap("patient_doctor_pro"),
-                          image: "assets/icons/patientpro.svg",
-                          imageExtension: "svg",
-                          label: "Patient PRO",
-                        ):SizedBox.shrink(),
+                        Config.isDoctor()
+                            ? BottomWidget(
+                                onTap: () => webViewOnTap("patient_doctor_pro"),
+                                image: "assets/icons/patientpro.svg",
+                                imageExtension: "svg",
+                                label: "Patient PRO",
+                              )
+                            : SizedBox.shrink(),
+
                         /// +++++++++++++++++++++++
                         /// Schedule
                         /// +++++++++++++++++++++++
-                        Config.isDoctor() ?
-                        BottomWidget(
-                          onTap: () => webViewOnTap("schedule"),
-                          image: "assets/icons/advice.svg",
-                          imageExtension: "svg",
-                          label: "Schedule",
-                        ):SizedBox.shrink(),
+                        Config.isDoctor()
+                            ? BottomWidget(
+                                onTap: () => webViewOnTap("schedule"),
+                                image: "assets/icons/advice.svg",
+                                imageExtension: "svg",
+                                label: "Schedule",
+                              )
+                            : SizedBox.shrink(),
+
                         /// +++++++++++++++++++++++
                         /// Refer & Earn
                         /// +++++++++++++++++++++++
-                        Config.isPatient() ?
-                        BottomWidget(
-                          onTap: () => webViewOnTap("refer_earn_patient"),
-                          image: "assets/icons/refer.svg",
-                          imageExtension: "svg",
-                          label: "Refer & Earn",
-                        ) :
-                        Config.isDoctor() ?
-                        BottomWidget(
-                          onTap: () => webViewOnTap("refer_earn_doctor"),
-                          image: "assets/icons/refer.svg",
-                          imageExtension: "svg",
-                          label: "Refer & Earn",
-                        ):
-                            SizedBox.shrink(),
+                        Config.isPatient()
+                            ? BottomWidget(
+                                onTap: () => webViewOnTap("refer_earn_patient"),
+                                image: "assets/icons/refer.svg",
+                                imageExtension: "svg",
+                                label: "Refer & Earn",
+                              )
+                            : Config.isDoctor()
+                                ? BottomWidget(
+                                    onTap: () =>
+                                        webViewOnTap("refer_earn_doctor"),
+                                    image: "assets/icons/refer.svg",
+                                    imageExtension: "svg",
+                                    label: "Refer & Earn",
+                                  )
+                                : SizedBox.shrink(),
+
                         /// +++++++++++++++++++++++
                         /// About Us
                         /// +++++++++++++++++++++++
@@ -147,6 +153,7 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                           imageExtension: "png",
                           label: "About Us",
                         ),
+
                         /// +++++++++++++++++++++++
                         /// Legal
                         /// +++++++++++++++++++++++
@@ -158,12 +165,16 @@ Drawer appDrawer(BuildContext context, DashboardController controller) {
                           imageExtension: "png",
                           label: "Legal",
                         ),
-                        Config.isDoctor() ?
-                        GestureDetector( onTap: () => webViewOnTap("doctor_chat"),
-                          child: Text("Talk with Dr. Onco", style: TextStyl.subtitle
-                              ?.copyWith(fontSize: 13),),
-                        )
-                        :SizedBox.shrink(),
+                        Config.isDoctor()
+                            ? GestureDetector(
+                                onTap: () => webViewOnTap("doctor_chat"),
+                                child: Text(
+                                  "Talk with Dr. Onco",
+                                  style:
+                                      TextStyl.subtitle?.copyWith(fontSize: 13),
+                                ),
+                              )
+                            : SizedBox.shrink(),
                         Divider(),
                       ],
                     ),

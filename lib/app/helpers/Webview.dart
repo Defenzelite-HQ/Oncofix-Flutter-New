@@ -171,7 +171,7 @@ List<Map<String, Object>> webViewItemList = [
     "url": "https://oncofix.com/panel/appointment",
   },
   {
-    "id": "doctor_profile",
+    "id": "profile",
     "title": "Profile",
     "url": "https://oncofix.com/panel/user-profile",
   },
