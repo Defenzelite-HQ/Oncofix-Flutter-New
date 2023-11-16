@@ -200,6 +200,10 @@ class LoginController extends AppController {
       "password_confirmation": confirmPasswordInput.text,
     };
 
+
+    await storage.write('identifier', emailInput.text);
+    await storage.write('password', passwordInput.text);
+
     setBusy(true);
     ApiResponse response = await Request.post('/register', body: body);
 
